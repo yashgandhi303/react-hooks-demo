@@ -1,0 +1,3 @@
+export const FETCH_SAMPLE= 'FETCH_SAMPLE';
+
+export const SAMPLE_LOADED= 'SAMPLE_LOADED';
