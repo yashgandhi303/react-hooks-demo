@@ -1,0 +1,4 @@
+
+
+
+// allow people to add stock (items) to the store

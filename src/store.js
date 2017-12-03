@@ -2,10 +2,12 @@ import { createStore, compose, applyMiddleware } from 'redux';
 // thunks:
 // import thunk from 'redux-thunk';
 // sagas:
+import createSagaMiddleware from 'redux-saga';
 
 // import throttle from 'lodash/throttle';
 import rootReducer from './reducers/root_reducer';
 // import { loadState, saveState } from './localStorage';
+const sagaMiddleware = createSagaMiddleware();
 
 const configureStore = () => {
 

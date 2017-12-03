@@ -20,6 +20,17 @@ const About = () => (
       {/* <p>- <a href='https://github.com/toddmotto/public-apis#currency-exchange'>github link</a></p> */}
 
     </div>
+
+    <div>
+      Sources:
+      <a href="" target="_blank">react-redux</a>
+      <a href="" target="_blank">react-redux</a>
+
+
+      {/* <a href="https://github.com/redux-saga/redux-saga" target="_blank">redux-saga</a> */}
+
+    </div>
+
   </div>
 );
 

@@ -5,6 +5,7 @@ import configureStore from './store';
 
 import Home from './routes/Home';
 import About from './routes/About';
+// import Cart from './routes/Cart';
 
 import Header from './components/Header';
 // import NoMatch from './components/NoMatch';
@@ -24,7 +25,7 @@ const App = () => (
             <Route exact path='/' component={Home} />
 
             <Route exact path='/about' component={About} />
-            {/* <Route exact path='/dashboard' component={Dashboard} /> */}
+            {/* <Route exact path='/cart' component={Cart} /> */}
 
             <Redirect to='/' />
           </Switch>

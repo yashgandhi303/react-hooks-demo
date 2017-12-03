@@ -1,9 +1,8 @@
 {
-  "name": "fe_rr",
+  "name": "carrinho",
   "version": "0.3.0",
   "author": "nick bouldien",
   "repository": "",
-
   "private": true,
   "scripts": {
     "start": "react-scripts start",
@@ -13,6 +12,7 @@
   },
   "dependencies": {
     "axios": "^0.17.1",
+    "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.6",
@@ -23,7 +23,5 @@
     "redux-saga": "^0.16.0",
     "redux-thunk": "^2.2.0"
   },
-  "devDependencies": {
-
-  }
+  "devDependencies": {}
 }

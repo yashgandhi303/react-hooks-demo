@@ -1,11 +1,16 @@
 import axios from 'axios';
 import {
   FETCH_SAMPLE,
-  SAMPLE_LOADED
+  SAMPLE_LOADED,
+  ADD_TO_CART,
+  REMOVE_FROM_CART,
+  CHANGE_ITEM_QUANTITY,
+  SHOW_CART_ITEMS,
+  CHECKOUT,
+  BUY_ITEMS
 } from './actionTypes';
 
-let ROOT_URL;
-
+// let ROOT_URL;
 // if (process.env.NODE_ENV === 'production') {
 //   ROOT_URL = '/';
 // } else {
