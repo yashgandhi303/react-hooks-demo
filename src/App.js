@@ -1,14 +1,14 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { Provider } from 'react-redux';
+
 import configureStore from './store';
 
 import Home from './routes/Home';
 import About from './routes/About';
-// import Cart from './routes/Cart';
+import Cart from './routes/Cart';
 
 import Header from './components/Header';
-// import NoMatch from './components/NoMatch';
 
 import './App.css';
 
@@ -25,7 +25,7 @@ const App = () => (
             <Route exact path='/' component={Home} />
 
             <Route exact path='/about' component={About} />
-            {/* <Route exact path='/cart' component={Cart} /> */}
+            <Route exact path='/cart' component={Cart} />
 
             <Redirect to='/' />
           </Switch>

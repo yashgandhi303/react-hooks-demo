@@ -1,7 +1,5 @@
-import axios from 'axios';
+// import axios from 'axios';
 import {
-  FETCH_SAMPLE,
-  SAMPLE_LOADED,
   ADD_TO_CART,
   REMOVE_FROM_CART,
   CHANGE_ITEM_QUANTITY,
@@ -23,7 +21,8 @@ import {
 */
 export function setSearchTerm(searchTerm) {
   // console.log('setSearchTerm: ', searchTerm);
-  return { type: FETCH_SAMPLE, payload: searchTerm };
+  // return { type: FETCH_SAMPLE, payload: searchTerm };
+  return;
 }
 
 export function getSearchTerm(searchTerm, searchType) {
@@ -32,3 +31,26 @@ export function getSearchTerm(searchTerm, searchType) {
     dispatch(setSearchTerm(searchTerm, searchType));
   }
 }
+
+
+export const addItemToCart = (item) => ({
+  type: ADD_TO_CART,
+  payload: item
+});
+
+
+
+// export const changeItemQuantity = (item) => {
+//   // will remove item from cart
+//   return { type: CHANGE_ITEM_QUANTITY, payload: item.id };
+// }
+
+// export const removeFromCart = (item) => {
+//   // will remove item from cart
+//   return { type: REMOVE_FROM_CART, payload: item.id };
+// }
+
+// export const buyItems = () => {
+//   // will remove all items from cart (as if purchased)
+//   return { type: BUY_ITEMS };
+// }

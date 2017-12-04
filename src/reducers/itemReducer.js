@@ -1,19 +1,43 @@
-import { ADD_TO_CART, REMOVE_FROM_CART } from '../actions/actionTypes';
+import { ADD_TO_CART, REMOVE_FROM_CART, BUY_ITEMS } from '../actions/actionTypes';
 
-const initialState = {};
+const initialState = [];
 
-const itemReducer = (state = initialState, action) => {
+const items = (state = initialState, action) => {
   switch(action.type) {
     case ADD_TO_CART:
-      // const newSample = action.payload;
-      // return [...state, newSample];
-      return state;
+      const newItem = action.payload;
+      return [...state, newItem];
+      // return state;
     case REMOVE_FROM_CART:
-      // return [...state, newWeather];
+      // return state.filter((item) => item.id !== state.id);
       return state;
+    case BUY_ITEMS:
+      // return [...state, newWeather];
+      return initialState;
     default:
       return state;
   }
 }
 
-export default itemReducer;
+// const item = (state, action) => {
+//   switch (action.type) {
+//     case ADD_ITEM:
+//       return {
+//         id: action.id,
+//         text: action.text,
+//         completed: false,
+//       };
+//     case DELETE_ITEM:
+//       if (state.id !== action.id) {
+//         return state;
+//       }
+//       return {
+//         ...state,
+//         completed: !state.completed,
+//       };
+//     default:
+//       return state;
+//   }
+// };
+
+export default items;

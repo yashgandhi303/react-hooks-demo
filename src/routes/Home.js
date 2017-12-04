@@ -1,15 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Cart from '../components/Cart';
+// import Cart from '../routes/Cart';
+import AddItemForm from '../components/AddItemForm';
 
 const Home = () => (
   <div id='home-div'>
     <h1 id='welcome'>Welcome</h1>
 
-    <h3>Links to the routes:</h3>
+      {/* <Cart /> */}
+      <Link to="/cart">Cart</Link>
 
-      <Link to='about'>about</Link>
-      <Cart />
+      <AddItemForm />
       {/* <Link to='dashboard'>dashboard route</Link> */}
 
   </div>

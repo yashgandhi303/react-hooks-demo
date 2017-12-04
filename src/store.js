@@ -2,25 +2,24 @@ import { createStore, compose, applyMiddleware } from 'redux';
 // thunks:
 // import thunk from 'redux-thunk';
 // sagas:
-import createSagaMiddleware from 'redux-saga';
+// import createSagaMiddleware from 'redux-saga';
 
 // import throttle from 'lodash/throttle';
 import rootReducer from './reducers/root_reducer';
 // import { loadState, saveState } from './localStorage';
-const sagaMiddleware = createSagaMiddleware();
+// const sagaMiddleware = createSagaMiddleware();
 
 const configureStore = () => {
 
   // const persistedState = loadState();
 
   const store = createStore(
-    rootReducer
+    rootReducer,
     // persistedState,
-    // compose(
-    // can use thunks, sagas, etc.
-    //   applyMiddleware(thunk),
-    //   typeof window === 'object' && typeof window.devToolsExtension !== 'undefined' ? window.devToolsExtension() : f => f
-    // )
+    compose(
+      // applyMiddleware(thunk), // can use thunks, sagas, etc.
+      typeof window === 'object' && typeof window.devToolsExtension !== 'undefined' ? window.devToolsExtension() : f => f
+    )
   );
 
   // store.subscribe(throttle(() => {
