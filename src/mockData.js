@@ -6,3 +6,21 @@ export const storeStock = {
   "chips": 31,
   "steak": 18
 };
+
+export const storeListItems = [
+  "beer",
+  "wine",
+  "whiskey",
+  "popcorn",
+  "chips",
+  "steak"
+];
+
+
+// {
+//   "beer": {
+//     quantity: 47,
+//     id: '1234',
+//
+//   }
+// }

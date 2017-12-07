@@ -1,19 +1,17 @@
-import { ADD_TO_CART, REMOVE_FROM_CART, BUY_ITEMS } from '../actions/actionTypes';
+import { ADD_TO_CART, REMOVE_FROM_CART, BUY_ITEMS, CHECKOUT } from '../actions/actionTypes';
 
-const initialState = [];
+const initialCartItems = [];
 
-const items = (state = initialState, action) => {
+const cartItems = (state = initialCartItems, action) => {
   switch(action.type) {
     case ADD_TO_CART:
       const newItem = action.payload;
       return [...state, newItem];
-      // return state;
     case REMOVE_FROM_CART:
-      // return state.filter((item) => item.id !== state.id);
-      return state;
+      return state.filter((item) => item !== action.payload);
     case BUY_ITEMS:
-      // return [...state, newWeather];
-      return initialState;
+      // returns default state (after purchasing)
+      return initialCartItems;
     default:
       return state;
   }
@@ -33,11 +31,11 @@ const items = (state = initialState, action) => {
 //       }
 //       return {
 //         ...state,
-//         completed: !state.completed,
+//         inStore: !state.inStore,
 //       };
 //     default:
 //       return state;
 //   }
 // };
 
-export default items;
+export default cartItems;

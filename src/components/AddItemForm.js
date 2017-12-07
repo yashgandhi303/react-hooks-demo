@@ -1,21 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { addItemToCart } from '../actions/actionCreators';
+import { addNewItemToStock } from '../actions/actionCreators';
 
 const AddItemForm = ({ dispatch }) => {
   let input;
 
   return (
     <div>
-      <p>Add Item</p>
+      <p>Add Item to Stock:</p>
       <form
         onSubmit={e => {
           e.preventDefault();
           if (!input.value.trim()) {
             return;
           }
-          dispatch(addItemToCart(input.value));
+          dispatch(addNewItemToStock(input.value));
           input.value = '';
         }}
       >

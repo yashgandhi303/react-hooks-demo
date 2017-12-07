@@ -23,9 +23,9 @@ const App = () => (
         <div className='container'>
           <Switch>
             <Route exact path='/' component={Home} />
+            <Route exact path='/cart' component={Cart} />
 
             <Route exact path='/about' component={About} />
-            <Route exact path='/cart' component={Cart} />
 
             <Redirect to='/' />
           </Switch>
