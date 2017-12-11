@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import cartItems from './itemReducer';
+import cartItems from './cartItemsReducer';
 import storeStock from './storeStockReducer';
 
 const rootReducer = combineReducers({

@@ -1,6 +1,6 @@
 import { createStore, compose, applyMiddleware } from 'redux';
 // thunks:
-// import thunk from 'redux-thunk';
+import thunk from 'redux-thunk';
 // sagas:
 // import createSagaMiddleware from 'redux-saga';
 
@@ -17,11 +17,12 @@ const configureStore = () => {
     rootReducer,
     // persistedState,
     compose(
-      // applyMiddleware(thunk), // can use thunks, sagas, etc.
+      applyMiddleware(thunk), // can use thunks, sagas, etc.
       typeof window === 'object' && typeof window.devToolsExtension !== 'undefined' ? window.devToolsExtension() : f => f
     )
   );
 
+  // if using persistedState:
   // store.subscribe(throttle(() => {
   //   // console.log('current state (store.js): ', store.getState());
   //   saveState({
