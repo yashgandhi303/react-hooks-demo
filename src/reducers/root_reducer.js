@@ -4,7 +4,7 @@ import storeStock from './storeStockReducer';
 
 const rootReducer = combineReducers({
   cartItems,
-  storeStock
+  storeStock,
 });
 
 export default rootReducer;

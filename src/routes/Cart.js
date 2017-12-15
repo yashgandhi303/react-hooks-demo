@@ -9,9 +9,10 @@ const Cart = ({ cartItems, buyAll, remove }) => (
     <h3>Your cart: </h3>
     <p>Item count: {cartItems.length}</p>
 
+      { console.log('Cart props: ', cartItems) }
       <div>
-        {cartItems.length && cartItems.map((item, ind) => (
-            <p onClick={() => remove(item)} key={ind}>{item}</p>
+        {cartItems.length && cartItems.map((item) => (
+            <p onClick={() => remove(item.id)} key={item.id}>{item.name}</p>
           )) || <Link to='/'>Go buy stuff</Link>
         }
       </div>
@@ -23,21 +24,34 @@ const Cart = ({ cartItems, buyAll, remove }) => (
 );
 
 Cart.propTypes = {
-  cartItems: PropTypes.array,
+  // cartItems: PropTypes.array.isRequired,
   buyAll: PropTypes.func.isRequired,
   remove: PropTypes.func.isRequired
 };
 
+function getArrayOfCartItems(cartItems, ids) {
+  const arr = [];
+  console.log('getARraasdfasdf ', cartItems, ids)
+  for (let item in cartItems) {
+    console.log('item: ', item);
+    if (ids.includes(item)) {
+      arr.push(cartItems[item]);
+    }
+  }
+  console.log('getArrayOfCartItems: ', arr);
+  return arr;
+}
+
 const mapStateToProps = (state, ownProps) => ({
-  cartItems: state.cartItems
+  cartItems: getArrayOfCartItems(state.cartItems.cartItemStock, state.cartItems.cartItemIds)
 });
 
 const mapDispatchToProps = (dispatch) => ({
   buyAll: () => {
     dispatch(buyItems());
   },
-  remove: (item) => {
-    dispatch(removeFromCart(item));
+  remove: (itemId) => {
+    dispatch(removeFromCart(itemId));
   }
 });
 

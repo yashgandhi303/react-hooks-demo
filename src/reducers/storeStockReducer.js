@@ -1,53 +1,82 @@
-import { FETCH_ITEMS_IN_STOCK, ADD_TO_CART, REMOVE_FROM_CART, BUY_ITEMS, ADD_NEW_ITEM_TO_STOCK } from '../actions/actionTypes';
+import { FETCH_ITEMS_IN_STOCK, ADD_TO_CART, REMOVE_FROM_CART, BUY_ITEMS, ADD_NEW_ITEM_TO_STOCK, REQUEST_ITEMS_IN_STOCK } from '../actions/actionTypes';
 // import { storeListItems } from '../mockData';
 
-// const initialStoreStock = storeListItems;
 export const getItem = (state, id) => state[id];
 
-const storeStock = (state = {stockItems: {}}, action) => {
+const initialState =  {
+   isFetching: false,
+   stockItems: []
+ }
+
+const storeStock = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_ITEMS_IN_STOCK:
       // change to only return items with stock > 0
       return {
         ...state,
-        stockItems: action.payload
+        isFetching: false,
+        stockItems: getStockItemsArray(action.payload)
+      };
+    case REQUEST_ITEMS_IN_STOCK:  // strictly for loading (for now)
+      return {
+        ...state,
+        isFetching: true
+      };
+    case REMOVE_FROM_CART:
+    case ADD_TO_CART:
+      return {
+        ...state,
+        stockItems: [
+          // TODO: need to do the slice thing (currently moving the item to the end of the array)
+          ...state.stockItems.filter(item => item.id !== action.payload.id),
+          action.payload
+        ]
       };
     case BUY_ITEMS:
       // right now just going back to full stock; will update to subtract bought items
       // from store stock (if enough in stock)
-      return {};
-    // case REMOVE_FROM_CART:
-    //   // remove item from cart, so add that quantity back
-    //   return [
-    //     ...state,
-    //     action.payload
-    //   ]
-    // case ADD_TO_CART:
-      // decrease count from item
-      // return state.filter( item => item !== action.payload );
-    // case ADD_NEW_ITEM_TO_STOCK:
-    //   // is this needed?
-    //   return [
-    //     ...state,
-    //     action.payload
-    //   ]
-    // case REMOVE_FROM_CART:
-    //   if (state.id !== action.id) {
-    //     return state;
-    //   }
-    //   return {
-    //     ...state,
-    //     inStore: !state.inStore,
-    //   };
-      // case CREATE_ITEM:
-      //   return {
-      //     name: action.name,
-      //     id: action.id,
-      //   };
+      return initialState;
     default:
       return state;
   }
 };
+
+// TODO: make this (a lot) better...
+const getStockItemsArray = (items) => {
+  // console.log('index state: ', items);
+  const stockItemsArray = [];
+  for (let item in items) {
+    // console.log(items[item]);
+    if (items[item].stock > 0) {
+      stockItemsArray.push(items[item])
+    }
+  }
+  // console.log('final stockItemsArray', stockItemsArray);
+  return stockItemsArray;
+};
+
+export const getIds = (state) => state.ids;
+
+const byIds = (state, action) => {
+  //
+}
+
+
+// export const getStockItems = (state) => {
+//   console.log('index state: ', state);
+//
+//   const stockItemsArray [];
+//
+//   for (let item in stockItems) {
+//     console.log(item);
+//   }
+//
+//   return stockItemsArray;
+//   // const ids = fromList.getIds(state.listByFilter[filter]);
+//   // console.log('ids: ', ids);
+//   // console.log('return array: ', ids.map(id => fromById.getTodo(state.byId, id)));
+//   // return ids.map(id => fromById.getTodo(state.byId, id));
+// };
 
 
 

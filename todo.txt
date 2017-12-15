@@ -2,3 +2,7 @@
 
 
 // allow people to add stock (items) to the store
+
+
+
+// fix the count/number on each item when "buying"

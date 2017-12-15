@@ -20,3 +20,68 @@ export const config = {
 // import { config } from './fire';
 //
 // firebase.initializeApp(config);
+
+
+
+/* 
+    saving the below here for now (for testing and setup (in actionCreators))
+
+ */
+
+// function addInitialItems () {
+//   const itemId = 'kns289k2';
+//   database.ref(`stockItems/${itemId}`).set({
+//     name: 'hot dogs',
+//     stock: 0
+//   });
+// }
+// addInitialItems();
+
+// function alterItemStock(id, newStockAmt) {
+//   const url = `https://carrinho-15670.firebaseio.com/stockItems/${id}/stock.json`;
+//   axios.put(url, newStockAmt)
+//     .then(res => {
+//       console.log('asdfasdf', res.data);
+//       // const itemsInStock = res.data;
+//       return res.data;
+//       // dispatch({
+//       //     type: FETCH_ITEMS_IN_STOCK,
+//       //     payload: itemsInStock
+//       // });
+//     })
+//     .catch(err => {
+//       console.error('error: ', err);
+//       // dispatch({
+//       //     type: ERROR,
+//       //     payload: {"Error": err}
+//       // })
+//     });
+// }
+// alterItemStock('abc123', 3);
+
+// function addInitialItems () {
+//   database.ref('stockItems/').set({
+//     items: [
+//       {
+//         id: 'abc123',
+//         name: 'beer',
+//         stock: 83
+//       },
+//       {
+//         id: 'xyz456',
+//         name: 'whiskey',
+//         stock: 43
+//       },
+//       {
+//         id: '4asd8az',
+//         name: 'hot dogs',
+//         stock: 0
+//       },
+//       {
+//         id: '1kn92ks',
+//         name: 'hamburgers',
+//         stock: 27
+//       }
+//     ]
+//   });
+// }

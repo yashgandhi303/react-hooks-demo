@@ -1,17 +1,34 @@
 import { combineReducers } from 'redux';
 import { ADD_TO_CART, REMOVE_FROM_CART, BUY_ITEMS } from '../actions/actionTypes';
+import omit from 'lodash/omit';
+import { log } from 'core-js/library/web/timers';
 
-const cartItems = (state = {}, action) => {
+const cartItemStock = (state = {}, action) => {
   switch(action.type) {
     case ADD_TO_CART:
       return {
         ...state,
-        [action.id]: action.payload
+        [action.payload.id]: action.payload,
       };
     case REMOVE_FROM_CART:
-    // TODO
-      return state;
-      // return state.filter((item) => item !== action.payload);
+    // TODO:
+
+    // var items = state.cartItems;
+    
+    // var result = Object.keys(items)
+    //   .map(key => items[key]) // turn an array of keys into array of items.
+    //   .filter(item =>  item.some(thing => thing.id !== action.payload.id)) // filter that array,
+    console.warn('state: ', state);
+      const cartItems = state
+      const id = action.payload;
+      console.log('asdfasdf', cartItems, id);
+      console.warn('warn2: ', {
+        ...omit(cartItems, id)
+      });
+      return {
+        // ...state,
+        ...omit(cartItems, id)
+      }
     case BUY_ITEMS:
       // returns default state (after purchasing)
       return {};
@@ -23,9 +40,9 @@ const cartItems = (state = {}, action) => {
 const cartItemIds = (state = [], action) => {
   switch(action.type) {
     case ADD_TO_CART:
-      return [...state, action.id];
+      return [...state, action.payload.id];
     case REMOVE_FROM_CART:
-      return state.filter((item) => item.id !== action.id);
+      return state.filter((item) => item.id !== action.payload.id);
     case BUY_ITEMS:
       // returns default state (after purchasing)
       return [];
@@ -34,8 +51,8 @@ const cartItemIds = (state = [], action) => {
   }
 }
 
-const nick = combineReducers({
-  cartItems,
+const cartItems = combineReducers({
+  cartItemStock,
   cartItemIds,
 })
 
@@ -77,3 +94,16 @@ const nick = combineReducers({
 // };
 
 export default cartItems;
+
+// const getCartItemsArray = (items) => {
+//   // console.log('index state: ', items);
+//   const cartItemsArray = [];
+//   for (let item in items) {
+//     // console.log(items[item]);
+//     if (items[item].stock > 0) {
+//       cartItemsArray.push(items[item])
+//     }
+//   }
+//   // console.log('final stockItemsArray', stockItemsArray);
+//   return cartItemsArray;
+// };

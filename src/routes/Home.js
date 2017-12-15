@@ -23,7 +23,7 @@ class Home extends React.Component {
 
   renderItems() {
     return (
-      this.props.storeStock.stockItems.items.map((item, index) => {
+      this.props.storeStock.stockItems.map((item, index) => {
           // make below component (has name, count, etc)
           if (item.stock > 0) {
             // return <input type='button' value={item.name} onClick={this.props.addItemToCartFn} key={item.id} />
@@ -68,8 +68,15 @@ class Home extends React.Component {
 // }).isRequired).isRequired,
 
 Home.propTypes = {
-  storeStock: PropTypes.object, // use shape ^^
-  cartItems: PropTypes.array,
+  // storeStock: PropTypes.object, // use shape ^^
+  storeStock: PropTypes.shape({
+    stockItems: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      stock: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+    }))
+  }).isRequired,
+  // cartItems: PropTypes.array,
   addItemToCartFn: PropTypes.func.isRequired,
   getItemsInStock: PropTypes.func.isRequired
 };

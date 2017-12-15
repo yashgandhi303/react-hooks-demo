@@ -14,7 +14,7 @@ const Item = (props) => (
         Id: {props.item.id}
     </p>
     <input type="number" /><br/>
-    <button onClick={() => props.onClickFn(props.item.id, props.item.name, 3)}>Add to cart</button>
+    <button onClick={() => props.onClickFn(props.item.id, props.item.name, (props.item.stock - 3))}>Add to cart</button>
 
   </div>
 );
