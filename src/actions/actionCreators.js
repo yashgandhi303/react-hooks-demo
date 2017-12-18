@@ -47,7 +47,15 @@ export const fetchItemsInStock = () => {
 // TODO: 
 // removeItemFromCart can also use this method
 // both need an id, and a new stock amount
-export const addItemToCart = (id, name, newStockAmt) => {
+// export const addItemToCart = (id, name, newStockAmt) => {
+export const addItemToCart = (item, amt) => {
+  const { id, name, stock } = item;
+  if (amt > stock) {
+    // TODO: dispatch error (they're adding more to cart than that item has in stock); for now logging error
+    console.error('Error: Adding too many items to cart: ', amt, stock);
+  }
+  const newStockAmt = stock + amt;
+
   // TODO: need check to make sure stock doesn't go negative
   console.log('addItemToCart: ', id, name, newStockAmt);
   return (dispatch) => {
@@ -56,18 +64,17 @@ export const addItemToCart = (id, name, newStockAmt) => {
         console.log('asdfasdf', res.data);
         dispatch({
           type: ADD_TO_CART,
-          payload: {
-            id,
-            name,
-            stock: newStockAmt // FIXME:  <---
-          }
+          amt,
+          id,
+          name,
+          stock: newStockAmt
         })
       })
   }
 }
 
-export const buyItems = () => {
-  console.log('called buyItems');
+export const buyItems = (items) => {
+  console.log('called buyItems', items);
   // will remove all items from cart (as if purchased)
   return { type: BUY_ITEMS };
 }
@@ -78,14 +85,36 @@ export const buyItems = () => {
 //   return { type: CHANGE_ITEM_QUANTITY, payload: item.id };
 // }
 
-export const removeFromCart = (itemId) => {
-  // needs to increase stockItems, and decrease the items in cart
-  console.log('removeFromCart ', itemId);
-  // return (dispatch) => {
+// export const removeFromCart = (itemId) => {
+//   // needs to increase stockItems, and decrease the items in cart
+//   console.log('removeFromCart ', itemId);
+//   // return (dispatch) => {
 
-    return { type: REMOVE_FROM_CART, payload: itemId };
+//     return { type: REMOVE_FROM_CART, payload: itemId };
 
-  // }
+//   // }
+// }
+
+export const removeFromCart = (item, amt) => {
+  console.log('aasdfasdf ', item, amt);
+  const { id, name, stock } = item;
+  const newStockAmt = stock + amt;
+  
+  // TODO: need check to make sure stock doesn't go negative
+  console.log('removeFromCart: ', id, name, newStockAmt);
+  return (dispatch) => {
+    axios.put(`https://carrinho-15670.firebaseio.com/stockItems/${id}/stock.json`, newStockAmt)
+      .then(res => {
+        console.log('asdfasdf', res.data);
+        dispatch({
+          type: REMOVE_FROM_CART,
+          amt,
+          id,
+          name,
+          stock: newStockAmt // FIXME:  <---
+        })
+      })
+  }
 }
 
 const formatItem = (item) => {

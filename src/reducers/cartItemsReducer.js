@@ -8,26 +8,26 @@ const cartItemStock = (state = {}, action) => {
     case ADD_TO_CART:
       return {
         ...state,
-        [action.payload.id]: action.payload,
+        // [action.payload.id]: action.payload,
+        [action.id]: {
+          id: action.id,
+          name: action.name,
+          amt: action.amt,
+          stock: action.stock
+        }
       };
     case REMOVE_FROM_CART:
-    // TODO:
-
-    // var items = state.cartItems;
-    
-    // var result = Object.keys(items)
-    //   .map(key => items[key]) // turn an array of keys into array of items.
-    //   .filter(item =>  item.some(thing => thing.id !== action.payload.id)) // filter that array,
-    console.warn('state: ', state);
-      const cartItems = state
+      console.warn('state: ', state);
+      const cartItems = state;
       const id = action.payload;
       console.log('asdfasdf', cartItems, id);
       console.warn('warn2: ', {
         ...omit(cartItems, id)
       });
+      const newState = omit(cartItems, id);
+      console.log('newThing: ', newState);
       return {
-        // ...state,
-        ...omit(cartItems, id)
+        ...newState
       }
     case BUY_ITEMS:
       // returns default state (after purchasing)
@@ -37,12 +37,27 @@ const cartItemStock = (state = {}, action) => {
   }
 }
 
+const getCartItemsArray = (items, action) => {
+  // console.log('index state: ', items);
+  const cartItemsArray = [];
+  for (let item in items) {
+    // console.log(items[item]);
+    if (items[item].id !== action.payload) {
+      cartItemsArray.push(items[item])
+    }
+  }
+  // console.log('final stockItemsArray', stockItemsArray);
+  return cartItemsArray;
+};
+
 const cartItemIds = (state = [], action) => {
   switch(action.type) {
     case ADD_TO_CART:
-      return [...state, action.payload.id];
+      return [...state, action.id];
     case REMOVE_FROM_CART:
-      return state.filter((item) => item.id !== action.payload.id);
+    console.log('action in cartItemIds: ', action)
+    console.warn('carItemIds: ', state.filter((item) => item !== action.id))
+      return state.filter((id) => id !== action.id);
     case BUY_ITEMS:
       // returns default state (after purchasing)
       return [];

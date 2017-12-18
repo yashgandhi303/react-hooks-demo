@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { buyItems, removeFromCart } from '../actions/actionCreators';
 import { Link } from 'react-router-dom';
+import Item from '../components/Item';
 
 const Cart = ({ cartItems, buyAll, remove }) => (
   <div className="cart-div">
@@ -12,7 +13,8 @@ const Cart = ({ cartItems, buyAll, remove }) => (
       { console.log('Cart props: ', cartItems) }
       <div>
         {cartItems.length && cartItems.map((item) => (
-            <p onClick={() => remove(item.id)} key={item.id}>{item.name}</p>
+            <Item onClickFn={remove} item={item} key={item.id}/>
+            //<p onClick={() => remove(item.id)} key={item.id}>{item.name}</p>
           )) || <Link to='/'>Go buy stuff</Link>
         }
       </div>
@@ -50,8 +52,8 @@ const mapDispatchToProps = (dispatch) => ({
   buyAll: () => {
     dispatch(buyItems());
   },
-  remove: (itemId) => {
-    dispatch(removeFromCart(itemId));
+  remove: (itemId, amt) => {
+    dispatch(removeFromCart(itemId, amt));
   }
 });
 

@@ -24,12 +24,17 @@ const storeStock = (state = initialState, action) => {
       };
     case REMOVE_FROM_CART:
     case ADD_TO_CART:
+      const updatedItem = {
+        id: action.id,
+        name: action.name,
+        stock: action.stock
+      };
       return {
         ...state,
         stockItems: [
           // TODO: need to do the slice thing (currently moving the item to the end of the array)
-          ...state.stockItems.filter(item => item.id !== action.payload.id),
-          action.payload
+          ...state.stockItems.filter(item => item.id !== action.id),
+          updatedItem
         ]
       };
     case BUY_ITEMS:
@@ -55,11 +60,11 @@ const getStockItemsArray = (items) => {
   return stockItemsArray;
 };
 
-export const getIds = (state) => state.ids;
+// export const getIds = (state) => state.ids;
 
-const byIds = (state, action) => {
-  //
-}
+// const byIds = (state, action) => {
+//   //
+// }
 
 
 // export const getStockItems = (state) => {

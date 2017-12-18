@@ -7,14 +7,30 @@ const Item = (props) => (
 
     { console.log('Item props: ', props) }
     {/* ant design component here nb??? */}
-    <p> Item: {props.item.name}
-        <br/>
-        Stock: {props.item.stock}
-        <br/>
-        Id: {props.item.id}
+    <p> 
+      Item: {props.item.name}
+      <br/>
+      Stock: {props.item.stock}
+      <br/>
+      Id: {props.item.id}
     </p>
-    <input type="number" /><br/>
-    <button onClick={() => props.onClickFn(props.item.id, props.item.name, (props.item.stock - 3))}>Add to cart</button>
+    <input type="number" />
+    <br/>
+    <button onClick={() => props.onClickFn(props.item, 3)}>{window.location.pathname === "/cart" ? "Remove From Cart" : "Add to cart"}</button>
+    {/* <button onClick={() => props.onClickFn(props.item, amount)}>Remove From Cart</button> */}
+
+    {( 
+      window.location.pathname === "/cart" && 
+      <div>
+        <p>Amt in Cart: {props.item.amt}</p>
+        <button 
+          onClick={() => props.onClickFn(props.item, 3)}
+        >
+          Remove From Cart
+        </button>
+      </div>
+    )}
+
 
   </div>
 );
