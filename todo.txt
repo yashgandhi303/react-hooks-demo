@@ -1,11 +1,14 @@
 
 
+bugs:
+// fix the count/number on each item when "buying" (and reset to zero after submitting)
+
+// need to do slice/blabla to keep item in same spot (when adding to cart, it moves to the end...)
 
 // allow people to add stock (items) to the store
 
+// in item (when in cart), update so button says "update item count" (or similar), and use that submitted value to update amt in cart (or remove if user enters 0)
 
-
-// fix the count/number on each item when "buying"
 
 // dompurify inputs (or joi)
 
@@ -13,3 +16,9 @@
 
 resources:
 https://javascriptplayground.com/blog/2017/12/introduction-to-react-tests-enzyme/
+
+
+
+
+
+bugs fixed:

@@ -50,9 +50,9 @@ const getStockItemsArray = (items) => {
   const stockItemsArray = [];
   for (let item in items) {
     // console.log(items[item]);
-    if (items[item].stock > 0) {
+    // if (items[item].stock > 0) {
       stockItemsArray.push(items[item])
-    }
+    // }
   }
   // console.log('final stockItemsArray', stockItemsArray);
   return stockItemsArray;

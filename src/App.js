@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import { injectGlobal } from 'styled-components';
 
 import configureStore from './store';
 
@@ -8,7 +9,7 @@ import Home from './routes/Home';
 import About from './routes/About';
 import Cart from './routes/Cart';
 
-import Header from './components/Header';
+import StyledHeader from './components/StyledHeader';
 
 import './App.css';
 
@@ -19,7 +20,7 @@ const App = () => (
   <Provider store={store}>
     <BrowserRouter>
       <div>
-        <Header />
+        <StyledHeader />
         <div className='container'>
           <Switch>
             <Route exact path='/' component={Home} />
@@ -35,10 +36,11 @@ const App = () => (
   </Provider>
 );
 
+injectGlobal`
+  body {
+    background-color: ghostwhite;
+    padding: 10px;
+  }
+`;
+
 export default App;
-// if (module.hot) {
-//    module.hot.accept('./print.js', function() {
-//      console.log('Accepting the updated printMe module!');
-//      printMe();
-//    });
-//  }

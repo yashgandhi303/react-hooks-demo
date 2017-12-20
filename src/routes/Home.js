@@ -23,11 +23,10 @@ class Home extends React.Component {
   renderItems() {
     return (
       this.props.storeStock.stockItems.map((item, index) => {
-        if (item.stock > 0) {
+        // if (item.stock > 0) {
           return <Item onClickFn={this.props.addItemToCartFn} item={item} key={item.id} />
-        }
+        // }
       })
-        // || <p>No items in stock</p>
     );
   }
 

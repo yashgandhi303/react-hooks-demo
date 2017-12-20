@@ -73,7 +73,6 @@ const cartItemIds = (state = [], action) => {
       }
       return [...state, action.id];
     case REMOVE_FROM_CART:
-      // console.warn('carItemIds: ', state.filter((item) => item !== action.id))
       return state.filter((id) => id !== action.id);
     case BUY_ITEMS:
       // returns default state (after purchasing)
