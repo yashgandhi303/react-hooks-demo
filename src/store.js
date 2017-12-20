@@ -1,5 +1,6 @@
 import { createStore, compose, applyMiddleware } from 'redux';
 import { createLogger } from "redux-logger";
+
 // thunks:
 import thunk from 'redux-thunk';
 // sagas:
@@ -9,6 +10,7 @@ import thunk from 'redux-thunk';
 import rootReducer from './reducers/root_reducer';
 // import { loadState, saveState } from './localStorage';
 // const sagaMiddleware = createSagaMiddleware();
+
 const loggerMiddleware = createLogger();
 
 const configureStore = () => {
@@ -31,15 +33,11 @@ const configureStore = () => {
   // store.subscribe(throttle(() => {
   //   // console.log('current state (store.js): ', store.getState());
   //   saveState({
-  //     weather: store.getState().weather,
-  //     laneReducer: store.getState().laneReducer,
-  //     stocks: store.getState().stocks,
-  //     currencies: store.getState().currencies
+  //    randomState
   //   });
   // }), 1000);
 
   return store;
 }
-
 
 export default configureStore;

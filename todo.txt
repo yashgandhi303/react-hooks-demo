@@ -7,6 +7,9 @@
 
 // fix the count/number on each item when "buying"
 
+// dompurify inputs (or joi)
+
+// styled components
 
 resources:
 https://javascriptplayground.com/blog/2017/12/introduction-to-react-tests-enzyme/

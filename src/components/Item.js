@@ -16,8 +16,10 @@ const Item = (props) => (
     </p>
     <input type="number" />
     <br/>
-    <button onClick={() => props.onClickFn(props.item, 3)}>{window.location.pathname === "/cart" ? "Remove From Cart" : "Add to cart"}</button>
-    {/* <button onClick={() => props.onClickFn(props.item, amount)}>Remove From Cart</button> */}
+
+    <button 
+      onClick={() => props.onClickFn(props.item, 3)}>{window.location.pathname === "/cart" ? "Remove From Cart" : "Add to cart"}
+    </button>
 
     {( 
       window.location.pathname === "/cart" && 

@@ -14,23 +14,22 @@ const Cart = ({ cartItems, buyAll, remove }) => (
       <div>
         {cartItems.length && cartItems.map((item) => (
             <Item onClickFn={remove} item={item} key={item.id}/>
-            //<p onClick={() => remove(item.id)} key={item.id}>{item.name}</p>
           )) || <Link to='/'>Go buy stuff</Link>
         }
       </div>
 
 
-    {/* have button to buy items and make cart go empty */}
+    {/* button to buy items and make cart go empty */}
     <button onClick={buyAll} disabled={!cartItems.length}>Buy all</button>
   </div>
 );
 
 Cart.propTypes = {
-  // cartItems: PropTypes.array.isRequired,
   buyAll: PropTypes.func.isRequired,
   remove: PropTypes.func.isRequired
 };
 
+// TODO: make functional nb??? (does it matter here? not altering state, just the array for a prop)
 function getArrayOfCartItems(cartItems, ids) {
   const arr = [];
   console.log('getARraasdfasdf ', cartItems, ids)

@@ -8,6 +8,8 @@ import {
   FETCH_ITEMS_IN_STOCK,
   FETCH_CART_ITEMS,
   BUY_ITEMS,
+  CHANGE_ITEM_QUANTITY,
+  UPDATE_ITEM_AMT,
   ADD_NEW_ITEM_TO_STOCK,
   REQUEST_ITEMS_IN_STOCK
 } from './actionTypes';
@@ -16,8 +18,15 @@ firebase.initializeApp(config);
 const database = firebase.database();
 
 const requestItems = () => ({
+  // TODO: initiate spinner
   type: REQUEST_ITEMS_IN_STOCK
 });
+
+// TODO: actions to create:
+// update stock for existing item (changeItemQuantity below)
+// add new item to store stock (addNewItemToStock below)
+// a filter/search to filter for only that item in stock/cart
+
 
 export const fetchItemsInStock = () => {
   return (dispatch) => {
@@ -54,7 +63,7 @@ export const addItemToCart = (item, amt) => {
     // TODO: dispatch error (they're adding more to cart than that item has in stock); for now logging error
     console.error('Error: Adding too many items to cart: ', amt, stock);
   }
-  const newStockAmt = stock + amt;
+  const newStockAmt = stock - amt;
 
   // TODO: need check to make sure stock doesn't go negative
   console.log('addItemToCart: ', id, name, newStockAmt);
@@ -78,22 +87,6 @@ export const buyItems = (items) => {
   // will remove all items from cart (as if purchased)
   return { type: BUY_ITEMS };
 }
-
-
-// export const changeItemQuantity = (item) => {
-//   // will remove item from cart
-//   return { type: CHANGE_ITEM_QUANTITY, payload: item.id };
-// }
-
-// export const removeFromCart = (itemId) => {
-//   // needs to increase stockItems, and decrease the items in cart
-//   console.log('removeFromCart ', itemId);
-//   // return (dispatch) => {
-
-//     return { type: REMOVE_FROM_CART, payload: itemId };
-
-//   // }
-// }
 
 export const removeFromCart = (item, amt) => {
   console.log('aasdfasdf ', item, amt);
@@ -153,9 +146,12 @@ export const addNewItemToStock = (item) => {
         // })
       });
   }
-
 }
 
+export const changeItemStockQuantity = (item) => {
+  // will remove item from cart
+  return { type: CHANGE_ITEM_QUANTITY, payload: item.id };
+}
 
 
 

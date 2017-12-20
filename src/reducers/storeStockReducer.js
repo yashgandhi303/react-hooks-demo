@@ -1,8 +1,6 @@
 import { FETCH_ITEMS_IN_STOCK, ADD_TO_CART, REMOVE_FROM_CART, BUY_ITEMS, ADD_NEW_ITEM_TO_STOCK, REQUEST_ITEMS_IN_STOCK } from '../actions/actionTypes';
 // import { storeListItems } from '../mockData';
 
-export const getItem = (state, id) => state[id];
-
 const initialState =  {
    isFetching: false,
    stockItems: []
@@ -60,6 +58,11 @@ const getStockItemsArray = (items) => {
   return stockItemsArray;
 };
 
+export default storeStock;
+
+
+
+// export const getItem = (state, id) => state[id];
 // export const getIds = (state) => state.ids;
 
 // const byIds = (state, action) => {
@@ -123,5 +126,3 @@ const getStockItemsArray = (items) => {
 //       return state;
 //   }
 // };
-
-export default storeStock;

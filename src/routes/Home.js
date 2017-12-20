@@ -19,17 +19,14 @@ class Home extends React.Component {
     // call to fetch stockItems for redux state
     this.props.getItemsInStock();
   }
-  // need componentDidUpdate() ??
 
   renderItems() {
     return (
       this.props.storeStock.stockItems.map((item, index) => {
-          // make below component (has name, count, etc)
-          if (item.stock > 0) {
-            // return <input type='button' value={item.name} onClick={this.props.addItemToCartFn} key={item.id} />
-            return <Item onClickFn={this.props.addItemToCartFn} item={item} key={item.id} />
-          }
-        })
+        if (item.stock > 0) {
+          return <Item onClickFn={this.props.addItemToCartFn} item={item} key={item.id} />
+        }
+      })
         // || <p>No items in stock</p>
     );
   }
@@ -41,16 +38,14 @@ class Home extends React.Component {
         <h1 id='welcome'>Welcome</h1>
 
           <Link to="/cart">Go to Cart</Link>
-          <p>Number of items in cart: {cartItems.length}</p>
+          <p>Number of items in cart: {cartItems.cartItemIds.length}</p>
 
           { console.log('Home props: ', this.props, storeStock.stockItems && storeStock.stockItems.length)}
 
           <h4>Store stock:</h4>
 
           {/* TODO: refactor into  component (aso, test below with no items - make sure dipslays the "no items in stock") */}
-          {
-            storeStock.stockItems && storeStock.stockItems.length && this.renderItems()
-          }
+          { storeStock.stockItems && storeStock.stockItems.length && this.renderItems() || <p>No items in stock</p> }
 
           {/* <AddItemForm /> */}
 
@@ -59,16 +54,7 @@ class Home extends React.Component {
   }
 }
 
-// storeStock: PropTypes.arrayOf(PropTypes.shape({
-//   stockItems: PropTypes.arrayOf(PropTypes.shape({
-//     id: PropTypes.string.isRequired,
-//   }))
-//   completed: PropTypes.bool.isRequired,
-//   text: PropTypes.string.isRequired,
-// }).isRequired).isRequired,
-
 Home.propTypes = {
-  // storeStock: PropTypes.object, // use shape ^^
   storeStock: PropTypes.shape({
     stockItems: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.string.isRequired,
@@ -76,7 +62,6 @@ Home.propTypes = {
       name: PropTypes.string.isRequired,
     }))
   }).isRequired,
-  // cartItems: PropTypes.array,
   addItemToCartFn: PropTypes.func.isRequired,
   getItemsInStock: PropTypes.func.isRequired
 };
