@@ -1,15 +1,16 @@
 import { createStore, compose, applyMiddleware } from 'redux';
 import { createLogger } from "redux-logger";
+import rootSaga from './sagas';
 
 // thunks:
 import thunk from 'redux-thunk';
 // sagas:
-// import createSagaMiddleware from 'redux-saga';
+import createSagaMiddleware from 'redux-saga';
 
 // import throttle from 'lodash/throttle';
 import rootReducer from './reducers/root_reducer';
 // import { loadState, saveState } from './localStorage';
-// const sagaMiddleware = createSagaMiddleware();
+const sagaMiddleware = createSagaMiddleware();
 
 const loggerMiddleware = createLogger();
 
@@ -22,7 +23,8 @@ const configureStore = () => {
     // persistedState,
     compose(
       applyMiddleware( // can use thunks, sagas, etc.
-        thunk,
+        // thunk,
+        sagaMiddleware,
         loggerMiddleware
       ),
       typeof window === 'object' && typeof window.devToolsExtension !== 'undefined' ? window.devToolsExtension() : f => f
@@ -39,5 +41,7 @@ const configureStore = () => {
 
   return store;
 }
+
+sagaMiddleware.run(rootSaga);
 
 export default configureStore;
