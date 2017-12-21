@@ -34,7 +34,6 @@ const Button = styled.button`
 
 const Item = (props) => (
   <div className="item-div" style={{ border: "1px solid black" }}>
-    <StyledTest />
     { console.log('Item props: ', props) }
     {/* ant design component here nb??? */}
     <StyledDiv> 
@@ -55,7 +54,7 @@ const Item = (props) => (
         {window.location.pathname === "/cart" ? "Remove From Cart" : "Add to cart"}
       </Button>
     </StyledDiv>
-    {( 
+    {(
       window.location.pathname === "/cart" && 
       <div>
         <p>Amt in Cart: {props.item.amt}</p>

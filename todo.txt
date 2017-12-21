@@ -22,3 +22,20 @@ https://javascriptplayground.com/blog/2017/12/introduction-to-react-tests-enzyme
 
 
 bugs fixed:
+
+
+
+
+TODOS:
+sagas
+tests
+eslint
+addNewItemsToCart(stock) method/action
+immutable
+
+
+
+
+
+
+DONE:
