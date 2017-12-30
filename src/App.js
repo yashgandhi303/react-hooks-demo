@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { injectGlobal } from 'styled-components';
 
-import configureStore from './store';
+// import configureStore from './store';
 
 import Home from './routes/Home';
 import About from './routes/About';
@@ -13,7 +13,9 @@ import StyledHeader from './components/StyledHeader';
 
 import './App.css';
 
-const store = configureStore();
+// const store = configureStore();
+import store from './store';
+
 
 
 const App = () => (

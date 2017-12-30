@@ -28,30 +28,30 @@ const requestItems = () => ({
 // a filter/search to filter for only that item in stock/cart
 
 
-export const fetchItemsInStock = () => {
-  return (dispatch) => {
-    dispatch(requestItems()); // for some type of spinner/loading in the future
-    // call to firebase and get all items in stock
-    // axios.get('https://docs-examples.firebaseio.com/rest/saving-data/fireblog/posts.json?print=pretty')
-    axios.get(`https://carrinho-15670.firebaseio.com/stockItems.json`)
-      .then(res => {
-        console.log('asdfasdf', res.data);
-        const itemsInStock = res.data;
-        dispatch({
-          type: FETCH_ITEMS_IN_STOCK,
-          payload: itemsInStock
-        });
-      })
-      .catch(err => {
-        console.error('Error fetching items: ', err);
-        // TODO: below
-        // dispatch({
-        //     type: ERROR,
-        //     payload: {"Error": err}
-        // })
-      });
-  }
-}
+// export const fetchItemsInStock = () => {
+//   return (dispatch) => {
+//     dispatch(requestItems()); // for some type of spinner/loading in the future
+//     // call to firebase and get all items in stock
+//     // axios.get('https://docs-examples.firebaseio.com/rest/saving-data/fireblog/posts.json?print=pretty')
+//     axios.get(`https://carrinho-15670.firebaseio.com/stockItems.json`)
+//       .then(res => {
+//         console.log('asdfasdf', res.data);
+//         const itemsInStock = res.data;
+//         dispatch({
+//           type: FETCH_ITEMS_IN_STOCK,
+//           payload: itemsInStock
+//         });
+//       })
+//       .catch(err => {
+//         console.error('Error fetching items: ', err);
+//         // TODO: below
+//         // dispatch({
+//         //     type: ERROR,
+//         //     payload: {"Error": err}
+//         // })
+//       });
+//   }
+// }
 
 // TODO: 
 // removeItemFromCart can also use this method

@@ -29,7 +29,7 @@ const cartItemStock = (state = {}, action) => {
           stock: action.stock
         }
       };
-      case UPDATE_ITEM_AMT:
+    case UPDATE_ITEM_AMT:
       return {
         ...state,
         [action.id]: {

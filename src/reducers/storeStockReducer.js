@@ -1,4 +1,4 @@
-import { FETCH_ITEMS_IN_STOCK, ADD_TO_CART, REMOVE_FROM_CART, BUY_ITEMS, ADD_NEW_ITEM_TO_STOCK, REQUEST_ITEMS_IN_STOCK } from '../actions/actionTypes';
+import { FETCH_ITEMS_IN_STOCK, ADD_TO_CART, REMOVE_FROM_CART, BUY_ITEMS, ADD_NEW_ITEM_TO_STOCK, REQUEST_ITEMS_IN_STOCK, FETCH_CART_ITEMS } from '../actions/actionTypes';
 // import { storeListItems } from '../mockData';
 
 const initialState =  {
@@ -35,6 +35,8 @@ const storeStock = (state = initialState, action) => {
           updatedItem
         ]
       };
+    case FETCH_CART_ITEMS:
+      return state;
     case BUY_ITEMS:
       // right now just going back to full stock; will update to subtract bought items
       // from store stock (if enough in stock)

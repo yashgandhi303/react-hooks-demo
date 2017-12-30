@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { addItemToCart, fetchItemsInStock } from '../actions/actionCreators';
+import { addItemToCart /*, fetchItemsInStock*/ } from '../actions/actionCreators';
 import AddItemForm from '../components/AddItemForm';
 import Item from '../components/Item';
 
@@ -77,7 +77,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(addItemToCart(item, amt));
   },
   getItemsInStock: () => {
-    dispatch(fetchItemsInStock());
+    dispatch({ type: 'FETCH_CART_ITEMS' }); // fetchItemsInStock());
   }
 });
 

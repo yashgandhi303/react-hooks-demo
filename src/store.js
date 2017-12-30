@@ -14,34 +14,53 @@ const sagaMiddleware = createSagaMiddleware();
 
 const loggerMiddleware = createLogger();
 
-const configureStore = () => {
 
-  // const persistedState = loadState();
-
-  const store = createStore(
-    rootReducer,
-    // persistedState,
-    compose(
-      applyMiddleware( // can use thunks, sagas, etc.
-        // thunk,
-        sagaMiddleware,
-        loggerMiddleware
-      ),
-      typeof window === 'object' && typeof window.devToolsExtension !== 'undefined' ? window.devToolsExtension() : f => f
-    )
-  );
-
-  // if using persistedState:
-  // store.subscribe(throttle(() => {
-  //   // console.log('current state (store.js): ', store.getState());
-  //   saveState({
-  //    randomState
-  //   });
-  // }), 1000);
-
-  return store;
-}
+const store = createStore(
+  rootReducer,
+  // persistedState,
+  compose(
+    applyMiddleware( // can use thunks, sagas, etc.
+      thunk,
+      sagaMiddleware,
+      loggerMiddleware
+    ),
+    typeof window === 'object' && typeof window.devToolsExtension !== 'undefined' ? window.devToolsExtension() : f => f
+  )
+);
 
 sagaMiddleware.run(rootSaga);
 
-export default configureStore;
+export default store;
+
+
+// const configureStore = () => {
+
+//   // const persistedState = loadState();
+
+//   const store = createStore(
+//     rootReducer,
+//     // persistedState,
+//     compose(
+//       applyMiddleware( // can use thunks, sagas, etc.
+//         // thunk,
+//         sagaMiddleware,
+//         loggerMiddleware
+//       ),
+//       typeof window === 'object' && typeof window.devToolsExtension !== 'undefined' ? window.devToolsExtension() : f => f
+//     )
+//   );
+
+//   // if using persistedState:
+//   // store.subscribe(throttle(() => {
+//   //   // console.log('current state (store.js): ', store.getState());
+//   //   saveState({
+//   //    randomState
+//   //   });
+//   // }), 1000);
+
+//   return store;
+// }
+
+// sagaMiddleware.run(rootSaga);
+
+// export default configureStore;

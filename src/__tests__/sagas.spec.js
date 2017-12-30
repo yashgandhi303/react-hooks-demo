@@ -1,10 +1,36 @@
 import test from 'tape';
 
-import { put, call } from 'redux-saga/effects'
-import { delay } from 'redux-saga'
-import { incrementAsync } from '../sagas'
+import { put, call } from 'redux-saga/effects';
+import { delay } from 'redux-saga';
+import { incrementAsync, fetchItemsInStock } from '../sagas';
 
 // put, call, takeEvery, takeLatest,                cps
+
+
+test('fetchItemsInStock Saga test', (assert) => {
+  const gen = fetchItemsInStock();
+
+  assert.deepEqual(
+    gen.next().value,
+    call(delay, 1000),
+    'incrementAsync Saga must call delay(1000)'
+  )
+
+  assert.deepEqual(
+    gen.next().value,
+    put({ type: 'INCREMENT' }),
+    'incrementAsync Saga must dispatch an INCREMENT action'
+  )
+
+  assert.deepEqual(
+    gen.next(),
+    { done: true, value: undefined },
+    'incrementAsync Saga must be done'
+  )
+
+  assert.end()
+});
+
 
 
 test('incrementAsync Saga test', (assert) => {
@@ -75,3 +101,51 @@ function* logoutUser() {
     }
   }
 }  
+
+
+
+
+function* fetchProducts() {
+  try {
+    const products = yield call(Api.fetch, '/products')
+    yield put({ type: 'PRODUCTS_RECEIVED', products })
+  }
+  catch(error) {
+    yield put({ type: 'PRODUCTS_REQUEST_FAILED', error })
+  }
+}
+
+const iterator = fetchProducts()
+
+// expects a call instruction
+assert.deepEqual(
+  iterator.next().value,
+  call(Api.fetch, '/products'),
+  "fetchProducts should yield an Effect call(Api.fetch, './products')"
+)
+
+// create a fake error
+const error = {}
+
+// expects a dispatch instruction
+assert.deepEqual(
+  iterator.throw(error).value,
+  put({ type: 'PRODUCTS_REQUEST_FAILED', error }),
+  "fetchProducts should yield an Effect put({ type: 'PRODUCTS_REQUEST_FAILED', error })"
+)
+
+
+const iterator = fetchProducts()
+
+// expects a call instruction
+assert.deepEqual(
+  iterator.next().value,
+  call(Api.fetch, '/products'),
+  "fetchProducts should yield an Effect call(Api.fetch, './products')"
+)
+
+
+
+
+
+

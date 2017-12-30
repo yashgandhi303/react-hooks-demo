@@ -10,9 +10,7 @@ bugs:
 // in item (when in cart), update so button says "update item count" (or similar), and use that submitted value to update amt in cart (or remove if user enters 0)
 
 
-// dompurify inputs (or joi)
 
-// styled components
 
 resources:
 https://javascriptplayground.com/blog/2017/12/introduction-to-react-tests-enzyme/
@@ -27,8 +25,10 @@ bugs fixed:
 
 
 TODOS:
+dompurify/joi inputs
+styled components
 sagas
-tests
+tests  https://javascriptplayground.com/blog/2017/12/introduction-to-react-tests-enzyme/
 eslint
 addNewItemsToCart(stock) method/action
 immutable
