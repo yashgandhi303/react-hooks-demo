@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { addItemToCart /*, fetchItemsInStock*/ } from '../actions/actionCreators';
-import AddItemForm from '../components/AddItemForm';
+// import { addItemToCart /*, fetchItemsInStock*/ } from '../actions/actionCreators';
+// import AddItemForm from '../components/AddItemForm';
 import Item from '../components/Item';
 
 class Home extends React.Component {
@@ -74,7 +74,11 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => ({
   addItemToCartFn: (item, amt) => {
-    dispatch(addItemToCart(item, amt));
+    dispatch({ 
+      type: 'ADD_ITEM_TO_CART',
+      item,
+      amt 
+  }) // );  // addItemToCart(item, amt)
   },
   getItemsInStock: () => {
     dispatch({ type: 'FETCH_CART_ITEMS' }); // fetchItemsInStock());

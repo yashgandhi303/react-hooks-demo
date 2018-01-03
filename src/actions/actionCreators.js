@@ -57,30 +57,30 @@ const requestItems = () => ({
 // removeItemFromCart can also use this method
 // both need an id, and a new stock amount
 // export const addItemToCart = (id, name, newStockAmt) => {
-export const addItemToCart = (item, amt) => {
-  const { id, name, stock } = item;
-  if (amt > stock) {
-    // TODO: dispatch error (they're adding more to cart than that item has in stock); for now logging error
-    console.error('Error: Adding too many items to cart: ', amt, stock);
-  }
-  const newStockAmt = stock - amt;
+// export const addItemToCart = (item, amt) => {
+//   const { id, name, stock } = item;
+//   if (amt > stock) {
+//     // TODO: dispatch error (they're adding more to cart than that item has in stock); for now logging error
+//     console.error('Error: Adding too many items to cart: ', amt, stock);
+//   }
+//   const newStockAmt = stock - amt;
 
-  // TODO: need check to make sure stock doesn't go negative
-  console.log('addItemToCart: ', id, name, newStockAmt);
-  return (dispatch) => {
-    axios.put(`https://carrinho-15670.firebaseio.com/stockItems/${id}/stock.json`, newStockAmt)
-      .then(res => {
-        console.log('asdfasdf', res.data);
-        dispatch({
-          type: ADD_TO_CART,
-          amt,
-          id,
-          name,
-          stock: newStockAmt
-        })
-      })
-  }
-}
+//   // TODO: need check to make sure stock doesn't go negative
+//   console.log('addItemToCart: ', id, name, newStockAmt);
+//   return (dispatch) => {
+//     axios.put(`https://carrinho-15670.firebaseio.com/stockItems/${id}/stock.json`, newStockAmt)
+//       .then(res => {
+//         console.log('asdfasdf', res.data);
+//         dispatch({
+//           type: ADD_TO_CART,
+//           amt,
+//           id,
+//           name,
+//           stock: newStockAmt
+//         })
+//       })
+//   }
+// }
 
 export const buyItems = (items) => {
   console.log('called buyItems', items);

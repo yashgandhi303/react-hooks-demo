@@ -11,6 +11,33 @@ class Api {
         return result;
     }
 
+    static addItemToCart(id, newStockAmt) {
+        const result = axios.put(`https://carrinho-15670.firebaseio.com/stockItems/${id}/stock.json`, newStockAmt)
+        .then(res => {
+        //   console.log('res.data: ', res.data);
+          return res.data;
+        });
+        return result;
+    }
+
+    // TODO: need to combine addItemToCart && removeItemFromCart
+    static removeItemFromCart(id, newStockAmt) {
+        const result = axios.put(`https://carrinho-15670.firebaseio.com/stockItems/${id}/stock.json`, newStockAmt)
+        .then(res => {
+        //   console.log('res.data: ', res.data);
+          return res.data;
+        });
+        return result;
+    }
+
+    
+
+    // static requestItems = () => ({
+    //     // TODO: initiate spinner
+    //     type: REQUEST_ITEMS_IN_STOCK
+    //   });
+      
+
 
 
 } 

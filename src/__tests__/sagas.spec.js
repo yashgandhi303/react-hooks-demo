@@ -1,26 +1,41 @@
 import test from 'tape';
-
 import { put, call } from 'redux-saga/effects';
 import { delay } from 'redux-saga';
 import { incrementAsync, fetchItemsInStock } from '../sagas';
+import Api from './api';
 
 // put, call, takeEvery, takeLatest,                cps
+
+/** 
+*  resources:
+*
+*  https://stackoverflow.com/questions/34930735/pros-cons-of-using-redux-saga-with-es6-generators-vs-redux-thunk-with-es2017-asy/34933395#34933395
+*
+**/
+
 
 
 test('fetchItemsInStock Saga test', (assert) => {
   const gen = fetchItemsInStock();
 
-  assert.deepEqual(
-    gen.next().value,
-    call(delay, 1000),
-    'incrementAsync Saga must call delay(1000)'
-  )
+  assert.deepEqual(iterator.next().value, take(FETCH_CART_ITEMS));
 
   assert.deepEqual(
     gen.next().value,
-    put({ type: 'INCREMENT' }),
-    'incrementAsync Saga must dispatch an INCREMENT action'
-  )
+    call(Api.fetchItems),
+    'fetchItemsInStock Saga must call Api.fetchItems)'
+  );
+  const payload = {'item1': {
+    'id': 'item1',
+    'name': 'beer',
+    'stock': 7
+  }};
+
+  assert.deepEqual(
+    gen.next().value,
+    put({ type: 'FETCH_ITEMS_IN_STOCK', payload }),
+    'incrementAsync Saga must dispatch FETCH_ITEMS_IN_STOCK action with payload'
+  );
 
   assert.deepEqual(
     gen.next(),
@@ -28,46 +43,39 @@ test('fetchItemsInStock Saga test', (assert) => {
     'incrementAsync Saga must be done'
   )
 
-  assert.end()
+  assert.end();
 });
 
 
 
-test('incrementAsync Saga test', (assert) => {
-  const gen = incrementAsync()
+// test('incrementAsync Saga test', (assert) => {
+//   const gen = incrementAsync()
 
-  assert.deepEqual(
-    gen.next().value,
-    call(delay, 1000),
-    'incrementAsync Saga must call delay(1000)'
-  )
+//   assert.deepEqual(
+//     gen.next().value,
+//     call(delay, 1000),
+//     'incrementAsync Saga must call delay(1000)'
+//   )
 
-  assert.deepEqual(
-    gen.next().value,
-    put({type: 'INCREMENT'}),
-    'incrementAsync Saga must dispatch an INCREMENT action'
-  )
+//   assert.deepEqual(
+//     gen.next().value,
+//     put({type: 'INCREMENT'}),
+//     'incrementAsync Saga must dispatch an INCREMENT action'
+//   )
 
-  assert.deepEqual(
-    gen.next(),
-    { done: true, value: undefined },
-    'incrementAsync Saga must be done'
-  )
+//   assert.deepEqual(
+//     gen.next(),
+//     { done: true, value: undefined },
+//     'incrementAsync Saga must be done'
+//   )
 
-  assert.end()
-});
-
-
+//   assert.end()
+// });
 
 
-/* 
-
-  below resources:
-
-  https://stackoverflow.com/questions/34930735/pros-cons-of-using-redux-saga-with-es6-generators-vs-redux-thunk-with-es2017-asy/34933395#34933395
 
 
-*/
+
 
 it("should handle logout correctly", () => {
   const saga = logoutUser(); // call the saga
