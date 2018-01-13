@@ -49,7 +49,7 @@ const mapStateToProps = (state, ownProps) => ({
 const mapDispatchToProps = (dispatch) => ({
   buyAll: () => {
     // TODO: dispatch a 'BUY_ITEMS' event below
-    dispatch(buyItems());
+    dispatch({ type: 'BUY_CART_ITEMS' }) //buyItems());
   },
   remove: (item, amt) => {
     dispatch({ type: 'REMOVE_ITEM_FROM_CART', item, amt}) //removeFromCart(itemId, amt));

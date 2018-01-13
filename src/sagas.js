@@ -13,6 +13,7 @@ import {
   FETCH_ITEMS_IN_STOCK,
   FETCH_CART_ITEMS,
   BUY_ITEMS,
+  BUY_CART_ITEMS,
   CHANGE_ITEM_QUANTITY,
   UPDATE_ITEM_AMT,
   ADD_NEW_ITEM_TO_STOCK,
@@ -27,13 +28,14 @@ export default function* rootSaga() {
     watchFetchItemsInStock(),
     watchAddItem(),
     watchRemoveItem(),
+    watchBuyItems()
     // takeEvery('ADD_ITEM_TO_CART', addItemToCart),
     // takeEvery('REMOVE_FROM_CART', removeFromCart),
     // addItemToCart(),
   ]);
 }
 
-/** watchers
+/** watchers/helpers
  */
 function* watchFetchItemsInStock() {
   yield takeEvery(FETCH_CART_ITEMS, fetchItemsInStock);
@@ -47,9 +49,14 @@ function* watchRemoveItem() {
   yield takeEvery(REMOVE_ITEM_FROM_CART, removeFromCart);
 }
 
+function* watchBuyItems() {
+  yield takeEvery(BUY_CART_ITEMS, buyAllItems);
+}
+
 
 /** sagas
- */
+*
+*/
 function* fetchItemsInStock() {
   // while true nb???
   // while (true) {
@@ -63,9 +70,10 @@ function* fetchItemsInStock() {
     yield put({
       type: FETCH_ITEMS_IN_STOCK,
       payload: itemsInStock
-    });  
+    });
+
   } catch (error) {
-    // yield put({type: ‘FETCH_FAILED’, error: error});
+    // yield put({ type: ‘FETCH_FAILED’, error: error });
     console.error('Error fetching items in stock: ', error);
   }
 }
@@ -73,7 +81,6 @@ function* fetchItemsInStock() {
 
 function* addItemToCart(action) {
   try {
-    console.warn('addItemToCart saga: ', action.item, action.amt);
     const { id, name, stock } = action.item;
     const amt = action.amt;
     if (amt > stock) {
@@ -83,7 +90,7 @@ function* addItemToCart(action) {
     const newStockAmt = stock - amt;
   
     // TODO: need check to make sure stock doesn't go negative
-    console.log('addItemToCart: ', id, name, newStockAmt);
+    // console.log('addItemToCart: ', id, name, newStockAmt);
     
     const addedItem = yield call(Api.addItemToCart, id, newStockAmt);
 
@@ -96,25 +103,20 @@ function* addItemToCart(action) {
     });
 
   } catch (error) {
-    // yield put({type: ‘ADD_TO_CART_FAILED’, error: error});
+    // yield put({ type: ‘ADD_TO_CART_FAILED’, error: error });
     console.error('Error adding item to cart: ', error);
   }
 }
 
-
-// FIXME: gets called twice?? works the first time, but then gets called and item is undefined, so throws error
 function* removeFromCart(action) {
   try {
-    console.warn('removeFromCart saga: ', action.item, action.amt);
     const { item, amt } = action;
     const { id, name, stock } = item;
-
-    console.log('remove nick esta aqui ', item, action);
 
     const newStockAmt = stock + amt;
   
     // TODO: need check to make sure stock doesn't go negative
-    console.log('removeFromCart: ', id, name, newStockAmt);
+    // console.log('removeFromCart: ', id, name, newStockAmt);
     
     // don't really need the value... nb??-
     const removedItem = yield call(Api.removeItemFromCart, id, newStockAmt);
@@ -130,12 +132,20 @@ function* removeFromCart(action) {
     return removedItem;
 
   } catch (error) {
-    // yield put({type: ‘REMOVE_FROM_CART_FAILED’, error: error});
+    // yield put({ type: ‘REMOVE_FROM_CART_FAILED’, error: error });
     console.error('Error removing item from cart: ', error);
   }
 }
 
+function* buyAllItems() {
+  try {
+    yield put({ type: BUY_ITEMS });    
 
+  } catch (error) {
+    // yield put({ type: ‘BUY_ITEMS_FAILURE’, error: error });
+    console.error('Error buying all items: ', error);
+  }
+}
 
 /*
     examples:

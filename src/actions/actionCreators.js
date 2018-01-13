@@ -82,11 +82,11 @@ const requestItems = () => ({
 //   }
 // }
 
-export const buyItems = (items) => {
-  console.log('called buyItems', items);
-  // will remove all items from cart (as if purchased)
-  return { type: BUY_ITEMS };
-}
+// export const buyItems = (items) => {
+//   console.log('called buyItems', items);
+//   // will remove all items from cart (as if purchased)
+//   return { type: BUY_ITEMS };
+// }
 
 // export const removeFromCart = (item, amt) => {
 //   console.log('aasdfasdf ', item, amt);

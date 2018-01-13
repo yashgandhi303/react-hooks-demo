@@ -1,5 +1,3 @@
-
-
 bugs:
 // fix the count/number on each item when "buying" (and reset to zero after submitting)
 
@@ -17,20 +15,20 @@ https://javascriptplayground.com/blog/2017/12/introduction-to-react-tests-enzyme
 
 
 
-
-
 bugs fixed:
 
 
 
 
 TODOS:
+addNewItemsToCart(stock) method/action
+sagas
+tests - test sagas
+      - test components
+
 dompurify/joi inputs
 styled components
-sagas
-tests  https://javascriptplayground.com/blog/2017/12/introduction-to-react-tests-enzyme/
 eslint
-addNewItemsToCart(stock) method/action
 immutable
 
 

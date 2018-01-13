@@ -17,6 +17,7 @@ export const FETCH_ITEMS_IN_STOCK = 'FETCH_ITEMS_IN_STOCK';
 // export const CHECKOUT = 'CHECKOUT';
 
 export const BUY_ITEMS = 'BUY_ITEMS';
+export const BUY_CART_ITEMS = 'BUY_CART_ITEMS';
 
 export const ADD_NEW_ITEM_TO_STOCK = 'ADD_NEW_ITEM_TO_STOCK';
 
