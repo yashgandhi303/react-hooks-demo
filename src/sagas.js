@@ -1,5 +1,5 @@
 import { delay } from 'redux-saga';
-import { put, takeEvery, all, call, take, fork } from 'redux-saga/effects';
+import { put, takeEvery, all, call, take, fork, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 import * as firebase from 'firebase';
 import { config } from './fire';
@@ -7,6 +7,7 @@ import Api from './api';
 
 import {
   ADD_TO_CART,
+  ADD_ITEM_TO_CART,
   REMOVE_FROM_CART,
   FETCH_ITEMS_IN_STOCK,
   FETCH_CART_ITEMS,
@@ -22,14 +23,31 @@ import {
 
 export default function* rootSaga() {
   yield all([
-    fetchItemsInStock(),
-    takeEvery('ADD_ITEM_TO_CART', addItemToCart),
+    watchFetchItemsInStock(),
+    watchAddItem(),
+    // takeEvery('ADD_ITEM_TO_CART', addItemToCart),
     takeEvery('REMOVE_FROM_CART', removeFromCart),
     // addItemToCart(),
   ]);
 }
 
+/** watchers
+ */
+function* watchFetchItemsInStock() {
+  yield takeEvery(FETCH_CART_ITEMS, fetchItemsInStock);
+}
+
+function* watchAddItem() {
+  yield takeEvery(ADD_TO_CART, addItemToCart);
+}
+
+
+
+/** sagas
+ */
 function* fetchItemsInStock() {
+  // while true nb???
+  // while (true) {
   try {
     // yield take(FETCH_CART_ITEMS);
 
@@ -40,22 +58,17 @@ function* fetchItemsInStock() {
     yield put({
       type: FETCH_ITEMS_IN_STOCK,
       payload: itemsInStock
-    });
-
+    });  
   } catch (error) {
     // yield put({type: ‘FETCH_FAILED’, error: error});
     console.error('Error fetching items in stock: ', error);
   }
 }
-
-// function* watchAddItem() {
-//   yield takeEvery('FETCH_CART_ITEMS', fetchItemsInStock)
 // }
-
 
 function* addItemToCart(action) {
   try {
-    console.warn('addItemToCart saga: ', action.item, action.amt)
+    console.warn('addItemToCart saga: ', action.item, action.amt);
     const { id, name, stock } = action.item;
     const amt = action.amt;
     if (amt > stock) {
@@ -70,7 +83,7 @@ function* addItemToCart(action) {
     const addedItem = yield call(Api.addItemToCart, id, newStockAmt);
 
     yield put({
-      type: ADD_TO_CART,
+      type: ADD_ITEM_TO_CART,
       amt,
       id,
       name,
@@ -84,11 +97,14 @@ function* addItemToCart(action) {
 }
 
 
+// FIXME: gets called twice?? works the first time, but then gets called and item is undefined, so throws error
 function* removeFromCart(action) {
   try {
     console.warn('removeFromCart saga: ', action.item, action.amt);
     const { item, amt } = action;
     const { id, name, stock } = item;
+
+    console.log('remove nick esta aqui ', item, action);
 
     const newStockAmt = stock + amt;
   
@@ -105,6 +121,8 @@ function* removeFromCart(action) {
       name,
       stock: newStockAmt // FIXME:  <---
     });
+
+    return removedItem;
 
   } catch (error) {
     // yield put({type: ‘REMOVE_FROM_CART_FAILED’, error: error});

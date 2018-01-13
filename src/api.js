@@ -12,6 +12,10 @@ class Api {
     }
 
     static addItemToCart(id, newStockAmt) {
+        console.warn('%c addItemToCart: ', id, newStockAmt);
+        // console.log('%c a colorful message', 'background: green; color: white; display: block;');
+        // console.log("%c addItemToCart: ', id, newStockAmt!", "background: green; color: blue; font-size:12px;"); 
+
         const result = axios.put(`https://carrinho-15670.firebaseio.com/stockItems/${id}/stock.json`, newStockAmt)
         .then(res => {
         //   console.log('res.data: ', res.data);

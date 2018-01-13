@@ -88,27 +88,27 @@ export const buyItems = (items) => {
   return { type: BUY_ITEMS };
 }
 
-export const removeFromCart = (item, amt) => {
-  console.log('aasdfasdf ', item, amt);
-  const { id, name, stock } = item;
-  const newStockAmt = stock + amt;
+// export const removeFromCart = (item, amt) => {
+//   console.log('aasdfasdf ', item, amt);
+//   const { id, name, stock } = item;
+//   const newStockAmt = stock + amt;
   
-  // TODO: need check to make sure stock doesn't go negative
-  console.log('removeFromCart: ', id, name, newStockAmt);
-  return (dispatch) => {
-    axios.put(`https://carrinho-15670.firebaseio.com/stockItems/${id}/stock.json`, newStockAmt)
-      .then(res => {
-        console.log('asdfasdf', res.data);
-        dispatch({
-          type: REMOVE_FROM_CART,
-          amt,
-          id,
-          name,
-          stock: newStockAmt // FIXME:  <---
-        })
-      })
-  }
-}
+//   // TODO: need check to make sure stock doesn't go negative
+//   console.log('removeFromCart: ', id, name, newStockAmt);
+//   return (dispatch) => {
+//     axios.put(`https://carrinho-15670.firebaseio.com/stockItems/${id}/stock.json`, newStockAmt)
+//       .then(res => {
+//         console.log('asdfasdf', res.data);
+//         dispatch({
+//           type: REMOVE_FROM_CART,
+//           amt,
+//           id,
+//           name,
+//           stock: newStockAmt // FIXME:  <---
+//         })
+//       })
+//   }
+// }
 
 const formatItem = (item) => {
   let formattedItem = {};

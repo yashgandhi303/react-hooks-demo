@@ -74,11 +74,11 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => ({
   addItemToCartFn: (item, amt) => {
-    dispatch({ 
-      type: 'ADD_ITEM_TO_CART',
+    dispatch({
+      type: 'ADD_TO_CART',
       item,
-      amt 
-  }) // );  // addItemToCart(item, amt)
+      amt
+    }) // );  // addItemToCart(item, amt)
   },
   getItemsInStock: () => {
     dispatch({ type: 'FETCH_CART_ITEMS' }); // fetchItemsInStock());

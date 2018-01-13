@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { buyItems, removeFromCart } from '../actions/actionCreators';
+import { buyItems /*, removeFromCart */ } from '../actions/actionCreators';
 import { Link } from 'react-router-dom';
 import Item from '../components/Item';
 
@@ -11,12 +11,12 @@ const Cart = ({ cartItems, buyAll, remove }) => (
     <p>Item count: {cartItems.length}</p>
 
       { console.log('Cart props: ', cartItems) }
-      <div>
-        {cartItems.length && cartItems.map((item) => (
-            <Item onClickFn={remove} item={item} key={item.id}/>
-          )) || <Link to='/'>Go buy stuff</Link>
-        }
-      </div>
+    <div>
+      { cartItems.length && cartItems.map((item) => (
+          <Item onClickFn={remove} item={item} key={item.id} />
+        )) || <Link to='/'>Go buy stuff</Link>
+      }
+    </div>
 
 
     {/* button to buy items and make cart go empty */}
@@ -29,17 +29,16 @@ Cart.propTypes = {
   remove: PropTypes.func.isRequired
 };
 
-// TODO: make functional nb??? (does it matter here? not altering state, just the array for a prop)
 function getArrayOfCartItems(cartItems, ids) {
   const arr = [];
   console.log('getARraasdfasdf ', cartItems, ids)
   for (let item in cartItems) {
-    console.log('item: ', item);
+    // console.log('item: ', item);
     if (ids.includes(item)) {
       arr.push(cartItems[item]);
     }
   }
-  console.log('getArrayOfCartItems: ', arr);
+  // console.log('getArrayOfCartItems: ', arr);
   return arr;
 }
 
@@ -49,10 +48,11 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   buyAll: () => {
+    // TODO: dispatch a 'BUY_ITEMS' event below
     dispatch(buyItems());
   },
-  remove: (itemId, amt) => {
-    dispatch(removeFromCart(itemId, amt));
+  remove: (item, amt) => {
+    dispatch({ type: 'REMOVE_FROM_CART', item, amt}) //removeFromCart(itemId, amt));
   }
 });
 

@@ -1,4 +1,13 @@
-import { FETCH_ITEMS_IN_STOCK, ADD_TO_CART, REMOVE_FROM_CART, BUY_ITEMS, ADD_NEW_ITEM_TO_STOCK, REQUEST_ITEMS_IN_STOCK, FETCH_CART_ITEMS } from '../actions/actionTypes';
+import {
+  FETCH_ITEMS_IN_STOCK, 
+  ADD_TO_CART,
+  ADD_ITEM_TO_CART,
+  REMOVE_FROM_CART,
+  BUY_ITEMS,
+  ADD_NEW_ITEM_TO_STOCK,
+  REQUEST_ITEMS_IN_STOCK,
+  FETCH_CART_ITEMS
+} from '../actions/actionTypes';
 // import { storeListItems } from '../mockData';
 
 const initialState =  {
@@ -21,7 +30,7 @@ const storeStock = (state = initialState, action) => {
         isFetching: true
       };
     case REMOVE_FROM_CART:
-    case ADD_TO_CART:
+    case ADD_ITEM_TO_CART:
       const updatedItem = {
         id: action.id,
         name: action.name,

@@ -1,12 +1,17 @@
 import { combineReducers } from 'redux';
-import { ADD_TO_CART, REMOVE_FROM_CART, BUY_ITEMS, UPDATE_ITEM_AMT } from '../actions/actionTypes';
+import {
+  ADD_TO_CART,
+  ADD_ITEM_TO_CART,
+  REMOVE_FROM_CART,
+  BUY_ITEMS,
+  UPDATE_ITEM_AMT
+} from '../actions/actionTypes';
 import omit from 'lodash/omit';
 
 const cartItemStock = (state = {}, action) => {
   switch(action.type) {
-    case ADD_TO_CART:
+    case ADD_ITEM_TO_CART:
       console.log('cartItemStock nbb: ', action,  state.hasOwnProperty(action.id));
-
       // add to the item in cart if it's already in there
       if (state.hasOwnProperty(action.id)) {
         const newCartAmt = action.amt + state[action.id].amt;
@@ -67,7 +72,7 @@ const getCartItemsArray = (items, action) => {
 
 const cartItemIds = (state = [], action) => {
   switch(action.type) {
-    case ADD_TO_CART:
+    case ADD_ITEM_TO_CART:
       if (state.includes(action.id)) {
         return state;
       }
@@ -92,7 +97,7 @@ export default cartItems;
 
 // const cartItems = (state = [], action) => {
 //   switch(action.type) {
-//     case ADD_TO_CART:
+//     case ADD_ITEM_TO_CART:
 //       const newItem = action.payload;
 //       return [...state, newItem];
 //     case REMOVE_FROM_CART:
