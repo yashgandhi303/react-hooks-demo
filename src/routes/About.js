@@ -11,17 +11,24 @@ const About = () => (
     <h3>Tech used:</h3>
     <div>
       <p>- <a href='https://github.com/facebook/react'>React 16</a></p>
+      {/* redux */}
+      {/* redux-sagas */}
+      {/* styled components */}
       {/* <p>- <a href='https://webpack.github.io/'>Webpack 3</a> (too much fun to setup...)</p> */}
 
     </div>
 
     <div>
-      API usage:
+      <p>
+        API usage:
+        <br />
+        For list of public apis:
+        <br />
+        <a href='https://firebase.google.com/docs/reference/rest/database/'>Firebase rest api</a>
 
-      For list of public apis:
-      <a href='https://firebase.google.com/docs/reference/rest/database/'>Firebase rest api</a>
+        {/* <p>- <a href='https://github.com/toddmotto/public-apis#currency-exchange'>github link</a></p> */}
 
-      {/* <p>- <a href='https://github.com/toddmotto/public-apis#currency-exchange'>github link</a></p> */}
+      </p>
       
     </div>
 

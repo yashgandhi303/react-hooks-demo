@@ -31,7 +31,7 @@ Cart.propTypes = {
 
 function getArrayOfCartItems(cartItems, ids) {
   const arr = [];
-  console.log('getARraasdfasdf ', cartItems, ids)
+  console.log('getArrayOfCartItems ', cartItems, ids);
   for (let item in cartItems) {
     // console.log('item: ', item);
     if (ids.includes(item)) {
@@ -52,7 +52,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(buyItems());
   },
   remove: (item, amt) => {
-    dispatch({ type: 'REMOVE_FROM_CART', item, amt}) //removeFromCart(itemId, amt));
+    dispatch({ type: 'REMOVE_ITEM_FROM_CART', item, amt}) //removeFromCart(itemId, amt));
   }
 });
 

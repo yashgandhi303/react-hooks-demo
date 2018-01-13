@@ -9,6 +9,7 @@ import {
   ADD_TO_CART,
   ADD_ITEM_TO_CART,
   REMOVE_FROM_CART,
+  REMOVE_ITEM_FROM_CART,
   FETCH_ITEMS_IN_STOCK,
   FETCH_CART_ITEMS,
   BUY_ITEMS,
@@ -25,8 +26,9 @@ export default function* rootSaga() {
   yield all([
     watchFetchItemsInStock(),
     watchAddItem(),
+    watchRemoveItem(),
     // takeEvery('ADD_ITEM_TO_CART', addItemToCart),
-    takeEvery('REMOVE_FROM_CART', removeFromCart),
+    // takeEvery('REMOVE_FROM_CART', removeFromCart),
     // addItemToCart(),
   ]);
 }
@@ -41,6 +43,9 @@ function* watchAddItem() {
   yield takeEvery(ADD_TO_CART, addItemToCart);
 }
 
+function* watchRemoveItem() {
+  yield takeEvery(REMOVE_ITEM_FROM_CART, removeFromCart);
+}
 
 
 /** sagas

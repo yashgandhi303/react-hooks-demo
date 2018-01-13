@@ -11,10 +11,11 @@ import omit from 'lodash/omit';
 const cartItemStock = (state = {}, action) => {
   switch(action.type) {
     case ADD_ITEM_TO_CART:
-      console.log('cartItemStock nbb: ', action,  state.hasOwnProperty(action.id));
+      console.log('cartItemStock ADD_ITEM_TO_CART: ', action,  state.hasOwnProperty(action.id));
       // add to the item in cart if it's already in there
       if (state.hasOwnProperty(action.id)) {
         const newCartAmt = action.amt + state[action.id].amt;
+        console.log('cartItemStock adding to existing: ', newCartAmt, action.amt, state[action.id].amt);
         return {
           ...state,
           [action.id]: {
@@ -46,9 +47,13 @@ const cartItemStock = (state = {}, action) => {
       };
     case REMOVE_FROM_CART:
       const cartItems = state;
-      const id = action.payload;
+      const id = action.id;
+      // cartItems[id].amt = 0;
+      console.log('cartItems: ', cartItems, id);
+
+      // console.warn('REMOVE_FROM_CART item: ', cartItems[id], cartItems[id].amt );
       const newState = omit(cartItems, id);
-      console.log('newThing: ', newState);
+      console.log('newState w/o item: ', newState);
       return {
         ...newState
       }

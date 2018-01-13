@@ -25,7 +25,7 @@ const Button = styled.button`
   border-radius: 10px;
   color: white;
   height: ${props => props.small ? 30 : 40}px;
-  width: ${props => props.small ? 60 : 90}px;
+  width: ${props => props.small ? 60 : 105}px;
 
   &:hover {
     background-color: rgba(21,19,21,0.64);
@@ -54,16 +54,18 @@ const Item = (props) => (
         {window.location.pathname === "/cart" ? "Remove From Cart" : "Add to cart"}
       </Button>
     </StyledDiv>
+    
     {(
       window.location.pathname === "/cart" && 
       <div>
         <p>Amt in Cart: {props.item.amt}</p>
+        {/* TODO: need to get the value of the input for the onclick function below (have to use state???) */}
         <input type="number" min={0} max={props.item.amt} defaultValue={props.item.amt} />
 
         <Button 
-          onClick={() => props.onClickFn(props.item, 3)}
+          onClick={() => props.onClickFn(props.item, props.item.amt)}
         >
-          Remove From Cart
+          Remove Item From Cart
         </Button>
       </div>
     )}
