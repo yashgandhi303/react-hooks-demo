@@ -1,8 +1,7 @@
 import { delay } from 'redux-saga';
-import { put, takeEvery, all, call, take, fork, takeLatest } from 'redux-saga/effects';
-import axios from 'axios';
-import * as firebase from 'firebase';
-import { config } from './fire';
+import { put, takeEvery, all, call /*, take, fork, takeLatest*/ } from 'redux-saga/effects';
+// import * as firebase from 'firebase';
+// import { config } from './fire';
 import Api from './api';
 
 import {
@@ -14,14 +13,15 @@ import {
   FETCH_CART_ITEMS,
   BUY_ITEMS,
   BUY_CART_ITEMS,
-  CHANGE_ITEM_QUANTITY,
-  UPDATE_ITEM_AMT,
-  ADD_NEW_ITEM_TO_STOCK,
-  REQUEST_ITEMS_IN_STOCK
+  REQUEST_ITEMS_IN_STOCK,
+  // CHANGE_ITEM_QUANTITY,
+  // UPDATE_ITEM_AMT,
+  // ADD_NEW_ITEM_TO_STOCK
 } from './actions/actionTypes';
 
 // firebase.initializeApp(config);
 // const database = firebase.database();
+// console.info('Firebase database: ', database);
 
 export default function* rootSaga() {
   yield all([
@@ -29,9 +29,6 @@ export default function* rootSaga() {
     watchAddItem(),
     watchRemoveItem(),
     watchBuyItems()
-    // takeEvery('ADD_ITEM_TO_CART', addItemToCart),
-    // takeEvery('REMOVE_FROM_CART', removeFromCart),
-    // addItemToCart(),
   ]);
 }
 
@@ -102,6 +99,8 @@ function* addItemToCart(action) {
       stock: newStockAmt
     });
 
+    return addedItem;
+
   } catch (error) {
     // yield put({ type: ‘ADD_TO_CART_FAILED’, error: error });
     console.error('Error adding item to cart: ', error);
@@ -126,7 +125,7 @@ function* removeFromCart(action) {
       amt,
       id,
       name,
-      stock: newStockAmt // FIXME:  <---
+      stock: newStockAmt
     });
 
     return removedItem;

@@ -34,8 +34,8 @@ const About = () => (
 
     <div>
       Sources:
-      <a href="" target="_blank">react-redux</a>
-      <a href="https://redux.js.org/" target="_blank">redux</a>
+      <a href="https://github.com/reactjs/react-redux" target="_blank" rel="noopener noreferrer">react-redux</a>
+      <a href="https://redux.js.org/" target="_blank" rel="noopener noreferrer">redux</a>
 
 
       {/* <a href="https://github.com/redux-saga/redux-saga" target="_blank">redux-saga</a> */}

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { buyItems /*, removeFromCart */ } from '../actions/actionCreators';
+// import { buyItems /*, removeFromCart */ } from '../actions/actionCreators';
 import { Link } from 'react-router-dom';
 import Item from '../components/Item';
 

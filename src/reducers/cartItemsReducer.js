@@ -1,17 +1,18 @@
 import { combineReducers } from 'redux';
+import omit from 'lodash/omit';
 import {
-  ADD_TO_CART,
+  // ADD_TO_CART,
   ADD_ITEM_TO_CART,
   REMOVE_FROM_CART,
   BUY_ITEMS,
   UPDATE_ITEM_AMT
 } from '../actions/actionTypes';
-import omit from 'lodash/omit';
+
 
 const cartItemStock = (state = {}, action) => {
   switch(action.type) {
     case ADD_ITEM_TO_CART:
-      console.log('cartItemStock ADD_ITEM_TO_CART: ', action,  state.hasOwnProperty(action.id));
+      // console.log('cartItemStock ADD_ITEM_TO_CART: ', action,  state.hasOwnProperty(action.id));
       // add to the item in cart if it's already in there
       if (state.hasOwnProperty(action.id)) {
         const newCartAmt = action.amt + state[action.id].amt;
@@ -65,16 +66,6 @@ const cartItemStock = (state = {}, action) => {
   }
 }
 
-const getCartItemsArray = (items, action) => {
-  const cartItemsArray = [];
-  for (let item in items) {
-    if (items[item].id !== action.payload) {
-      cartItemsArray.push(items[item])
-    }
-  }
-  return cartItemsArray;
-};
-
 const cartItemIds = (state = [], action) => {
   switch(action.type) {
     case ADD_ITEM_TO_CART:
@@ -98,6 +89,16 @@ const cartItems = combineReducers({
 })
 
 export default cartItems;
+
+// const getCartItemsArray = (items, action) => {
+//   const cartItemsArray = [];
+//   for (let item in items) {
+//     if (items[item].id !== action.payload) {
+//       cartItemsArray.push(items[item])
+//     }
+//   }
+//   return cartItemsArray;
+// };
 
 
 // const cartItems = (state = [], action) => {

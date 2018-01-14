@@ -1,11 +1,12 @@
 import { createStore, compose, applyMiddleware } from 'redux';
 import { createLogger } from "redux-logger";
-import rootSaga from './sagas';
-
-// thunks:
 import thunk from 'redux-thunk';
-// sagas:
 import createSagaMiddleware from 'redux-saga';
+
+/* firebase config */
+import * as firebase from 'firebase';
+import rootSaga from './sagas';
+import { config } from './fire';
 
 // import throttle from 'lodash/throttle';
 import rootReducer from './reducers/root_reducer';
@@ -13,6 +14,12 @@ import rootReducer from './reducers/root_reducer';
 const sagaMiddleware = createSagaMiddleware();
 
 const loggerMiddleware = createLogger();
+
+
+/** firebase database setup */
+firebase.initializeApp(config);
+const database = firebase.database();
+console.info('Firebase database: ', database);
 
 
 const store = createStore(

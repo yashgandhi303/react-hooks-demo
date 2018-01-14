@@ -14,8 +14,8 @@ import {
   REQUEST_ITEMS_IN_STOCK
 } from './actionTypes';
 
-firebase.initializeApp(config);
-const database = firebase.database();
+// firebase.initializeApp(config);
+// const database = firebase.database();
 
 const requestItems = () => ({
   // TODO: initiate spinner

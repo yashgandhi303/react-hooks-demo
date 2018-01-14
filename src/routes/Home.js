@@ -31,7 +31,7 @@ class Home extends React.Component {
   }
 
   render() {
-    const { cartItems, storeStock, addItemToCartFn } = this.props;
+    const { cartItems, storeStock } = this.props;
     return (
       <div id='home-div'>
         <h1 id='welcome'>Welcome</h1>
