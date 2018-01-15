@@ -8,6 +8,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
+    "jesttest": "jest",
+    "testsagas": "tape ./src/__tests__/sagas.test.js",
     "eject": "react-scripts eject"
   },
   "dependencies": {
