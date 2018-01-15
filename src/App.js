@@ -16,8 +16,6 @@ import './App.css';
 // const store = configureStore();
 import store from './store';
 
-
-
 const App = () => (
   <Provider store={store}>
     <BrowserRouter>

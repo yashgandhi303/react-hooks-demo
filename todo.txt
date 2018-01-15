@@ -21,6 +21,7 @@ bugs fixed:
 
 
 TODOS:
+reimplement configure store (for testing)
 addNewItemsToCart(stock) method/action
 sagas
 tests - test sagas
