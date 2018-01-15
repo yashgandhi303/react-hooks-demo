@@ -34,7 +34,7 @@ export default function* rootSaga() {
 
 /** watchers/helpers
  */
-function* watchFetchItemsInStock() {
+export function* watchFetchItemsInStock() {
   yield takeEvery(FETCH_CART_ITEMS, fetchItemsInStock);
 }
 
@@ -54,7 +54,7 @@ function* watchBuyItems() {
 /** sagas
 *
 */
-function* fetchItemsInStock() {
+export function* fetchItemsInStock() {
   // while true nb???
   // while (true) {
   try {
