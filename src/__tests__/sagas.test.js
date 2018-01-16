@@ -1,12 +1,14 @@
 // import test from 'tape';
 import { put, call, take, takeEvery } from 'redux-saga/effects';
 import { delay } from 'redux-saga';
+import Api from '../api';
+import * as actionTypes from '../actions/actionTypes';
 import { 
     watchFetchItemsInStock,
     fetchItemsInStock,
-
+    watchAddItem,
+    addItemToCart
 } from '../sagas';
-import Api from '../api';
 
 /** 
 *  resources:
@@ -15,42 +17,131 @@ import Api from '../api';
 -*
 -**/
 
+/* add items */
+describe('watchFetchItemsInStock saga test', () => {
+  const watchSaga = watchFetchItemsInStock();
+  let output = null;
 
-import * as actionTypes from '../actions/actionTypes';
-
-it('watchFetchItemsInStock Saga test', () => {
-    const watchSaga = watchFetchItemsInStock();
-
-    let output = watchSaga.next().value;
+  it('takes FETCH_CART_ITEMS action', () => {
+    output = watchSaga.next().value;
     let expected = takeEvery(actionTypes.FETCH_CART_ITEMS, fetchItemsInStock);
     expect(output).toEqual(expected);
+  });
+});
   
+
+describe('fetchItemsInStock saga test', () => {
+  const gen = fetchItemsInStock();
+  let output = null;
+  const payload = {'item1': {
+    'id': 'item1',
+    'name': 'beer',
+    'stock': 7
+  }};
+
+  it(' should put the REQUEST_ITEMS_IN_STOCK when dispatching', () => {
+    output = gen.next().value; 
+    expect(output).toEqual(put({ type: actionTypes.REQUEST_ITEMS_IN_STOCK }));
+  });
+
+  it('should call the Api.fetchItems', () => {
+    output = gen.next().value;
+    let expected = call(Api.fetchItems);
+    expect(output).toEqual(expected);
   });
   
-  it('fetchItemsInStock Saga test', () => {
-    const gen = fetchItemsInStock();
-
-    // should put the REQUEST_ITEMS_IN_STOCK when dispatching
-    expect(gen.next().value).toEqual(put({ type: actionTypes.REQUEST_ITEMS_IN_STOCK }));
-
-    // should call the Api.fetchItems
-    let expected = call(Api.fetchItems);
-    expect(gen.next().value).toEqual(expected);
+  it("should put the payload when dispatching 'FETCH_ITEMS_IN_STOCK'", () => {
+    output = gen.next().value;
+    expect(output).toEqual(put({ type: 'FETCH_ITEMS_IN_STOCK', payload: undefined }));
+  });
   
-    const payload = {'item1': {
+  it('should be done', () => {
+    output = gen.next().value;
+    expect(gen.next().value).toEqual(undefined);
+  });
+    
+  // TODO: throw an error
+
+  });
+
+  /* add items */
+  describe('WatchAddItem saga test', () => {
+    const watchSaga = watchAddItem();
+    let output = null;
+
+    it('watchAddItem Saga test', () => {
+      output = watchSaga.next().value;
+      let expected = takeEvery(actionTypes.ADD_TO_CART, addItemToCart);  
+      expect(output).toEqual(expected);
+    });  
+  });
+
+  // mock action data for addItemToCart
+
+  describe('addItemToCart saga test', () => {
+    // resource: https://medium.freecodecamp.org/async-operations-using-redux-saga-2ba02ae077b3
+    const gen = addItemToCart();
+    let output = null;
+    const newItemAction = {
+      amt: 7,
+      item: {
         'id': 'item1',
         'name': 'beer',
-        'stock': 7
-      }};
-    
-    // next should put the payload when dispatching 'FETCH_ITEMS_IN_STOCK'
-    expect(gen.next().value).toEqual(put({ type: 'FETCH_ITEMS_IN_STOCK', payload: undefined }));
+        'stock': 17
+      }  
+    }
+    console.log('asdfasdf', newItemAction);
+    const { id, name, stock } = newItemAction.item;
+    const amt = newItemAction.amt;
+    const newStockAmt = stock - amt;
 
-    // done
-    expect(gen.next().value).toEqual(undefined);
+    it('destructures the newItemAction correctly', () => {
+      expect(id).toEqual('item1');
+      expect(name).toEqual('beer');
+      expect(stock).toEqual(17);
+      expect(amt).toEqual(7);
+  
+      // if (amt > stock) {
+      //   // TODO: dispatch error (they're adding more to cart than that item has in stock); for now logging error
+      //   console.error('Error: Adding too many items to cart: ', amt, stock);
+      // }
+      expect(newStockAmt).toEqual(10);
+    });
+  
+    // it('should call the Api.addItemToCart', (done) => {
+    //   const action = newItemAction;
+    //   output = gen.next(action).value;
+    //   console.log('output1 :', output);
+    //   console.log('output2 :', gen.next().value);
+    //   console.log('newactionitem', newItemAction);
+    //   let expected = call(Api.addItemToCart, action);
+    //   done();
+    //   expect(output).toEqual(expected);
+    // });
 
-    // TODO: throw an error
-
+    // it('should put the ADD_ITEM_TO_CART when dispatching', (done) => {  
+    //   output = gen.next(newItemAction).value;
+    //   expect(output).toEqual(put({ 
+    //     type: actionTypes.ADD_ITEM_TO_CART,
+    //     amt,
+    //     id,
+    //     name,
+    //     stock: newStockAmt
+    //   }));
+  
+  
+      // next should put the payload when dispatching 'FETCH_ITEMS_IN_STOCK'
+      // expect(gen.next().value).toEqual(put({ type: 'FETCH_ITEMS_IN_STOCK', payload: undefined }));
+  
+      // done
+      // expect(gen.next().value).toEqual(undefined);
+      // const finished = gen.next().done;
+      // done();
+      // expect(finished).toEqual(true);
+      // expect(output).toEqual(expected);
+      // // TODO: throw an error
+  
+    // });  
   });
 
 

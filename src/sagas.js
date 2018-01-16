@@ -1,7 +1,5 @@
 import { delay } from 'redux-saga';
 import { put, takeEvery, all, call /*, take, fork, takeLatest*/ } from 'redux-saga/effects';
-// import * as firebase from 'firebase';
-// import { config } from './fire';
 import Api from './api';
 
 import {
@@ -19,9 +17,6 @@ import {
   // ADD_NEW_ITEM_TO_STOCK
 } from './actions/actionTypes';
 
-// firebase.initializeApp(config);
-// const database = firebase.database();
-// console.info('Firebase database: ', database);
 
 export default function* rootSaga() {
   yield all([
@@ -38,15 +33,15 @@ export function* watchFetchItemsInStock() {
   yield takeEvery(FETCH_CART_ITEMS, fetchItemsInStock);
 }
 
-function* watchAddItem() {
+export function* watchAddItem() {
   yield takeEvery(ADD_TO_CART, addItemToCart);
 }
 
-function* watchRemoveItem() {
+export function* watchRemoveItem() {
   yield takeEvery(REMOVE_ITEM_FROM_CART, removeFromCart);
 }
 
-function* watchBuyItems() {
+export function* watchBuyItems() {
   yield takeEvery(BUY_CART_ITEMS, buyAllItems);
 }
 
@@ -56,9 +51,7 @@ function* watchBuyItems() {
 */
 export function* fetchItemsInStock() {
   // while true nb???
-  // while (true) {
   try {
-    // yield take(FETCH_CART_ITEMS);
 
     yield put({ type: REQUEST_ITEMS_IN_STOCK });
 
@@ -74,11 +67,11 @@ export function* fetchItemsInStock() {
     console.error('Error fetching items in stock: ', error);
   }
 }
-// }
 
-function* addItemToCart(action) {
+export function* addItemToCart(action) {
   try {
     const { id, name, stock } = action.item;
+    console.warn('in sagas action: ', action);
     const amt = action.amt;
     if (amt > stock) {
       // TODO: dispatch error (they're adding more to cart than that item has in stock); for now logging error
@@ -107,7 +100,7 @@ function* addItemToCart(action) {
   }
 }
 
-function* removeFromCart(action) {
+export function* removeFromCart(action) {
   try {
     const { item, amt } = action;
     const { id, name, stock } = item;
@@ -115,9 +108,7 @@ function* removeFromCart(action) {
     const newStockAmt = stock + amt;
   
     // TODO: need check to make sure stock doesn't go negative
-    // console.log('removeFromCart: ', id, name, newStockAmt);
     
-    // don't really need the value... nb??-
     const removedItem = yield call(Api.removeItemFromCart, id, newStockAmt);
 
     yield put({
@@ -136,8 +127,9 @@ function* removeFromCart(action) {
   }
 }
 
-function* buyAllItems() {
+export function* buyAllItems() {
   try {
+
     yield put({ type: BUY_ITEMS });    
 
   } catch (error) {
@@ -151,12 +143,12 @@ function* buyAllItems() {
 */
 
 // Our worker Saga: will perform the async increment task
-export function* incrementAsync() {
-  yield delay(1000)
-  yield put({ type: 'INCREMENT' })
-}
+// export function* incrementAsync() {
+//   yield delay(1000)
+//   yield put({ type: 'INCREMENT' })
+// }
 
-// Our watcher Saga: spawn a new incrementAsync task on each INCREMENT_ASYNC
-export function* watchIncrementAsync() {
-  yield takeEvery('INCREMENT_ASYNC', incrementAsync)
-}
+// // Our watcher Saga: spawn a new incrementAsync task on each INCREMENT_ASYNC
+// export function* watchIncrementAsync() {
+//   yield takeEvery('INCREMENT_ASYNC', incrementAsync)
+// }
