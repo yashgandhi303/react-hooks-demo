@@ -12,9 +12,9 @@ const Cart = ({ cartItems, buyAll, remove }) => (
 
       { console.log('Cart props: ', cartItems) }
     <div>
-      { cartItems.length && cartItems.map((item) => (
+      { (cartItems.length && cartItems.map((item) => (
           <Item onClickFn={remove} item={item} key={item.id} />
-        )) || <Link to='/'>Go buy stuff</Link>
+        ))) || <Link to='/'>Go buy stuff</Link>
       }
     </div>
 

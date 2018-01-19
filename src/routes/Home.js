@@ -44,7 +44,7 @@ class Home extends React.Component {
           <h4>Store stock:</h4>
 
           {/* TODO: refactor into  component (aso, test below with no items - make sure dipslays the "no items in stock") */}
-          { storeStock.stockItems && storeStock.stockItems.length && this.renderItems() || <p>No items in stock</p> }
+          { (storeStock.stockItems && storeStock.stockItems.length && this.renderItems()) || <p>No items in stock</p> }
 
           {/* <AddItemForm /> */}
 

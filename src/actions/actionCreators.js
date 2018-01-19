@@ -1,16 +1,14 @@
 import axios from 'axios';
-import * as firebase from 'firebase';
-import { config } from '../fire';
 
 import {
-  ADD_TO_CART,
-  REMOVE_FROM_CART,
-  FETCH_ITEMS_IN_STOCK,
-  FETCH_CART_ITEMS,
-  BUY_ITEMS,
+  // ADD_TO_CART,
+  // REMOVE_FROM_CART,
+  // FETCH_ITEMS_IN_STOCK,
+  // FETCH_CART_ITEMS,
+  // BUY_ITEMS,
+  // UPDATE_ITEM_AMT,
+  // ADD_NEW_ITEM_TO_STOCK,
   CHANGE_ITEM_QUANTITY,
-  UPDATE_ITEM_AMT,
-  ADD_NEW_ITEM_TO_STOCK,
   REQUEST_ITEMS_IN_STOCK
 } from './actionTypes';
 
@@ -129,8 +127,9 @@ export const addNewItemToStock = (item) => {
     // dispatch(requestPosts()); // for some type of spinner/loading in the future
     axios.post(`https://carrinho-15670.firebaseio.com/stockItems.json`, newItem)
       .then(res => {
-        console.log('asdfasdf', res.data);
-        const itemsInStock = res.data;
+        // console.log('asdfasdf', res.data);
+        
+        const itemsInStock = res.data; /* eslint no-unused-vars: "off" */
         // return { type: ADD_NEW_ITEM_TO_STOCK, payload: item };
         // dispatch({
         //     type: FETCH_ITEMS_IN_STOCK,
