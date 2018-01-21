@@ -20,7 +20,7 @@ const StyledDiv = styled.div`
   background-color: rgba(218,219,221,0.3);
 `;
 
-const Button = styled.button`
+const StyledButton = styled.button`
   background-color: rgba(21,19,21,0.83);
   border-radius: 10px;
   color: white;
@@ -46,13 +46,13 @@ const Item = (props) => (
       <input type="number" min={1} max={props.item.stock} />
       <br/>
 
-      <Button
+      <StyledButton
         small={false}
         onClick={() => props.onClickFn(props.item, 3)}
         disabled={props.item.stock < 1}
       >
         {window.location.pathname === "/cart" ? "Remove From Cart" : "Add to cart"}
-      </Button>
+      </StyledButton>
     </StyledDiv>
     
     {(
@@ -62,11 +62,11 @@ const Item = (props) => (
         {/* TODO: need to get the value of the input for the onclick function below (have to use state???) */}
         <input type="number" min={0} max={props.item.amt} defaultValue={props.item.amt} />
 
-        <Button 
+        <StyledButton 
           onClick={() => props.onClickFn(props.item, props.item.amt)}
         >
           Remove Item From Cart
-        </Button>
+        </StyledButton>
       </div>
     )}
   </div>

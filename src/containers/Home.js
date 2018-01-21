@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-// import { addItemToCart /*, fetchItemsInStock*/ } from '../actions/actionCreators';
+import { Divider, Grid } from 'semantic-ui-react';
 // import AddItemForm from '../components/AddItemForm';
-import Item from '../components/Item';
+import ItemCard from '../components/ItemCard';
 
 class Home extends React.Component {
   constructor(props) {
@@ -22,11 +22,23 @@ class Home extends React.Component {
 
   renderItems() {
     return (
-      this.props.storeStock.stockItems.map((item, index) => {
-        // if (item.stock > 0) {
-          return <Item onClickFn={this.props.addItemToCartFn} item={item} key={item.id} />
-        // }
-      })
+      <Grid divided>
+        {
+          this.props.storeStock.stockItems.map((item, index) => {
+            return (
+              <Grid.Column width={4}>
+
+                <ItemCard
+                  onClickFn={this.props.addItemToCartFn}
+                  item={item}
+                  key={item.id}
+                />
+              </Grid.Column>
+
+            );
+          })
+        }
+      </Grid>
     );
   }
 
@@ -39,11 +51,15 @@ class Home extends React.Component {
           <Link to="/cart">Go to Cart</Link>
           <p>Number of items in cart: {cartItems.cartItemIds.length}</p>
 
+          <Divider />
+
           { console.log('Home props: ', this.props, storeStock.stockItems && storeStock.stockItems.length)}
 
           <h4>Store stock:</h4>
 
           {/* TODO: refactor into  component (aso, test below with no items - make sure dipslays the "no items in stock") */}
+          {/* { (storeStock.stockItems && storeStock.stockItems.length && this.renderItems()) || <p>No items in stock</p> } */}
+
           { (storeStock.stockItems && storeStock.stockItems.length && this.renderItems()) || <p>No items in stock</p> }
 
           {/* <AddItemForm /> */}
@@ -78,10 +94,10 @@ const mapDispatchToProps = (dispatch) => ({
       type: 'ADD_TO_CART',
       item,
       amt
-    }) // );  // addItemToCart(item, amt)
+    })
   },
   getItemsInStock: () => {
-    dispatch({ type: 'FETCH_CART_ITEMS' }); // fetchItemsInStock());
+    dispatch({ type: 'FETCH_CART_ITEMS' });
   }
 });
 
