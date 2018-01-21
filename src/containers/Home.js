@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Divider, Grid } from 'semantic-ui-react';
+import { Container, Divider, Grid, Header, Flag, Dimmer, Loader } from 'semantic-ui-react';
 // import AddItemForm from '../components/AddItemForm';
 import ItemCard from '../components/ItemCard';
 import Footer from '../components/Footer';
@@ -46,17 +46,26 @@ class Home extends React.Component {
   render() {
     const { cartItems, storeStock } = this.props;
     return (
-      <div id='home-div'>
-        <h1 id='welcome'>Welcome</h1>
-
+      // <div id='home-div'>
+      <Container className='home-div'>
+        <Header as='h1'>
+          Welcome to Carrinho &nbsp;
+          <Flag name={'us'} />
+          <Flag name={'br'} />
+        </Header>
+        
           <Link to="/cart">Go to Cart</Link>
-          <p>Number of items in cart: {cartItems.cartItemIds.length}</p>
+
+          <Header as='h5'>Number of items in cart: {cartItems.cartItemIds.length}</Header>
 
           <Divider />
+          {/* <Dimmer active inverted>
+            <Loader inverted>Loading</Loader>
+          </Dimmer> */}
 
           { console.log('Home props: ', this.props, storeStock.stockItems && storeStock.stockItems.length)}
 
-          <h4>Store stock:</h4>
+          <Header as='h4'>Store Stock:</Header>
 
           {/* TODO: refactor into  component (aso, test below with no items - make sure dipslays the "no items in stock") */}
           {/* { (storeStock.stockItems && storeStock.stockItems.length && this.renderItems()) || <p>No items in stock</p> } */}
@@ -66,7 +75,8 @@ class Home extends React.Component {
           {/* <AddItemForm /> */}
 
           {/* <Footer /> */}
-      </div>
+      {/* </div> */}
+      </Container>
     )
   }
 }

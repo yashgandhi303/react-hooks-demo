@@ -1,3 +1,12 @@
+import React from 'react';
+import Adapter from 'enzyme-adapter-react-16';
+import Enzyme, { shallow /*, render, mount */ } from 'enzyme';
+// import renderer from 'react-test-renderer';
+import Home from '../containers/Home';
+import store from '../store';
+
+Enzyme.configure({ adapter: new Adapter() })
+
 // import React from 'react';
 // import ReactDOM from 'react-dom';
 // // import renderer from 'react-test-renderer';
@@ -17,14 +26,6 @@
 //     expect(wrapper).toMatchSnapshot();
 // });
 
-import React from 'react';
-import Adapter from 'enzyme-adapter-react-16';
-Enzyme.configure({ adapter: new Adapter() })
-import Enzyme, { shallow, render, mount } from 'enzyme';
-import renderer from 'react-test-renderer';
-import Home from '../routes/Home';
-
-import store from '../store';
 
 it('Home: sanity check', () => {
   expect(true).toEqual(true);
