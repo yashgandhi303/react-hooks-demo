@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import { Card, Icon, Image, Button, Form, Input, Rating } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
+import abc123_1 from '../../public/images/abc123_1.png';
+// import abc123_1 from '../../public/images/abc123_1.png';
+// import abc123_1 from '../../public/images/abc123_1.png';
+// import abc123_1 from '../../public/images/abc123_1.png';
+// import abc123_1 from '../../public/images/abc123_1.png';
 
 class ItemCardInput extends Component {
   constructor(props) {
@@ -39,9 +44,19 @@ class ItemCardInput extends Component {
   }
 }
 
+// const findImg = (id) => {
+//   const imgVar = null;
+//   return;
+// }
+
 const ItemCard = (props) => (
   <Card>
-    {/* <Image src='/assets/images/avatar/large/matthew.png' /> */}
+    <Image
+      src={abc123_1}
+      alt={`image for ${props.item.name}`}
+      size='tiny'
+      centered={true}
+    />
     <Card.Content>
       <Card.Header>{props.item.name}</Card.Header>
       <Rating

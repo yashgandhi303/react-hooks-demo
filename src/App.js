@@ -5,9 +5,9 @@ import { injectGlobal } from 'styled-components';
 
 // import configureStore from './store';
 
-import Home from './routes/Home';
-import About from './routes/About';
-import Cart from './routes/Cart';
+import Home from './containers/Home';
+import About from './containers/About';
+import Cart from './containers/Cart';
 
 import StyledHeader from './components/StyledHeader';
 
@@ -39,7 +39,7 @@ const App = () => (
 injectGlobal`
   body {
     background-color: ghostwhite;
-    padding: 10px;
+    ${'' /* padding: 10px; */}
   }
 `;
 

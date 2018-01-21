@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { Divider, Grid } from 'semantic-ui-react';
 // import AddItemForm from '../components/AddItemForm';
 import ItemCard from '../components/ItemCard';
+import Footer from '../components/Footer';
 
 class Home extends React.Component {
   constructor(props) {
@@ -64,6 +65,7 @@ class Home extends React.Component {
 
           {/* <AddItemForm /> */}
 
+          {/* <Footer /> */}
       </div>
     )
   }
