@@ -4,15 +4,17 @@ const About = () => (
   <div id='about-div'>
     <h1>About this project:</h1>
 
-    <h3>Tech used:</h3>
-    <p>Nick Bouldien <a href="">github profile</a></p>
+    <h3>Creator:</h3>
+    <p>Nick Bouldien <a href="https://github.com/nickbouldien">github profile</a></p>
 
 
     <h3>Tech used:</h3>
     <div>
       <p>- <a href='https://github.com/facebook/react'>React 16</a></p>
-      {/* redux */}
-      {/* redux-sagas */}
+      <p>- <a href='https://redux.js.org/'>redux </a></p>
+      <p>- <a href='https://redux-saga.js.org/'>redux-sagas </a></p>
+      <p>- <a href='https://react.semantic-ui.com/introduction'>Semantic UI React</a></p>
+      
       {/* styled components */}
       {/* <p>- <a href='https://webpack.github.io/'>Webpack 3</a> (too much fun to setup...)</p> */}
 
@@ -21,8 +23,6 @@ const About = () => (
     <div>
       <p>
         API usage:
-        <br />
-        For list of public apis:
         <br />
         <a href='https://firebase.google.com/docs/reference/rest/database/'>Firebase rest api</a>
 
