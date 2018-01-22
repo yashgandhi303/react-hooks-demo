@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Menu, Icon } from 'semantic-ui-react';
+import { Menu, Icon, Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
 export default class StyledHeader extends Component {
@@ -17,32 +17,40 @@ export default class StyledHeader extends Component {
         <Menu.Item
           name='home'
           active={activeItem === 'home'}
-          onClick={this.handleItemClick}        
+          onClick={this.handleItemClick}
+          as={Link}
+          to={"/"}
         >
-          <Link to="/">
-            Carrinho.com <Icon name={'shopping cart'} size={"large"} />
-          </Link>
+          Carrinho.com <Icon name={'shopping cart'} size={"large"} />
         </Menu.Item>
 
         <Menu.Item
           name='about'
           active={activeItem === 'about'}
           onClick={this.handleItemClick}
+          as={Link}
+          to={"/about"}
         >
-          <Link to="/about">      
-            About
-          </Link>
+          About
         </Menu.Item>
 
-        {/* <Menu.Item
-          name='testimonials'
-          active={activeItem === 'testimonials'}
-          onClick={this.handleItemClick}
-        >
-          <Link to="/">
-            Testimonials
-          </Link>
-        </Menu.Item> */}
+        <Menu.Menu position='right'>
+          <Menu.Item
+            name='cart'
+            active={activeItem === 'cart'}
+            onClick={this.handleItemClick}
+            as={Link}
+            to={"/cart"}
+          >
+            Cart <Icon name={'cart'} size={"large"} color={"blue"} />
+          </Menu.Item>
+          <Menu.Item className='item'>
+            <Button as='a'>Log in</Button>
+          </Menu.Item>
+          <Menu.Item>
+            <Button as='a' primary>Sign Up</Button>
+          </Menu.Item>
+        </Menu.Menu>
       </Menu>
     )
   }

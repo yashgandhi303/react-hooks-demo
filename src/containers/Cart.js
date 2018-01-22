@@ -1,27 +1,36 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-// import { buyItems /*, removeFromCart */ } from '../actions/actionCreators';
 import { Link } from 'react-router-dom';
+import { Container,Button,  Divider, Grid, Header, Flag, Dimmer, Loader } from 'semantic-ui-react';
 import Item from '../components/Item';
+import ItemCard from '../components/ItemCard';
 
 const Cart = ({ cartItems, buyAll, remove }) => (
-  <div className="cart-div">
-    <h3>Your cart: </h3>
-    <p>Item count: {cartItems.length}</p>
+  <Container>
+    <Header as="h2">Your cart: </Header>
+
+    <Header as="h4">Item count: {cartItems.length}</Header>
 
       { console.log('Cart props: ', cartItems) }
     <div>
       { (cartItems.length && cartItems.map((item) => (
-          <Item onClickFn={remove} item={item} key={item.id} />
+          //{/* <Item onClickFn={remove} item={item} key={item.id} /> */}
+          <ItemCard
+            onClickFn={remove}
+            item={item}
+            key={item.id}
+            location={"cart"}
+          />
         ))) || <Link to='/'>Go buy stuff</Link>
       }
     </div>
 
-
     {/* button to buy items and make cart go empty */}
-    <button onClick={buyAll} disabled={!cartItems.length}>Buy all</button>
-  </div>
+    {/* <button onClick={buyAll} disabled={!cartItems.length}>Buy all</button> */}
+    <Button onClick={buyAll} disabled={!cartItems.length} secondary>Buy all</Button>
+
+  </Container>
 );
 
 Cart.propTypes = {

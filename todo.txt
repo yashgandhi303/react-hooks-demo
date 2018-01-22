@@ -1,10 +1,11 @@
 bugs:
+// removing a number from cart messes up number in stock (wrong fn called? reducer issue?)
 // fix the count/number on each item when "buying" (and reset to zero after submitting)
-
+// show correct amount they add to cart in the item (in cart route)
 // need to do slice/blabla to keep item in same spot (when adding to cart, it moves to the end...)
 
 // allow people to add stock (items) to the store
-
+// fix images
 // in item (when in cart), update so button says "update item count" (or similar), and use that submitted value to update amt in cart (or remove if user enters 0)
 
 
@@ -29,7 +30,6 @@ tests - test sagas
 
 dompurify/joi inputs
 styled components
-eslint
 immutable
 
 
@@ -38,3 +38,4 @@ immutable
 
 
 DONE:
+-- eslint
