@@ -105,9 +105,8 @@ export function* removeFromCart(action) {
     const { item, amt } = action;
     const { id, name, stock } = item;
 
-    const newStockAmt = stock + amt;
-  
-    // TODO: need check to make sure stock doesn't go negative
+    const newStockAmt = stock + Number(amt);
+    // TODO: need check to make sure stock doesn't go negative (will throw error so it catches below and dispatches)
     
     const removedItem = yield call(Api.removeItemFromCart, id, newStockAmt);
 

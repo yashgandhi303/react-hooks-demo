@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import { Card, Icon, Image, Button, Form, Input, Rating } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import abc123_1 from '../../public/images/abc123_1.png';
-// import abc123_1 from '../../public/images/abc123_1.png';
-// import abc123_1 from '../../public/images/abc123_1.png';
-// import abc123_1 from '../../public/images/abc123_1.png';
-// import abc123_1 from '../../public/images/abc123_1.png';
 
 class ItemCardInput extends Component {
   constructor(props) {

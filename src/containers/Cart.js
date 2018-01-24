@@ -2,8 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Container, Button, Header /*,  Divider, Grid, Flag, Dimmer, Loader*/ } from 'semantic-ui-react';
-import Item from '../components/Item';
+import { Container, Button, Header, Grid /*,  Divider, , Flag, Dimmer, Loader*/ } from 'semantic-ui-react';
 import ItemCard from '../components/ItemCard';
 
 const Cart = ({ cartItems, buyAll, remove }) => (
@@ -12,21 +11,36 @@ const Cart = ({ cartItems, buyAll, remove }) => (
 
     <Header as="h4">Item count: {cartItems.length}</Header>
 
-      { console.log('Cart props: ', cartItems) }
-    <div>
-      { (cartItems.length && cartItems.map((item) => (
-          <ItemCard
-            onClickFn={remove}
-            item={item}
-            key={item.id}
-            location={"cart"}
-          />
-        ))) || <Link to='/'>Go buy stuff</Link>
-      }
-    </div>
+    { console.log('Cart props: ', cartItems) }
 
-    {/* button to buy items and make cart go empty */}
-    <Button onClick={buyAll} disabled={!cartItems.length} secondary>Buy all</Button>
+    <Grid>
+      <Grid.Column width={6}>
+        { (
+          // FIXME: formatting - this is ugly!!!
+            cartItems.length && cartItems.map((item) => (
+              <ItemCard
+                onClickFn={remove}
+                item={item}
+                key={item.id}
+                location={"cart"}
+              />
+            ))
+          ) || (
+            <Button
+              as={Link}
+              to={"/"}
+            >
+              Go buy stuff
+            </Button> 
+          )
+        }
+      </Grid.Column>
+      
+      <Grid.Column width={8} textAlign={"center"}>
+        {/* button to buy items and make cart go empty */}
+        <Button onClick={buyAll} disabled={!cartItems.length} secondary>Buy all</Button>
+      </Grid.Column>
+    </Grid>
   </Container>
 );
 
@@ -35,16 +49,15 @@ Cart.propTypes = {
   remove: PropTypes.func.isRequired
 };
 
+// TODO: refactor this
 function getArrayOfCartItems(cartItems, ids) {
   const arr = [];
   console.log('getArrayOfCartItems ', cartItems, ids);
   for (let item in cartItems) {
-    // console.log('item: ', item);
     if (ids.includes(item)) {
       arr.push(cartItems[item]);
     }
   }
-  // console.log('getArrayOfCartItems: ', arr);
   return arr;
 }
 
@@ -54,7 +67,6 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   buyAll: () => {
-    // TODO: dispatch a 'BUY_ITEMS' event below
     dispatch({ type: 'BUY_CART_ITEMS' })
   },
   remove: (item, amt) => {

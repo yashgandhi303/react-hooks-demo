@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Container, Divider, Grid, Header, Flag, Dimmer, Loader } from 'semantic-ui-react';
+import { Container, Divider, Grid, Header, Flag, Button, Dimmer, Loader } from 'semantic-ui-react';
 // import AddItemForm from '../components/AddItemForm';
 import ItemCard from '../components/ItemCard';
 // import Footer from '../components/Footer';
@@ -52,11 +52,21 @@ class Home extends React.Component {
           <Flag name={'br'} />
         </Header>
         
-        <Link to="/cart">Go to Cart</Link>
+        {
+          cartItems.cartItemIds.length > 0 && (
+            <Button
+              as={Link}
+              to={"/cart"}
+            >
+              Go to Cart
+            </Button>
+          )
+        }
 
         <Header as='h5'>Number of items in cart: {cartItems.cartItemIds.length}</Header>
 
         <Divider />
+        
         {/* <Dimmer active inverted>
           <Loader inverted>Loading</Loader>
         </Dimmer> */}
@@ -67,6 +77,13 @@ class Home extends React.Component {
 
         {/* TODO: refactor into  component (aso, test below with no items - make sure dipslays the "no items in stock") */}
         {/* { (storeStock.stockItems && storeStock.stockItems.length && this.renderItems()) || <p>No items in stock</p> } */}
+
+        { this.props.loading && (
+              <Dimmer active>
+                <Loader content='Loading' />
+              </Dimmer>
+            )
+          }
 
         { (storeStock.stockItems && storeStock.stockItems.length && this.renderItems()) || <p>No items in stock</p> }
 
@@ -90,8 +107,9 @@ Home.propTypes = {
   getItemsInStock: PropTypes.func.isRequired
 };
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state /*, ownProps */) => {
   return {
+    loading: state.storeStock.isFetching,
     storeStock: state.storeStock,
     cartItems: state.cartItems
   };

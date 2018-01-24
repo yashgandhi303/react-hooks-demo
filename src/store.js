@@ -14,6 +14,7 @@ import rootReducer from './reducers/root_reducer';
 const sagaMiddleware = createSagaMiddleware();
 
 const loggerMiddleware = createLogger();
+// const persistedState = loadState();
 
 
 /** firebase database setup */
@@ -34,6 +35,13 @@ const store = createStore(
     typeof window === 'object' && typeof window.devToolsExtension !== 'undefined' ? window.devToolsExtension() : f => f
   )
 );
+//   // if using persistedState:
+//   // store.subscribe(throttle(() => {
+//   //   // console.log('current state (store.js): ', store.getState());
+//   //   saveState({
+//   //    randomState
+//   //   });
+//   // }), 1000);
 
 sagaMiddleware.run(rootSaga);
 

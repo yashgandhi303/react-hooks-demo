@@ -23,7 +23,7 @@ const storeStock = (state = initialState, action) => {
         isFetching: false,
         stockItems: getStockItemsArray(action.payload)
       };
-    case REQUEST_ITEMS_IN_STOCK:  // strictly for loading (for now)
+    case FETCH_CART_ITEMS:  // strictly for loading (for now)
       return {
         ...state,
         isFetching: true
@@ -44,8 +44,8 @@ const storeStock = (state = initialState, action) => {
           updatedItem
         ]
       };
-    case FETCH_CART_ITEMS:
-      return state;
+    // case FETCH_CART_ITEMS:
+    //   return state;
     case BUY_ITEMS:
       // right now just going back to full stock; will update to subtract bought items
       // from store stock (if enough in stock)
