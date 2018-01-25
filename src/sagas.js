@@ -1,5 +1,6 @@
 // import { delay } from 'redux-saga';
 import { put, takeEvery, all, call /*, take, fork, takeLatest*/ } from 'redux-saga/effects';
+import uuid from 'uuid';
 import Api from './api';
 
 import {
@@ -12,9 +13,9 @@ import {
   BUY_ITEMS,
   BUY_CART_ITEMS,
   REQUEST_ITEMS_IN_STOCK,
+  ADD_NEW_ITEM_TO_STOCK
   // CHANGE_ITEM_QUANTITY,
   // UPDATE_ITEM_AMT,
-  // ADD_NEW_ITEM_TO_STOCK
 } from './actions/actionTypes';
 
 
@@ -23,7 +24,8 @@ export default function* rootSaga() {
     watchFetchItemsInStock(),
     watchAddItem(),
     watchRemoveItem(),
-    watchBuyItems()
+    watchBuyItems(),
+    watchAddNewItemToStock()
   ]);
 }
 
@@ -45,6 +47,9 @@ export function* watchBuyItems() {
   yield takeEvery(BUY_CART_ITEMS, buyAllItems);
 }
 
+export function* watchAddNewItemToStock() {
+  yield takeEvery(ADD_NEW_ITEM_TO_STOCK, addItemToStock);
+}
 
 /** sagas
 *
@@ -136,6 +141,26 @@ export function* buyAllItems() {
     console.error('Error buying all items: ', error);
   }
 }
+
+export function* addItemToStock(action) {
+  try {
+    const { item } = action;
+    const id = uuid.v4();
+    // item.id = id;
+    const itemWithId = Object.assign({}, item, { id });
+    const removedItem = yield call(Api.addItemToStock, itemWithId);
+
+    // yield put({
+    //   type: BUY_ITEMS
+    // });    
+
+  } catch (error) {
+    // yield put({ type: ‘ADD_ITEM_TO_STOCK_FAILURE’, error: error });
+    console.error('Error adding new item to stock: ', error);
+  }
+}
+
+
 
 /*
     examples:

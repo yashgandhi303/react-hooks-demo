@@ -34,6 +34,17 @@ class Api {
 		return result;
 	}
 
+	static addItemToStock(item) {
+		const { id } = item;
+		console.warn('asdfasdfasdf item is: ', item);
+
+		const result = axios.post(`https://carrinho-15670.firebaseio.com/stockItems/${id}.json`, item)
+			.then(res => {
+			  console.log('addItemToStock res.data: ', res.data);
+				return res.data;
+		});
+		return result;
+	}
 
 	// static requestItems = () => ({
 	//     // TODO: initiate spinner

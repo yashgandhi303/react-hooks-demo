@@ -10,6 +10,7 @@ import About from './containers/About';
 import Cart from './containers/Cart';
 
 import StyledHeader from './components/StyledHeader';
+import AddItemForm from './components/AddItemForm';
 
 import './App.css';
 
@@ -24,7 +25,10 @@ const App = () => (
         <div className='container'>
           <Switch>
             <Route exact path='/' component={Home} />
+
             <Route exact path='/cart' component={Cart} />
+
+            <Route exact path='/admin/add-item' component={AddItemForm} />
 
             <Route exact path='/about' component={About} />
 
@@ -39,6 +43,8 @@ const App = () => (
 injectGlobal`
   body {
     background-color: ghostwhite;
+    ${''/* global font size; can adjust in components using rem */}
+    ${'' /* font-size: 10px; */}
     ${'' /* padding: 10px; */}
   }
 `;
