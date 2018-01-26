@@ -31,9 +31,7 @@ class ItemCardInput extends Component {
           />
           <Form.Button
             disabled={amt === 0}
-            content={
-              window.location.pathname === "/cart" ? "Remove From Cart" : "Add to cart"
-            }
+            content={window.location.pathname === "/cart" ? "Remove From Cart" : "Add to cart"}
           />
         </Form.Field>
       </Form>
@@ -49,11 +47,14 @@ class ItemCardInput extends Component {
 const ItemCard = (props) => (
   <Card>
     <Image
-      src={abc123_1}
+      src={`./images/${props.item.id}.png`}
       alt={`image for ${props.item.name}`}
       size='tiny'
       centered={true}
     />
+    <div><pre><code>{JSON.stringify(props.item)}
+    </code></pre>
+    </div>
     <Card.Content>
       <Card.Header>{props.item.name}</Card.Header>
       <Rating

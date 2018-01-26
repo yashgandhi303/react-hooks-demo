@@ -27,7 +27,8 @@ const App = () => (
             <Route exact path='/' component={Home} />
 
             <Route exact path='/cart' component={Cart} />
-
+            
+            {/* /admin/* would be protected... */}
             <Route exact path='/admin/add-item' component={AddItemForm} />
 
             <Route exact path='/about' component={About} />

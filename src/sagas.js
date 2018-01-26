@@ -1,6 +1,5 @@
 // import { delay } from 'redux-saga';
 import { put, takeEvery, all, call /*, take, fork, takeLatest*/ } from 'redux-saga/effects';
-import uuid from 'uuid';
 import Api from './api';
 
 import {
@@ -145,11 +144,9 @@ export function* buyAllItems() {
 export function* addItemToStock(action) {
   try {
     const { item } = action;
-    const id = uuid.v4();
-    // item.id = id;
-    const itemWithId = Object.assign({}, item, { id });
-    const removedItem = yield call(Api.addItemToStock, itemWithId);
-
+  
+    const addedItem = yield call(Api.addItemToStock, item);
+    console.log('addItemTostock saga item: ', addedItem);
     // yield put({
     //   type: BUY_ITEMS
     // });    

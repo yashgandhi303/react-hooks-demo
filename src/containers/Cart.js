@@ -21,6 +21,7 @@ const Cart = ({ cartItems, buyAll, remove }) => (
               <ItemCard
                 onClickFn={remove}
                 item={item}
+                id={item.id}
                 key={item.id}
                 location={"cart"}
               />

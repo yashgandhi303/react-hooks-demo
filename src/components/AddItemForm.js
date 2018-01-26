@@ -8,7 +8,7 @@ import { Form, Input, TextArea, Header, Button /*, Container, Divider, Grid, Dim
 class AddItemForm extends Component {
   state = {
     name: '',
-    quantity: 0,
+    stock: 0,
     description: ''
   }
 
@@ -20,20 +20,20 @@ class AddItemForm extends Component {
     const item = this.state;
     //TODO: need to validate here (joi??)
 
-    if (item.quantity === 0) return; // need to display something here
+    if (item.stock === 0) return; // need to display something here
     console.log('handlesubmit: ', item);
     this.props.addItemToStock(item);
-    this.setState({ name: '', quantity: 0, description: ''});
+    this.setState({ name: '', stock: 0, description: ''});
   }
 
   render() {
-    const { name, quantity, description } = this.state;
+    const { name, stock, description } = this.state;
     return [
-      <Header as='h2' key="addItemForm-h2">Add an item to stock</Header>,
+      <Header as='h2' key="addItemForm-h2">Hey admin, add an item to stock</Header>,
       <Form onSubmit={this.handleSubmit} key="addItemForm-form">
         <Form.Field required control={Input} name='name' value={name} label='Name' placeholder='Name' onChange={this.handleChange} />
         {/* <Form.Field required control={Input} name='name' label='Last name' placeholder='Last name' /> */}
-        <Form.Field required label='Quantity' name='quantity' value={quantity} control='input' type='number' max={99} onChange={this.handleChange}  />
+        <Form.Field required label='Stock' name='stock' value={stock} control='input' type='number' max={99} onChange={this.handleChange}  />
         <Form.Field id='form-textarea-control-description' name='description' control={TextArea} label='Description' placeholder='Description' value={description} onChange={this.handleChange}  />
   
         <Button type='submit'>Submit</Button>
