@@ -44,12 +44,12 @@ export default class StyledHeader extends Component {
           >
             Cart <Icon name={'cart'} size={"large"} color={"blue"} />
           </Menu.Item>
-          <Menu.Item className='item'>
+          {/* <Menu.Item className='item'>
             <Button as='a'>Log in</Button>
           </Menu.Item>
           <Menu.Item>
             <Button as='a' primary>Sign Up</Button>
-          </Menu.Item>
+          </Menu.Item> */}
         </Menu.Menu>
       </Menu>
     )

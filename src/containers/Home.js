@@ -23,20 +23,19 @@ class Home extends React.Component {
 
   renderItems() {
     return (
-      <Grid divided>
+      <Grid divided container stackable>
         {
-          this.props.storeStock.stockItems.map((item, index) => {
-            return (
-              <Grid.Column width={4} key={index}>
-                <ItemCard
-                  onClickFn={this.props.addItemToCartFn}
-                  item={item}
-                  key={item.id}
-                  location={"home"}
-                />
-              </Grid.Column>
-            );
-          })
+          this.props.storeStock.stockItems.map((item, index) => (
+            <Grid.Column width={4} key={index}>
+              <ItemCard
+                onClickFn={this.props.addItemToCartFn}
+                item={item}
+                key={item.id}
+                location={"home"}
+              />
+            </Grid.Column>
+            )
+          )
         }
       </Grid>
     );
@@ -47,8 +46,8 @@ class Home extends React.Component {
     return (
       <Container className='home-div'>
         <Header as='h1'>
+          <Flag name={'us'} />        
           Welcome to Carrinho &nbsp;
-          <Flag name={'us'} />
           <Flag name={'br'} />
         </Header>
         
@@ -66,17 +65,10 @@ class Home extends React.Component {
         <Header as='h5'>Number of items in cart: {cartItems.cartItemIds.length}</Header>
 
         <Divider />
-        
-        {/* <Dimmer active inverted>
-          <Loader inverted>Loading</Loader>
-        </Dimmer> */}
-
-        {/* { console.log('Home props: ', this.props, storeStock.stockItems && storeStock.stockItems.length)} */}
 
         <Header as='h4'>Store Stock:</Header>
 
         {/* TODO: refactor into  component (aso, test below with no items - make sure dipslays the "no items in stock") */}
-        {/* { (storeStock.stockItems && storeStock.stockItems.length && this.renderItems()) || <p>No items in stock</p> } */}
 
         { this.props.loading && (
               <Dimmer active>

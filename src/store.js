@@ -22,15 +22,21 @@ firebase.initializeApp(config);
 const database = firebase.database();
 console.info('Firebase database: ', database);
 
+const DEBUG = process.env !== 'production';
+
+const middleware = [
+  thunk,
+  sagaMiddleware,
+  DEBUG && loggerMiddleware,
+].filter(Boolean);
+
 
 const store = createStore(
   rootReducer,
   // persistedState,
   compose(
     applyMiddleware( // can use thunks, sagas, etc.
-      thunk,
-      sagaMiddleware,
-      loggerMiddleware
+      ...middleware
     ),
     typeof window === 'object' && typeof window.devToolsExtension !== 'undefined' ? window.devToolsExtension() : f => f
   )
