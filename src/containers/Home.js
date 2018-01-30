@@ -71,7 +71,7 @@ class Home extends React.Component {
           <Loader inverted>Loading</Loader>
         </Dimmer> */}
 
-        { console.log('Home props: ', this.props, storeStock.stockItems && storeStock.stockItems.length)}
+        {/* { console.log('Home props: ', this.props, storeStock.stockItems && storeStock.stockItems.length)} */}
 
         <Header as='h4'>Store Stock:</Header>
 

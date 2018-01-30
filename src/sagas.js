@@ -75,7 +75,7 @@ export function* fetchItemsInStock() {
 export function* addItemToCart(action) {
   try {
     const { id, name, stock } = action.item;
-    console.warn('in sagas action: ', action);
+    // console.warn('in sagas action: ', action);
     const amt = action.amt;
     if (amt > stock) {
       // TODO: dispatch error (they're adding more to cart than that item has in stock); for now logging error

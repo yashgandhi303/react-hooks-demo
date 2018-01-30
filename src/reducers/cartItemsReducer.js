@@ -16,7 +16,7 @@ const cartItemStock = (state = {}, action) => {
       // add to the item in cart if it's already in there
       if (state.hasOwnProperty(action.id)) {
         const newCartAmt = action.amt + state[action.id].amt;
-        console.log('cartItemStock adding to existing: ', newCartAmt, action.amt, state[action.id].amt);
+        // console.log('cartItemStock adding to existing: ', newCartAmt, action.amt, state[action.id].amt);
         return {
           ...state,
           [action.id]: {
@@ -50,11 +50,11 @@ const cartItemStock = (state = {}, action) => {
       const cartItems = state;
       const id = action.id;
       // cartItems[id].amt = 0;
-      console.log('cartItems: ', cartItems, id);
+      // console.log('cartItems: ', cartItems, id);
 
       // console.warn('REMOVE_FROM_CART item: ', cartItems[id], cartItems[id].amt );
       const newState = omit(cartItems, id);
-      console.log('newState w/o item: ', newState);
+      // console.log('newState w/o item: ', newState);
       return {
         ...newState
       }

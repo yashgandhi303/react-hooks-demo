@@ -1,12 +1,12 @@
 import {
   FETCH_ITEMS_IN_STOCK, 
-  // ADD_TO_CART,
+  FETCH_CART_ITEMS,
   ADD_ITEM_TO_CART,
   REMOVE_FROM_CART,
   BUY_ITEMS,
+  // ADD_TO_CART,
   // ADD_NEW_ITEM_TO_STOCK,
-  REQUEST_ITEMS_IN_STOCK,
-  FETCH_CART_ITEMS
+  // REQUEST_ITEMS_IN_STOCK,
 } from '../actions/actionTypes';
 // import { storeListItems } from '../mockData';
 

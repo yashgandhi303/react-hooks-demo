@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, Icon, Image, Button, Form, Input, Rating } from 'semantic-ui-react';
+import { Card, Image, Form, Input, Rating /*, Icon, Button */ } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import abc123_1 from '../../public/images/abc123_1.png';
 
@@ -17,7 +17,7 @@ class ItemCardInput extends Component {
   render() {
     const { item, onClickFn } = this.props;
     const amt = this.state.amt;
-    console.log('ItemCard props: ', item, amt);
+    // console.log('ItemCard props: ', item, amt);
     return (
       <Form onSubmit={() => onClickFn(item, amt)}>
         <Form.Field>
@@ -47,14 +47,18 @@ class ItemCardInput extends Component {
 const ItemCard = (props) => (
   <Card>
     <Image
-      src={`./images/${props.item.id}.png`}
+      src={abc123_1}
       alt={`image for ${props.item.name}`}
       size='tiny'
       centered={true}
     />
-    <div><pre><code>{JSON.stringify(props.item)}
-    </code></pre>
-    </div>
+    {/* <div>
+      <pre>
+        <code>
+          {JSON.stringify(props.item)}
+        </code>
+      </pre>
+    </div> */}
     <Card.Content>
       <Card.Header>{props.item.name}</Card.Header>
       <Rating

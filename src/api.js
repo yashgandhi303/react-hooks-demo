@@ -11,7 +11,7 @@ class Api {
 	}
 
 	static addItemToCart(id, newStockAmt) {
-		console.warn('%c addItemToCart: ', id, newStockAmt);
+		// console.warn('%c addItemToCart: ', id, newStockAmt);
 
 		const result = axios.put(`https://carrinho-15670.firebaseio.com/stockItems/${id}/stock.json`, newStockAmt)
 			.then(res => {
@@ -30,7 +30,7 @@ class Api {
 	}
 
 	static addItemToStock(item) {
-		console.warn('asdfasdfasdf item is: ', item);
+		// console.warn('asdfasdfasdf item is: ', item);
 
 		const result = axios.post(`https://carrinho-15670.firebaseio.com/stockItems.json`, item)
 			.then(res => {
