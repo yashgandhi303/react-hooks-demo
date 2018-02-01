@@ -44,17 +44,34 @@ export default class StyledHeader extends Component {
           >
             Cart <Icon name={'cart'} size={"large"} color={"blue"} />
           </Menu.Item>
-          {/* <Menu.Item className='item'>
+
+          { this.state.authed ?
+          <Menu.Item className='item'>
             <Button as='a'>Log in</Button>
           </Menu.Item>
+          : 
           <Menu.Item>
             <Button as='a' primary>Sign Up</Button>
-          </Menu.Item> */}
+          </Menu.Item>
+          }
         </Menu.Menu>
       </Menu>
     )
   }
 }
+
+
+{this.state.authed
+  ? <button
+      style={{border: 'none', background: 'transparent'}}
+      onClick={() => {
+        logout()
+      }}
+      className="navbar-brand">Logout</button>
+  : <span>
+      <Link to="/login" className="navbar-brand">Login</Link>
+      <Link to="/register" className="navbar-brand">Register</Link>
+    </span>}
 
 // import styled /*, { css } */ from 'styled-components';
 

@@ -17,10 +17,13 @@ const loggerMiddleware = createLogger();
 // const persistedState = loadState();
 
 
-/** firebase database setup */
+/** firebase database setup */ // TODO: put elsewhere
 firebase.initializeApp(config);
 const database = firebase.database();
-console.info('Firebase database: ', database);
+export const ref = database.ref();
+export const firebaseAuth = firebase.auth;
+
+console.info('Firebase database: ', ref);
 
 const DEBUG = process.env !== 'production';
 
