@@ -21,7 +21,6 @@ class AddItemForm extends Component {
     //TODO: need to validate here (joi??)
 
     if (item.stock === 0) return; // need to display something here
-    // console.log('handlesubmit: ', item);
     this.props.addItemToStock(item);
     this.setState({ name: '', stock: 0, description: ''});
   }

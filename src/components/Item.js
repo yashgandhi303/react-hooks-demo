@@ -34,7 +34,6 @@ const StyledButton = styled.button`
 
 const Item = (props) => (
   <div className="item-div" style={{ border: "1px solid black" }}>
-    {/* { console.log('Item props: ', props) } */}
     {/* ant design component here nb??? */}
     <StyledDiv> 
       Item: {props.item.name}

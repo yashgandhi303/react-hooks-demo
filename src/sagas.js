@@ -75,7 +75,6 @@ export function* fetchItemsInStock() {
 export function* addItemToCart(action) {
   try {
     const { id, name, stock } = action.item;
-    // console.warn('in sagas action: ', action);
     const amt = action.amt;
     if (amt > stock) {
       // TODO: dispatch error (they're adding more to cart than that item has in stock); for now logging error
@@ -84,7 +83,6 @@ export function* addItemToCart(action) {
     const newStockAmt = stock - amt;
   
     // TODO: need check to make sure stock doesn't go negative
-    // console.log('addItemToCart: ', id, name, newStockAmt);
     
     const addedItem = yield call(Api.addItemToCart, id, newStockAmt);
 

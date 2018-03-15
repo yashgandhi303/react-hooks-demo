@@ -36,6 +36,16 @@ export default class StyledHeader extends Component {
           About
         </Menu.Item>
 
+        <Menu.Item
+          name='admin'
+          active={activeItem === 'admin'}
+          onClick={this.handleItemClick}
+          as={Link}
+          to={"/admin"}
+        >
+          Admin
+        </Menu.Item>
+
         <Menu.Menu position='right'>
           <Menu.Item
             name='cart'

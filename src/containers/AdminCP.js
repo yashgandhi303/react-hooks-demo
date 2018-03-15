@@ -1,65 +1,42 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { BarChart, YAxis, XAxis, Tooltip, Legend, CartesianGrid, Bar } from 'recharts';
-import { Container, Header /*, Grid, Button, Divider, Flag, Dimmer, Loader*/ } from 'semantic-ui-react';
+import { Container, Header, Divider /*, Grid, Button, Flag, Dimmer, Loader*/ } from 'semantic-ui-react';
 import AddItemFrom from '../components/AddItemForm';
-// import { Link } from 'react-router-dom';
 
+class AdminCP extends Component {
 
-const title = "Stock";
-
-const chartStyle = {
-  width: "200px",
-  height: "400px",
-}
-const chartSeries = [
-  {
-    field: 'stock',
-    name: 'Amt of Item',
-    color: '#ff7f0e'
+  componentDidMount() {
+    // call to fetch stockItems for redux state
+    this.props.getItemsInStock();
   }
-];
 
-const x = function(d) { // wtf nb???
-  return d.stock;
-};
+  render() {
+    const { stock } = this.props;
+    const chartData = stock;
 
+    return (
+      <Container>
+  
+        <AddItemFrom />
+  
+        <Divider />
 
-const AdminCP = ({ stock }) => {
+        <Header as="h2">Store stock: </Header>
 
-  const chartData = stock;
-  console.log('stock', stock);
-
-  return (
-    <Container>
-      <Header as="h2">Store stock: </Header>
-
-      <AddItemFrom />
-
-      <BarChart width={730} height={250} data={chartData}>
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Bar dataKey="pv" fill="#8884d8" />
-        <Bar dataKey="uv" fill="#82ca9d" />
-      </BarChart>
-
-      {/* <BarChart width={730} height={250} data={chartData}>
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Bar dataKey="pv" fill="#8884d8" />
-        <Bar dataKey="uv" fill="#82ca9d" />
-      </BarChart> */}
-
-    </Container>
-  );
-
+        <BarChart width={730} height={250} data={chartData}>
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="name" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Bar dataKey="stock" fill="#8884d8" />
+        </BarChart>
+  
+      </Container>
+    )
+  }
 }
 
 AdminCP.propTypes = {
@@ -70,4 +47,12 @@ const mapStateToProps = (state /*, ownProps*/) => ({
   stock: state.storeStock.stockItems
 });
 
-export default connect(mapStateToProps)(AdminCP);
+const mapDispatchToProps = (dispatch) => ({
+  getItemsInStock: () => {
+    dispatch({ type: 'FETCH_CART_ITEMS' });
+  }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(AdminCP);
+
+

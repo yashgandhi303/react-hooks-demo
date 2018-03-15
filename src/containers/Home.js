@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Container, Divider, Grid, Header, Flag, Button, Dimmer, Loader } from 'semantic-ui-react';
-// import AddItemForm from '../components/AddItemForm';
 import ItemCard from '../components/ItemCard';
 // import Footer from '../components/Footer';
 
@@ -68,8 +67,6 @@ class Home extends React.Component {
 
         <Header as='h4'>Store Stock:</Header>
 
-        {/* TODO: refactor into  component (aso, test below with no items - make sure dipslays the "no items in stock") */}
-
         { this.props.loading && (
               <Dimmer active>
                 <Loader content='Loading' />
@@ -78,8 +75,6 @@ class Home extends React.Component {
           }
 
         { (storeStock.stockItems && storeStock.stockItems.length && this.renderItems()) || <p>No items in stock</p> }
-
-        {/* <AddItemForm /> */}
 
         {/* <Footer /> */}
       </Container>

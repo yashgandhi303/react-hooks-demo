@@ -14,11 +14,14 @@ const About = () => (
       <p>- <a href='https://redux.js.org/'>redux </a></p>
       <p>- <a href='https://redux-saga.js.org/'>redux-sagas </a></p>
       <p>- <a href='https://react.semantic-ui.com/introduction'>Semantic UI React</a></p>
+      <p>- <a href='http://recharts.org/#/en-US'>Recharts</a></p>
       
       {/* styled components */}
       {/* <p>- <a href='https://webpack.github.io/'>Webpack 3</a> (too much fun to setup...)</p> */}
 
     </div>
+
+    <br />
 
     <div>
       <p>

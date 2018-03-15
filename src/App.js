@@ -14,7 +14,6 @@ import Register from './containers/Register';
 import Login from './containers/Login';
 
 import StyledHeader from './components/StyledHeader';
-import AddItemForm from './components/AddItemForm';
 
 import './App.css';
 
