@@ -20,6 +20,7 @@ import './App.css';
 
 // const store = configureStore();
 import store from './store';
+import AdminCP from './containers/AdminCP';
 
 
 function PrivateRoute ({component: Component, authed, ...rest}) {
@@ -86,8 +87,9 @@ class App extends React.Component {
               <PublicRoute authed={authed} exact path='/login' component={Login} />
   
               {/* /admin/* would be protected... */}
-              <PrivateRoute authed={authed} exact path='/admin/add-item' component={AddItemForm} />
-  
+              {/* <PrivateRoute authed={authed} exact path='/admin' component={AdminCP} /> */}
+              <PublicRoute authed={authed} exact path='/admin' component={AdminCP} />
+
               <PublicRoute authed={authed} exact path='/about' component={About} />
   
               <Redirect to='/' />

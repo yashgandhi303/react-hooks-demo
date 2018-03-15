@@ -24,6 +24,7 @@ bugs fixed:
 TODOS:
 reimplement configure store (for testing)
 addNewItemsToCart(stock) method/action
+use static proptypes
 sagas
 tests - test sagas
       - test components
