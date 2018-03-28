@@ -70,8 +70,8 @@ const mapDispatchToProps = (dispatch) => ({
   buyAll: () => {
     dispatch({ type: 'BUY_CART_ITEMS' })
   },
-  remove: (item, amt) => {
-    dispatch({ type: 'REMOVE_ITEM_FROM_CART', item, amt})
+  remove: (item, amt, initialAmt) => {
+    dispatch({ type: 'REMOVE_ITEM_FROM_CART', item, amt, initialAmt })
   }
 });
 

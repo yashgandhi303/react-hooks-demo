@@ -12,9 +12,9 @@ import {
   BUY_ITEMS,
   BUY_CART_ITEMS,
   REQUEST_ITEMS_IN_STOCK,
-  ADD_NEW_ITEM_TO_STOCK
+  ADD_NEW_ITEM_TO_STOCK,
+  UPDATE_ITEM_AMT,
   // CHANGE_ITEM_QUANTITY,
-  // UPDATE_ITEM_AMT,
 } from './actions/actionTypes';
 
 
@@ -75,7 +75,9 @@ export function* fetchItemsInStock() {
 export function* addItemToCart(action) {
   try {
     const { id, name, stock } = action.item;
-    const amt = action.amt;
+    console.log('addItemToCart: ', action.item);
+    
+    const amt = Number(action.amt);
     if (amt > stock) {
       // TODO: dispatch error (they're adding more to cart than that item has in stock); for now logging error
       console.error('Error: Adding too many items to cart: ', amt, stock);
@@ -104,21 +106,31 @@ export function* addItemToCart(action) {
 
 export function* removeFromCart(action) {
   try {
-    const { item, amt } = action;
+    const { item, amt, initialAmt } = action;
     const { id, name, stock } = item;
-
+    debugger;
     const newStockAmt = stock + Number(amt);
     // TODO: need check to make sure stock doesn't go negative (will throw error so it catches below and dispatches)
     
     const removedItem = yield call(Api.removeItemFromCart, id, newStockAmt);
 
-    yield put({
-      type: REMOVE_FROM_CART,
-      amt,
-      id,
-      name,
-      stock: newStockAmt
-    });
+    if (Number(amt) < initialAmt) { // remove the item from cart if user removes all of the item, otherwise just update quantity
+      yield put({
+        type: UPDATE_ITEM_AMT,
+        amt,
+        id,
+        name,
+        stock: newStockAmt
+      });
+    } else {
+      yield put({
+        type: REMOVE_FROM_CART,
+        amt,
+        id,
+        name,
+        stock: newStockAmt
+      });
+    }
 
     return removedItem;
 

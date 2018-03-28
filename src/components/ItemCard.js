@@ -6,7 +6,10 @@ import abc123_1 from '../../public/images/abc123_1.png';
 class ItemCardInput extends Component {
   constructor(props) {
     super(props);
-    this.state = { amt: this.props.item.amt || 0 };
+    this.state = {
+      amt: this.props.item.amt || 0,
+      initialAmt: this.props.item.amt || 0
+    };
     this.handleChange = this.handleChange.bind(this);
   }
   handleChange(e) {
@@ -16,10 +19,11 @@ class ItemCardInput extends Component {
   }
   render() {
     const { item, onClickFn } = this.props;
-    const amt = this.state.amt;
-    // console.log('ItemCard props: ', item, amt);
+    const { amt, initialAmt } = this.state;
+
+    console.log('ItemCard props: ', item, amt, initialAmt);
     return (
-      <Form onSubmit={() => onClickFn(item, amt)}>
+      <Form onSubmit={() => onClickFn(item, amt, initialAmt)}>
         <Form.Field>
           <label>Amount</label>
           <Input
@@ -52,13 +56,6 @@ const ItemCard = (props) => (
       size='tiny'
       centered={true}
     />
-    {/* <div>
-      <pre>
-        <code>
-          {JSON.stringify(props.item)}
-        </code>
-      </pre>
-    </div> */}
     <Card.Content>
       <Card.Header>{props.item.name}</Card.Header>
       <Rating

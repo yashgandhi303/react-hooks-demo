@@ -27,12 +27,8 @@ class Api {
 		return result;
 	}
 
-	static addItemToStock(item) {
-		const result = axios.post(`https://carrinho-15670.firebaseio.com/stockItems.json`, item)
-			.then(res => {
-				return res.data;
-		});
-		return result;
+	static async addItemToStock(item) {
+		return axios.post(`https://carrinho-15670.firebaseio.com/stockItems.json`, item).res.data;
 	}
 
 	// static requestItems = () => ({

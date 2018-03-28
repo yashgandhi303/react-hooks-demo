@@ -22,23 +22,23 @@ import store from './store';
 import AdminCP from './containers/AdminCP';
 
 
-function PrivateRoute ({component: Component, authed, ...rest}) {
+function PrivateRoute ({ component: Component, authed, ...rest }) {
   return (
     <Route
       {...rest}
       render={(props) => authed === true
         ? <Component {...props} />
-        : <Redirect to={{pathname: '/login', state: {from: props.location}}} />}
+        : <Redirect to={{ pathname: '/login', state: { from: props.location }}} />}
     />
   )
 }
 
-function PublicRoute ({component: Component, authed, ...rest}) {
+function PublicRoute ({ component: Component, authed, ...rest }) {
   return (
     <Route
       {...rest}
       render={(props) => authed === false
-        ? <Component {...props} />
+        ? <Component { ...props } />
         : <Redirect to='/dashboard' />}
     />
   )
