@@ -25,7 +25,8 @@ export const firebaseAuth = firebase.auth;
 
 console.info('Firebase database: ', ref);
 
-const DEBUG = process.env !== 'production';
+const DEBUG = process.env !== 'production' && process.env.NODE_ENV !== 'production';
+// console.log('process: ', process, DEBUG);
 
 const middleware = [
   thunk,

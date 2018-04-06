@@ -21,6 +21,10 @@ import './App.css';
 import store from './store';
 import AdminCP from './containers/AdminCP';
 
+if (process.env.NODE_ENV !== 'production') {
+  const { whyDidYouUpdate } = require('why-did-you-update');
+  whyDidYouUpdate(React);
+}
 
 function PrivateRoute ({ component: Component, authed, ...rest }) {
   return (

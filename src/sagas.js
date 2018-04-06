@@ -117,7 +117,7 @@ export function* removeFromCart(action) {
     if (Number(amt) < initialAmt) { // remove the item from cart if user removes all of the item, otherwise just update quantity
       yield put({
         type: UPDATE_ITEM_AMT,
-        amt,
+        amt: initialAmt - Number(amt),
         id,
         name,
         stock: newStockAmt
