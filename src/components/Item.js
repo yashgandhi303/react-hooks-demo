@@ -1,20 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled /*, { css }*/ from 'styled-components';
-// import { Link } from 'react-router-dom';
-
-// const Test = () => {
-//   return  <p>this is cool</p>
-// }
-
-// const StyledTest = styled(Test)`
-//   background: red;
-//   background-color: rgba(21,19,21,0.83);
-//   border-radius: 8px;
-//   color: white;
-//   height: ${props => props.small ? 40 : 60}px;
-//   width: ${props => props.small ? 60 : 120}px;
-// `;
 
 const StyledDiv = styled.div`
   background-color: rgba(218,219,221,0.3);
@@ -73,7 +59,7 @@ const Item = (props) => (
 
 Item.propTypes = {
   onClickFn: PropTypes.func.isRequired,
-  item: PropTypes.object.isRequired
+  item: PropTypes.object.isRequired,
 };
 
 export default Item;

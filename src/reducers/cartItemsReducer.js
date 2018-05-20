@@ -1,13 +1,12 @@
 import { combineReducers } from 'redux';
 import omit from 'lodash/omit';
 import {
-  // ADD_TO_CART,
   ADD_ITEM_TO_CART,
   REMOVE_FROM_CART,
   BUY_ITEMS,
-  UPDATE_ITEM_AMT
+  UPDATE_ITEM_AMT,
+  // ADD_TO_CART,
 } from '../actions/actionTypes';
-
 
 const cartItemStock = (state = {}, action) => {
   switch(action.type) {

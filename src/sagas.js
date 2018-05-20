@@ -28,7 +28,8 @@ export default function* rootSaga() {
   ]);
 }
 
-/** watchers/helpers
+/** 
+ * watchers/helpers
  */
 export function* watchFetchItemsInStock() {
   yield takeEvery(FETCH_CART_ITEMS, fetchItemsInStock);
@@ -75,7 +76,6 @@ export function* fetchItemsInStock() {
 export function* addItemToCart(action) {
   try {
     const { id, name, stock } = action.item;
-    console.log('addItemToCart: ', action.item);
     
     const amt = Number(action.amt);
     if (amt > stock) {
@@ -156,7 +156,6 @@ export function* addItemToStock(action) {
     const { item } = action;
   
     const addedItem = yield call(Api.addItemToStock, item);
-    console.log('addItemTostock saga item: ', addedItem);
     // yield put({
     //   type: BUY_ITEMS
     // });    
@@ -166,20 +165,3 @@ export function* addItemToStock(action) {
     console.error('Error adding new item to stock: ', error);
   }
 }
-
-
-
-/*
-    examples:
-*/
-
-// Our worker Saga: will perform the async increment task
-// export function* incrementAsync() {
-//   yield delay(1000)
-//   yield put({ type: 'INCREMENT' })
-// }
-
-// // Our watcher Saga: spawn a new incrementAsync task on each INCREMENT_ASYNC
-// export function* watchIncrementAsync() {
-//   yield takeEvery('INCREMENT_ASYNC', incrementAsync)
-// }

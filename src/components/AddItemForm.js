@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-// import { addNewItemToStock } from '../actions/actionCreators';
 import { Form, Input, TextArea, Header, Button /*, Container, Divider, Grid, Dimmer, Loader */ } from 'semantic-ui-react';
-// import { Link } from 'react-router-dom';
 
 class AddItemForm extends Component {
   state = {
     name: '',
     stock: 0,
-    description: ''
+    description: '',
   }
 
   handleChange = (e /*, { name, value }*/) => {
@@ -49,7 +47,7 @@ const mapDispatchToProps = (dispatch) => ({
   addItemToStock: (item) => {
     dispatch({
       type: 'ADD_NEW_ITEM_TO_STOCK',
-      item
+      item,
     })
   }
 });

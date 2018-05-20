@@ -1,52 +1,8 @@
-import React, { Component } from 'react';
-import { Card, Image, Form, Input, Rating /*, Icon, Button */ } from 'semantic-ui-react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import { Card, Image, Rating } from 'semantic-ui-react';
+import ItemCardInput from './ItemCardInput';
 import abc123_1 from '../../public/images/abc123_1.png';
-
-class ItemCardInput extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      amt: this.props.item.amt || 0,
-      initialAmt: this.props.item.amt || 0
-    };
-    this.handleChange = this.handleChange.bind(this);
-  }
-  handleChange(e) {
-    this.setState({
-      amt: e.target.value
-    });
-  }
-  render() {
-    const { item, onClickFn } = this.props;
-    const { amt, initialAmt } = this.state;
-
-    console.log('ItemCard props: ', item, amt, initialAmt);
-    return (
-      <Form onSubmit={() => onClickFn(item, amt, initialAmt)}>
-        <Form.Field>
-          <label>Amount</label>
-          <Input
-            type='number'
-            min={0}
-            max={item.stock}
-            value={amt}
-            onChange={this.handleChange}
-          />
-          <Form.Button
-            disabled={amt === 0}
-            content={window.location.pathname === "/cart" ? "Remove From Cart" : "Add to cart"}
-          />
-        </Form.Field>
-      </Form>
-    );
-  }
-}
-
-// const findImg = (id) => {
-//   const imgVar = null;
-//   return;
-// }
 
 const ItemCard = (props) => (
   <Card>
@@ -84,7 +40,7 @@ const ItemCard = (props) => (
 
 ItemCard.propTypes = {
   onClickFn: PropTypes.func.isRequired,
-  item: PropTypes.object.isRequired
+  item: PropTypes.object.isRequired,
 };
 
 export default ItemCard;

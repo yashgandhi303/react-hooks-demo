@@ -5,12 +5,6 @@ import {
   Grid,
   Header,
   List,
-  // Button,
-  // Divider,
-  // Icon,
-  // Image,
-  // Menu,
-  // Visibility,
 } from 'semantic-ui-react';
 
 const Footer = () => (

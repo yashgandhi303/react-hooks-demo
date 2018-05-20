@@ -1,17 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
 import { Container, Divider, Grid, Header, Flag, Button, Dimmer, Loader } from 'semantic-ui-react';
 import ItemCard from '../components/ItemCard';
-// import Footer from '../components/Footer';
 
 class Home extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       nothing: true,
-      uiState: 'maybe'
+      uiState: 'maybe',
     }
   }
 
@@ -91,31 +89,7 @@ Home.propTypes = {
     }))
   }).isRequired,
   addItemToCartFn: PropTypes.func.isRequired,
-  getItemsInStock: PropTypes.func.isRequired
+  getItemsInStock: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state /*, ownProps */) => {
-  return {
-    loading: state.storeStock.isFetching,
-    storeStock: state.storeStock,
-    cartItems: state.cartItems
-  };
-};
-
-const mapDispatchToProps = (dispatch) => ({
-  addItemToCartFn: (item, amt) => {
-    dispatch({
-      type: 'ADD_TO_CART',
-      item,
-      amt
-    })
-  },
-  getItemsInStock: () => {
-    dispatch({ type: 'FETCH_CART_ITEMS' });
-  }
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Home);
+export default Home;

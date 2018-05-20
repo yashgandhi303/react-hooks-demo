@@ -8,7 +8,7 @@ import {
 
 const initialState =  {
    isFetching: false,
-   stockItems: []
+   stockItems: [],
  }
 
 const storeStock = (state = initialState, action) => {
@@ -17,19 +17,19 @@ const storeStock = (state = initialState, action) => {
       return {
         ...state,
         isFetching: false,
-        stockItems: getStockItemsArray(action.payload)
+        stockItems: getStockItemsArray(action.payload),
       };
     case FETCH_CART_ITEMS:  // strictly for loading (for now)
       return {
         ...state,
-        isFetching: true
+        isFetching: true,
       };
     case REMOVE_FROM_CART:
     case ADD_ITEM_TO_CART:
       const updatedItem = {
           id: action.id,
           name: action.name,
-          stock: action.stock
+          stock: action.stock,
         };
       return {
         ...state,

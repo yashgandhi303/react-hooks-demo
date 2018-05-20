@@ -3,7 +3,7 @@ import { login, resetPassword } from '../auth';
 
 function setErrorMsg(error) {
   return {
-    loginMessage: error
+    loginMessage: error,
   }
 }
 

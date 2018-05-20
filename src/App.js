@@ -4,38 +4,37 @@ import { Provider } from 'react-redux';
 import { injectGlobal } from 'styled-components';
 
 // import configureStore from './store';
-import { logout } from './auth';
-import firebaseAuth from './store';
+// import { logout } from './auth';
+// import firebaseAuth from './store';
 
-import Home from './containers/Home';
-import About from './containers/About';
-import Cart from './containers/Cart';
-import Register from './containers/Register';
-import Login from './containers/Login';
+import HomeContainer from './containers/HomeContainer';
+import CartContainer from './containers/CartContainer';
 
+import Register from './components/Register';
+import Login from './components/Login';
+import About from './components/About';
 import StyledHeader from './components/StyledHeader';
+import AdminCPContainer from './containers/AdminCPContainer';
 
 import './App.css';
 
-// const store = configureStore();
 import store from './store';
-import AdminCP from './containers/AdminCP';
 
-if (process.env.NODE_ENV !== 'production') {
-  const { whyDidYouUpdate } = require('why-did-you-update');
-  whyDidYouUpdate(React);
-}
+// if (process.env.NODE_ENV !== 'production') {
+//   const { whyDidYouUpdate } = require('why-did-you-update');
+//   whyDidYouUpdate(React);
+// }
 
-function PrivateRoute ({ component: Component, authed, ...rest }) {
-  return (
-    <Route
-      {...rest}
-      render={(props) => authed === true
-        ? <Component {...props} />
-        : <Redirect to={{ pathname: '/login', state: { from: props.location }}} />}
-    />
-  )
-}
+// function PrivateRoute ({ component: Component, authed, ...rest }) {
+//   return (
+//     <Route
+//       {...rest}
+//       render={(props) => authed === true
+//         ? <Component {...props} />
+//         : <Redirect to={{ pathname: '/login', state: { from: props.location }}} />}
+//     />
+//   )
+// }
 
 function PublicRoute ({ component: Component, authed, ...rest }) {
   return (
@@ -52,7 +51,7 @@ class App extends React.Component {
   // TODO: move all the auth logic to redux, sagas, etc. (global...)
   state = {
     authed: false,
-    loading: false
+    loading: false,
   }
   // componentDidMount () {
   //   this.removeListener = firebaseAuth().onAuthStateChanged((user) => {
@@ -83,15 +82,15 @@ class App extends React.Component {
           <StyledHeader authed={authed} />
           <div className='container'>
             <Switch>
-              <Route exact path='/' component={Home} />
+              <Route exact path='/' component={HomeContainer} />
   
-              <PublicRoute authed={authed} exact path='/cart' component={Cart} />
+              <PublicRoute authed={authed} exact path='/cart' component={CartContainer} />
               <PublicRoute authed={authed} exact path='/register' component={Register} />
               <PublicRoute authed={authed} exact path='/login' component={Login} />
   
               {/* /admin/* would be protected... */}
               {/* <PrivateRoute authed={authed} exact path='/admin' component={AdminCP} /> */}
-              <PublicRoute authed={authed} exact path='/admin' component={AdminCP} />
+              <PublicRoute authed={authed} exact path='/admin' component={AdminCPContainer} />
 
               <PublicRoute authed={authed} exact path='/about' component={About} />
   

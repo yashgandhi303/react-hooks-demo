@@ -1,27 +1,26 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { BarChart, YAxis, XAxis, Tooltip, Legend, CartesianGrid, Bar } from 'recharts';
-import { Container, Header, Divider /*, Grid, Button, Flag, Dimmer, Loader*/ } from 'semantic-ui-react';
-import AddItemFrom from '../components/AddItemForm';
+import { Container, Header /*, Divider */ } from 'semantic-ui-react';
+// import AddItemForm from '../components/AddItemForm';
 
 class AdminCP extends Component {
-
+  
   componentDidMount() {
     // call to fetch stockItems for redux state
     this.props.getItemsInStock();
   }
-
+  
   render() {
     const { stock } = this.props;
     const chartData = stock;
-
+    
     return (
       <Container>
   
-        <AddItemFrom />
+        {/* <AddItemForm /> */}
   
-        <Divider />
+        {/* <Divider /> */}
 
         <Header as="h2">Store stock: </Header>
 
@@ -43,16 +42,4 @@ AdminCP.propTypes = {
   stock: PropTypes.array.isRequired,
 };
 
-const mapStateToProps = (state /*, ownProps*/) => ({
-  stock: state.storeStock.stockItems
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  getItemsInStock: () => {
-    dispatch({ type: 'FETCH_CART_ITEMS' });
-  }
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(AdminCP);
-
-
+export default AdminCP;

@@ -7,15 +7,10 @@ import createSagaMiddleware from 'redux-saga';
 import * as firebase from 'firebase';
 import rootSaga from './sagas';
 import { config } from './fire';
-
-// import throttle from 'lodash/throttle';
 import rootReducer from './reducers/root_reducer';
-// import { loadState, saveState } from './localStorage';
 const sagaMiddleware = createSagaMiddleware();
 
 const loggerMiddleware = createLogger();
-// const persistedState = loadState();
-
 
 /** firebase database setup */ // TODO: put elsewhere
 firebase.initializeApp(config);
@@ -26,7 +21,6 @@ export const firebaseAuth = firebase.auth;
 console.info('Firebase database: ', ref);
 
 const DEBUG = process.env !== 'production' && process.env.NODE_ENV !== 'production';
-// console.log('process: ', process, DEBUG);
 
 const middleware = [
   thunk,
@@ -56,36 +50,3 @@ const store = createStore(
 sagaMiddleware.run(rootSaga);
 
 export default store;
-
-
-// const configureStore = () => {
-
-//   // const persistedState = loadState();
-
-//   const store = createStore(
-//     rootReducer,
-//     // persistedState,
-//     compose(
-//       applyMiddleware( // can use thunks, sagas, etc.
-//         // thunk,
-//         sagaMiddleware,
-//         loggerMiddleware
-//       ),
-//       typeof window === 'object' && typeof window.devToolsExtension !== 'undefined' ? window.devToolsExtension() : f => f
-//     )
-//   );
-
-//   // if using persistedState:
-//   // store.subscribe(throttle(() => {
-//   //   // console.log('current state (store.js): ', store.getState());
-//   //   saveState({
-//   //    randomState
-//   //   });
-//   // }), 1000);
-
-//   return store;
-// }
-
-// sagaMiddleware.run(rootSaga);
-
-// export default configureStore;
