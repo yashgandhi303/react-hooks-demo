@@ -107,7 +107,6 @@ class App extends React.Component {
 injectGlobal`
   body {
     background-color: ghostwhite;
-    ${''/* global font size; can adjust in components using rem */}
     ${'' /* font-size: 10px; */}
     ${'' /* padding: 10px; */}
   }
