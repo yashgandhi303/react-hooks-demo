@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Form, Input, TextArea, Header, Button /*, Container, Divider, Grid, Dimmer, Loader */ } from 'semantic-ui-react';
+import { Form, Input, TextArea, Header, Button } from 'semantic-ui-react';
 
 class AddItemForm extends Component {
   state = {
@@ -28,11 +28,34 @@ class AddItemForm extends Component {
     return [
       <Header as='h2' key="addItemForm-h2">Hey admin, add an item to stock</Header>,
       <Form onSubmit={this.handleSubmit} key="addItemForm-form">
-        <Form.Field required control={Input} name='name' value={name} label='Name' placeholder='Name' onChange={this.handleChange} />
-        {/* <Form.Field required control={Input} name='name' label='Last name' placeholder='Last name' /> */}
-        <Form.Field required label='Stock' name='stock' value={stock} control='input' type='number' max={99} onChange={this.handleChange}  />
-        <Form.Field id='form-textarea-control-description' name='description' control={TextArea} label='Description' placeholder='Description' value={description} onChange={this.handleChange}  />
-  
+        <Form.Field
+          required
+          control={Input}
+          name='name'
+          value={name}
+          label='Name'
+          placeholder='Name'
+          onChange={this.handleChange}
+        />
+        <Form.Field
+          required
+          label='Stock'
+          name='stock'
+          value={stock}
+          control='input'
+          type='number'
+          max={99}
+          onChange={this.handleChange}
+        />
+        <Form.Field
+          id='form-textarea-control-description'
+          name='description'
+          control={TextArea}
+          label='Description'
+          placeholder='Description'
+          value={description}
+          onChange={this.handleChange}
+        />
         <Button type='submit'>Submit</Button>
       </Form>
     ];  

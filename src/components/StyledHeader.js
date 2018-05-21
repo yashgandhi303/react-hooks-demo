@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Menu, Icon, Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-import { logout } from '../auth';
-// import firebaseAuth from '../store';
+// import { logout } from '../auth';
+// import firebaseAuth from '../database';
 
 export default class StyledHeader extends Component {
   state = {}
@@ -57,7 +57,7 @@ export default class StyledHeader extends Component {
             Cart <Icon name={'cart'} size={"large"} color={"blue"} />
           </Menu.Item>
 
-          { this.props.authed ?
+          {/* { this.props.authed ?
             <Menu.Item className='item'>
               <Button as={Link} to="login">Log in</Button>
             </Menu.Item>
@@ -73,7 +73,7 @@ export default class StyledHeader extends Component {
             </Menu.Item>
             : 
             null
-          }
+          } */}
 
 
         </Menu.Menu>

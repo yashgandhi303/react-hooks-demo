@@ -3,20 +3,13 @@ import { createLogger } from "redux-logger";
 import thunk from 'redux-thunk';
 import createSagaMiddleware from 'redux-saga';
 
-/* firebase config */
-import * as firebase from 'firebase';
 import rootSaga from './sagas';
-import { config } from './fire';
 import rootReducer from './reducers/root_reducer';
+import * as ref from './database';
 const sagaMiddleware = createSagaMiddleware();
 
 const loggerMiddleware = createLogger();
 
-/** firebase database setup */ // TODO: put elsewhere
-firebase.initializeApp(config);
-const database = firebase.database();
-export const ref = database.ref();
-export const firebaseAuth = firebase.auth;
 
 console.info('Firebase database: ', ref);
 

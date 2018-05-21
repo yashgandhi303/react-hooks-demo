@@ -1,50 +1,34 @@
 import React from 'react';
+import { Container, Segment, Grid, Header, List } from 'semantic-ui-react';
 
 const About = () => (
   <div id='about-div'>
-    <h1>About this project:</h1>
+    <Container>
+      <h1>About this project:</h1>
 
-    <h3>Creator:</h3>
-    <p>Nick Bouldien <a href="https://github.com/nickbouldien">github profile</a></p>
+      <List link>
+        <List.Item href="https://github.com/nickbouldien">github link</List.Item>
+      </List>
 
+      <h3>Tech used:</h3>
+      <List link>
+        <List.Item href="https://github.com/facebook/react">React 16</List.Item>
+        <List.Item href='https://redux.js.org/'>redux </List.Item>
+        <List.Item href='https://redux-saga.js.org/'>redux-saga</List.Item>
+        <List.Item href='https://react.semantic-ui.com/introduction'>Semantic UI React</List.Item>
+        <List.Item href='https://redux-saga.js.org/'>redux-saga</List.Item>
+        <List.Item href='http://recharts.org/#/en-US'>Recharts</List.Item>
 
-    <h3>Tech used:</h3>
-    <div>
-      <p>- <a href='https://github.com/facebook/react'>React 16</a></p>
-      <p>- <a href='https://redux.js.org/'>redux </a></p>
-      <p>- <a href='https://redux-saga.js.org/'>redux-sagas </a></p>
-      <p>- <a href='https://react.semantic-ui.com/introduction'>Semantic UI React</a></p>
-      <p>- <a href='http://recharts.org/#/en-US'>Recharts</a></p>
-      
-      {/* styled components */}
-      {/* <p>- <a href='https://webpack.github.io/'>Webpack 3</a> (too much fun to setup...)</p> */}
+        <List.Item href='https://firebase.google.com/docs/reference/rest/database/'>Firebase rest api</List.Item>
+      </List>
 
-    </div>
+      <h3>Sources:</h3>
+      <List link>
+        <List.Item href="https://github.com/reactjs/react-redux">react-redux</List.Item>
+        <List.Item href='https://redux.js.org/'>redux</List.Item>
+      </List>
 
-    <br />
-
-    <div>
-      <p>
-        API usage:
-        <br />
-        <a href='https://firebase.google.com/docs/reference/rest/database/'>Firebase rest api</a>
-
-        {/* <p>- <a href='https://github.com/toddmotto/public-apis#currency-exchange'>github link</a></p> */}
-
-      </p>
-      
-    </div>
-
-    <div>
-      Sources:
-      <a href="https://github.com/reactjs/react-redux" target="_blank" rel="noopener noreferrer">react-redux</a>
-      <a href="https://redux.js.org/" target="_blank" rel="noopener noreferrer">redux</a>
-
-
-      {/* <a href="https://github.com/redux-saga/redux-saga" target="_blank">redux-saga</a> */}
-      {/* thunks (in firebase branch) */}
-    </div>
-
+    </Container>
   </div>
 );
 

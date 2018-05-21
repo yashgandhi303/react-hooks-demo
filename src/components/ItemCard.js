@@ -2,12 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Card, Image, Rating } from 'semantic-ui-react';
 import ItemCardInput from './ItemCardInput';
-import abc123_1 from '../../public/images/abc123_1.png';
 
 const ItemCard = (props) => (
   <Card>
     <Image
-      src={abc123_1}
+      src={props.item.image}
       alt={`image for ${props.item.name}`}
       size='tiny'
       centered={true}
