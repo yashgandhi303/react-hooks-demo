@@ -12,9 +12,9 @@ import {
   BUY_ITEMS,
   BUY_CART_ITEMS,
   REQUEST_ITEMS_IN_STOCK,
-  ADD_NEW_ITEM_TO_STOCK
+  ADD_NEW_ITEM_TO_STOCK,
+  UPDATE_ITEM_AMT,
   // CHANGE_ITEM_QUANTITY,
-  // UPDATE_ITEM_AMT,
 } from './actions/actionTypes';
 
 
@@ -28,7 +28,8 @@ export default function* rootSaga() {
   ]);
 }
 
-/** watchers/helpers
+/** 
+ * watchers/helpers
  */
 export function* watchFetchItemsInStock() {
   yield takeEvery(FETCH_CART_ITEMS, fetchItemsInStock);
@@ -75,8 +76,8 @@ export function* fetchItemsInStock() {
 export function* addItemToCart(action) {
   try {
     const { id, name, stock } = action.item;
-    // console.warn('in sagas action: ', action);
-    const amt = action.amt;
+    
+    const amt = Number(action.amt);
     if (amt > stock) {
       // TODO: dispatch error (they're adding more to cart than that item has in stock); for now logging error
       console.error('Error: Adding too many items to cart: ', amt, stock);
@@ -84,7 +85,6 @@ export function* addItemToCart(action) {
     const newStockAmt = stock - amt;
   
     // TODO: need check to make sure stock doesn't go negative
-    // console.log('addItemToCart: ', id, name, newStockAmt);
     
     const addedItem = yield call(Api.addItemToCart, id, newStockAmt);
 
@@ -106,21 +106,31 @@ export function* addItemToCart(action) {
 
 export function* removeFromCart(action) {
   try {
-    const { item, amt } = action;
+    const { item, amt, initialAmt } = action;
     const { id, name, stock } = item;
-
+    debugger;
     const newStockAmt = stock + Number(amt);
     // TODO: need check to make sure stock doesn't go negative (will throw error so it catches below and dispatches)
     
     const removedItem = yield call(Api.removeItemFromCart, id, newStockAmt);
 
-    yield put({
-      type: REMOVE_FROM_CART,
-      amt,
-      id,
-      name,
-      stock: newStockAmt
-    });
+    if (Number(amt) < initialAmt) { // remove the item from cart if user removes all of the item, otherwise just update quantity
+      yield put({
+        type: UPDATE_ITEM_AMT,
+        amt: initialAmt - Number(amt),
+        id,
+        name,
+        stock: newStockAmt
+      });
+    } else {
+      yield put({
+        type: REMOVE_FROM_CART,
+        amt,
+        id,
+        name,
+        stock: newStockAmt
+      });
+    }
 
     return removedItem;
 
@@ -146,7 +156,6 @@ export function* addItemToStock(action) {
     const { item } = action;
   
     const addedItem = yield call(Api.addItemToStock, item);
-    console.log('addItemTostock saga item: ', addedItem);
     // yield put({
     //   type: BUY_ITEMS
     // });    
@@ -156,20 +165,3 @@ export function* addItemToStock(action) {
     console.error('Error adding new item to stock: ', error);
   }
 }
-
-
-
-/*
-    examples:
-*/
-
-// Our worker Saga: will perform the async increment task
-// export function* incrementAsync() {
-//   yield delay(1000)
-//   yield put({ type: 'INCREMENT' })
-// }
-
-// // Our watcher Saga: spawn a new incrementAsync task on each INCREMENT_ASYNC
-// export function* watchIncrementAsync() {
-//   yield takeEvery('INCREMENT_ASYNC', incrementAsync)
-// }

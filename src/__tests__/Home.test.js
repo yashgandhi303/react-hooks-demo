@@ -2,7 +2,7 @@ import React from 'react';
 import Adapter from 'enzyme-adapter-react-16';
 import Enzyme, { shallow /*, render, mount */ } from 'enzyme';
 // import renderer from 'react-test-renderer';
-import Home from '../containers/Home';
+import HomeContainer from '../containers/HomeContainer';
 import store from '../store';
 
 Enzyme.configure({ adapter: new Adapter() })
@@ -32,14 +32,14 @@ it('Home: sanity check', () => {
 });
   
 it('renders welcome message', () => {
-  const wrapper = shallow(<Home store={store} />).dive();
+  const wrapper = shallow(<HomeContainer store={store} />).dive();
   const welcome = <h1 id="welcome">Welcome</h1>;
   expect(wrapper.contains(welcome)).toEqual(true);
 });
 
 
-// test('Home snapshot', () => {
-//   const component = renderer.create(<Home store={store} />, );
+// test('HomeContainer snapshot', () => {
+//   const component = renderer.create(<HomeContainer store={store} />, );
 //   let tree = component.toJSON();
 //   expect(tree).toMatchSnapshot();
 
@@ -57,8 +57,8 @@ it('renders welcome message', () => {
 // });
 
 // describe('>>>H O M E --- Snapshot', () => {
-//   it('+++capturing Snapshot of Home', () => {
-//     const renderedValue = renderer.create(<Home store={store} />).toJSON();
+//   it('+++capturing Snapshot of HomeContainer', () => {
+//     const renderedValue = renderer.create(<HomeContainer store={store} />).toJSON();
 //     expect(renderedValue).toMatchSnapshot();
 //   });
 // });

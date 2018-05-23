@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Container, Button, Header, Grid /*,  Divider, , Flag, Dimmer, Loader*/ } from 'semantic-ui-react';
+import { Container, Button, Header, Grid } from 'semantic-ui-react';
 import ItemCard from '../components/ItemCard';
 
 const Cart = ({ cartItems, buyAll, remove }) => (
@@ -15,9 +14,9 @@ const Cart = ({ cartItems, buyAll, remove }) => (
 
     <Grid>
       <Grid.Column width={6}>
-        { (
-          // FIXME: formatting - this is ugly!!!
-            cartItems.length && cartItems.map((item) => (
+        {
+            cartItems.length > 0 ? (
+              cartItems.map((item) => (
               <ItemCard
                 onClickFn={remove}
                 item={item}
@@ -26,7 +25,7 @@ const Cart = ({ cartItems, buyAll, remove }) => (
                 location={"cart"}
               />
             ))
-          ) || (
+          ) : (
             <Button
               as={Link}
               to={"/"}
@@ -50,32 +49,4 @@ Cart.propTypes = {
   remove: PropTypes.func.isRequired
 };
 
-// TODO: refactor this
-function getArrayOfCartItems(cartItems, ids) {
-  const arr = [];
-  console.log('getArrayOfCartItems ', cartItems, ids);
-  for (let item in cartItems) {
-    if (ids.includes(item)) {
-      arr.push(cartItems[item]);
-    }
-  }
-  return arr;
-}
-
-const mapStateToProps = (state, ownProps) => ({
-  cartItems: getArrayOfCartItems(state.cartItems.cartItemStock, state.cartItems.cartItemIds)
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  buyAll: () => {
-    dispatch({ type: 'BUY_CART_ITEMS' })
-  },
-  remove: (item, amt) => {
-    dispatch({ type: 'REMOVE_ITEM_FROM_CART', item, amt})
-  }
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Cart);
+export default Cart;

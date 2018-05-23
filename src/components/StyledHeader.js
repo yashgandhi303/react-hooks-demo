@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Menu, Icon, Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
+// import { logout } from '../auth';
+// import firebaseAuth from '../database';
 
 export default class StyledHeader extends Component {
   state = {}
@@ -34,6 +36,16 @@ export default class StyledHeader extends Component {
           About
         </Menu.Item>
 
+        <Menu.Item
+          name='admin'
+          active={activeItem === 'admin'}
+          onClick={this.handleItemClick}
+          as={Link}
+          to={"/admin"}
+        >
+          Admin
+        </Menu.Item>
+
         <Menu.Menu position='right'>
           <Menu.Item
             name='cart'
@@ -44,17 +56,44 @@ export default class StyledHeader extends Component {
           >
             Cart <Icon name={'cart'} size={"large"} color={"blue"} />
           </Menu.Item>
-          {/* <Menu.Item className='item'>
-            <Button as='a'>Log in</Button>
-          </Menu.Item>
-          <Menu.Item>
-            <Button as='a' primary>Sign Up</Button>
-          </Menu.Item> */}
+
+          {/* { this.props.authed ?
+            <Menu.Item className='item'>
+              <Button as={Link} to="login">Log in</Button>
+            </Menu.Item>
+            : 
+            <Menu.Item>
+              <Button as={Link} to="register" primary>Sign Up</Button>
+            </Menu.Item>
+          }
+          
+          { this.props.authed ?
+            <Menu.Item className='item'>
+              <Button onClick={logout} to="logout">Logout</Button>
+            </Menu.Item>
+            : 
+            null
+          } */}
+
+
         </Menu.Menu>
       </Menu>
     )
   }
 }
+
+
+// {this.state.authed
+//   ? <button
+//       style={{border: 'none', background: 'transparent'}}
+//       onClick={() => {
+//         logout()
+//       }}
+//       className="navbar-brand">Logout</button>
+//   : <span>
+//       <Link to="/login" className="navbar-brand">Login</Link>
+//       <Link to="/register" className="navbar-brand">Register</Link>
+//     </span>}
 
 // import styled /*, { css } */ from 'styled-components';
 

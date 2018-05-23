@@ -1,18 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
 import { Container, Divider, Grid, Header, Flag, Button, Dimmer, Loader } from 'semantic-ui-react';
-// import AddItemForm from '../components/AddItemForm';
 import ItemCard from '../components/ItemCard';
-// import Footer from '../components/Footer';
 
 class Home extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       nothing: true,
-      uiState: 'maybe'
+      uiState: 'maybe',
     }
   }
 
@@ -68,8 +65,6 @@ class Home extends React.Component {
 
         <Header as='h4'>Store Stock:</Header>
 
-        {/* TODO: refactor into  component (aso, test below with no items - make sure dipslays the "no items in stock") */}
-
         { this.props.loading && (
               <Dimmer active>
                 <Loader content='Loading' />
@@ -78,8 +73,6 @@ class Home extends React.Component {
           }
 
         { (storeStock.stockItems && storeStock.stockItems.length && this.renderItems()) || <p>No items in stock</p> }
-
-        {/* <AddItemForm /> */}
 
         {/* <Footer /> */}
       </Container>
@@ -96,31 +89,7 @@ Home.propTypes = {
     }))
   }).isRequired,
   addItemToCartFn: PropTypes.func.isRequired,
-  getItemsInStock: PropTypes.func.isRequired
+  getItemsInStock: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state /*, ownProps */) => {
-  return {
-    loading: state.storeStock.isFetching,
-    storeStock: state.storeStock,
-    cartItems: state.cartItems
-  };
-};
-
-const mapDispatchToProps = (dispatch) => ({
-  addItemToCartFn: (item, amt) => {
-    dispatch({
-      type: 'ADD_TO_CART',
-      item,
-      amt
-    })
-  },
-  getItemsInStock: () => {
-    dispatch({ type: 'FETCH_CART_ITEMS' });
-  }
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Home);
+export default Home;

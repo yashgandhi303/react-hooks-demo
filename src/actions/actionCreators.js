@@ -1,3 +1,5 @@
+// this is no longer needed - everything done in sagas.js
+
 import axios from 'axios';
 
 import {
