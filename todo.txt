@@ -17,6 +17,7 @@ bugs fixed:
 
 
 TODOS:
+change favicon
 reimplement configure store (for testing)
 addNewItemsToCart(stock) method/action
 use static proptypes
