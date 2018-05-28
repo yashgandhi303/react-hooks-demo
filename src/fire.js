@@ -1,3 +1,5 @@
+console.log('config thigs:, ', process.env.REACT_APP_API_KEY, process.env.REACT_APP_DATABASE_URL);
+
 export const config = {
   apiKey: JSON.parse(process.env.REACT_APP_API_KEY) || "",
   authDomain: JSON.parse(process.env.REACT_APP_AUTH_DOMAIN) || "",
