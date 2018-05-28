@@ -1,9 +1,10 @@
 import axios from 'axios';
-
+import { config } from './fire';
+const BASE_URL = config.databaseURL;
 class Api {
 
 	static fetchItems() {
-		const result = axios.get(`https://carrinho-15670.firebaseio.com/stockItems.json`)
+		const result = axios.get(`${BASE_URL}/stockItems.json`)
 			.then(res => {
 			return res.data;
 	});
@@ -11,7 +12,7 @@ class Api {
 	}
 
 	static addItemToCart(id, newStockAmt) {
-		const result = axios.put(`https://carrinho-15670.firebaseio.com/stockItems/${id}/stock.json`, newStockAmt)
+		const result = axios.put(`${BASE_URL}/stockItems/${id}/stock.json`, newStockAmt)
 			.then(res => {
 				return res.data;
 			});
@@ -20,7 +21,7 @@ class Api {
 
 	// TODO: need to combine addItemToCart && removeItemFromCart
 	static removeItemFromCart(id, newStockAmt) {
-		const result = axios.put(`https://carrinho-15670.firebaseio.com/stockItems/${id}/stock.json`, newStockAmt)
+		const result = axios.put(`${BASE_URL}/stockItems/${id}/stock.json`, newStockAmt)
 			.then(res => {
 				return res.data;
 		});
@@ -28,7 +29,7 @@ class Api {
 	}
 
 	static async addItemToStock(item) {
-		return axios.post(`https://carrinho-15670.firebaseio.com/stockItems.json`, item).res.data;
+		return axios.post(`${BASE_URL}/stockItems.json`, item).res.data;
 	}
 
 	// static requestItems = () => ({

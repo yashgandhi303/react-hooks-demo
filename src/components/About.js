@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Segment, Grid, Header, List } from 'semantic-ui-react';
+import { Container, List } from 'semantic-ui-react';
 
 const About = () => (
   <div id='about-div'>
@@ -7,7 +7,7 @@ const About = () => (
       <h1>About this project:</h1>
 
       <List link>
-        <List.Item href="https://github.com/nickbouldien">github link</List.Item>
+        <List.Item href="https://github.com/nickbouldien/carrinho">github link</List.Item>
       </List>
 
       <h3>Tech used:</h3>
@@ -18,7 +18,7 @@ const About = () => (
         <List.Item href='https://react.semantic-ui.com/introduction'>Semantic UI React</List.Item>
         <List.Item href='https://redux-saga.js.org/'>redux-saga</List.Item>
         <List.Item href='http://recharts.org/#/en-US'>Recharts</List.Item>
-
+        <List.Item href="https://www.heroku.com/">hosted on Heroku</List.Item>
         <List.Item href='https://firebase.google.com/docs/reference/rest/database/'>Firebase rest api</List.Item>
       </List>
 

@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-import { Menu, Icon, Button } from 'semantic-ui-react';
+import { Menu, Icon } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-// import { logout } from '../auth';
-// import firebaseAuth from '../database';
 
 export default class StyledHeader extends Component {
-  state = {}
+  state = { activeItem: "" }
 
   handleItemClick = (e, { name }) => (
     this.setState({ activeItem: name })
