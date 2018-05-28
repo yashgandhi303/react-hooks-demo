@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { config } from './fire';
 const BASE_URL = config.databaseURL;
+console.log('BASE_URL: ', BASE_URL);
 class Api {
-
 	static fetchItems() {
 		const result = axios.get(`${BASE_URL}/stockItems.json`)
 			.then(res => {
@@ -36,7 +36,6 @@ class Api {
 	//     // TODO: initiate spinner
 	//     type: REQUEST_ITEMS_IN_STOCK
 	//   });
-	
 } 
 
 export default Api;

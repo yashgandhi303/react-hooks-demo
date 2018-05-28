@@ -6,20 +6,19 @@ class ItemCardInput extends Component {
     super(props);
     this.state = {
       amt: this.props.item.amt || 0,
-      initialAmt: this.props.item.amt || 0
+      initialAmt: this.props.item.amt || 0,
     };
     this.handleChange = this.handleChange.bind(this);
   }
   handleChange(e) {
     this.setState({
-      amt: e.target.value
+      amt: e.target.value,
     });
   }
   render() {
     const { item, onClickFn } = this.props;
     const { amt, initialAmt } = this.state;
 
-    console.log('ItemCard props: ', item, amt, initialAmt);
     return (
       <Form onSubmit={() => onClickFn(item, amt, initialAmt)}>
         <Form.Field>

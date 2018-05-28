@@ -10,10 +10,9 @@ const sagaMiddleware = createSagaMiddleware();
 
 const loggerMiddleware = createLogger();
 
-
 console.info('Firebase database: ', ref);
 
-const DEBUG = process.env !== 'production' && process.env.NODE_ENV !== 'production';
+const DEBUG = process.env.NODE_ENV !== 'prod' && process.env.NODE_ENV !== 'production';
 
 const middleware = [
   thunk,
@@ -32,7 +31,7 @@ const store = createStore(
     typeof window === 'object' && typeof window.devToolsExtension !== 'undefined' ? window.devToolsExtension() : f => f
   )
 );
-//   // if using persistedState:
+
 //   // store.subscribe(throttle(() => {
 //   //   // console.log('current state (store.js): ', store.getState());
 //   //   saveState({
