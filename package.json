@@ -8,8 +8,10 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
-    "test:watch": "jest --watch",
-    "test:jest": "jest",
+    "test:cov": "jest --coverage",
+    "test:cov-report": "open coverage/lcov-report/index.html",
+    "test:watch": "jest --env=jsdom --watch",
+    "test:jest": "jest --env=jsdom",
     "testsagas": "tape ./src/__tests__/sagas.test.js"
   },
   "dependencies": {
@@ -70,9 +72,11 @@
     "whatwg-fetch": "2.0.3"
   },
   "devDependencies": {
+    "babel-plugin-dynamic-import-node": "^2.0.0",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "enzyme-to-json": "^3.3.0",
+    "prettier": "^1.14.0",
     "react-test-renderer": "^16.2.0",
     "why-did-you-update": "^0.1.1"
   },
@@ -87,7 +91,7 @@
       "<rootDir>/src/**/__tests__/**/*.{js,jsx,mjs}",
       "<rootDir>/src/**/?(*.)(spec|test).{js,jsx,mjs}"
     ],
-    "testEnvironment": "node",
+    "testEnvironment": "jsdom",
     "testURL": "http://localhost",
     "transform": {
       "^.+\\.(js|jsx|mjs)$": "<rootDir>/node_modules/babel-jest",
