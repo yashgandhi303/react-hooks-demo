@@ -17,10 +17,10 @@
 // // import { shallow } from 'enzyme';
 // import App from '../App';
 
-// it('sanity check', () => {
-//   // const wrapper = shallow(<App />);
-//   expect(true).toEqual(true);
-// });
+test.skip('sanity check', () => {
+  // const wrapper = shallow(<App />);
+  expect(true).toEqual(true);
+});
 
 // it('renders welcome message', () => {
 //   const wrapper = shallow(<App />);
