@@ -17,6 +17,7 @@ test scripts:
 
 
 ### TODOs:
+- use better patterns
 - write tests
 - more/better styling
 - fix image issues

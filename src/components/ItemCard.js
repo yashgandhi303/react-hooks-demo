@@ -3,16 +3,16 @@ import PropTypes from 'prop-types';
 import { Card, Image, Rating } from 'semantic-ui-react';
 import ItemCardInput from './ItemCardInput';
 
-const ItemCard = (props) => (
+const ItemCard = ({ item, onClickFn }) => (
   <Card>
     <Image
-      src={props.item.image}
-      alt={`image for ${props.item.name}`}
+      src={item.image}
+      alt={`image for ${item.name}`}
       size='tiny'
       centered={true}
     />
     <Card.Content>
-      <Card.Header>{props.item.name}</Card.Header>
+      <Card.Header>{item.name}</Card.Header>
       <Rating
         icon='star'
         defaultRating={Math.floor(Math.random() * 6)}
@@ -21,17 +21,17 @@ const ItemCard = (props) => (
       />
       <Card.Meta>
         <span className='stock-amount'>
-          { `Stock: ${props.item.stock}` }
+          { `Stock: ${item.stock}` }
         </span>
       </Card.Meta>
       <Card.Description>
-        { props.item.description || 'Deliciousness' }
+        { item.description || 'Deliciousness' }
       </Card.Description>
     </Card.Content>
     <Card.Content extra>
       <ItemCardInput
-        item={props.item}
-        onClickFn={props.onClickFn}
+        item={item}
+        onClickFn={onClickFn}
       />
     </Card.Content>
   </Card>
@@ -39,7 +39,7 @@ const ItemCard = (props) => (
 
 ItemCard.propTypes = {
   onClickFn: PropTypes.func.isRequired,
-  item: PropTypes.object.isRequired,
+  item: PropTypes.object.isRequired, // TODO: use shape aqui!!!
 };
 
 export default ItemCard;

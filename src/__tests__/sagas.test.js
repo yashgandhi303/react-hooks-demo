@@ -1,14 +1,19 @@
-// // import test from 'tape';
-// import { put, call, take, takeEvery } from 'redux-saga/effects';
+import { put, call, take, takeEvery } from 'redux-saga/effects';
 // import { delay } from 'redux-saga';
-// import Api from '../api';
-// import * as actionTypes from '../actions/actionTypes';
-// import { 
-//     watchFetchItemsInStock,
-//     fetchItemsInStock,
-//     watchAddItem,
-//     addItemToCart
-// } from '../sagas';
+import ApiMock from '../api';
+import * as actionTypes from '../actions/actionTypes';
+import {
+    watchFetchItemsInStock,
+    fetchItemsInStock,
+    watchAddItem,
+    addItemToCart
+} from '../sagas';
+
+jest.mock('../api', () => {
+  return {
+  //
+  }
+});
 
 // /** 
 // *  resources:
@@ -18,17 +23,16 @@
 // -**/
 
 // /* add items */
-// describe('watchFetchItemsInStock saga test', () => {
-//   const watchSaga = watchFetchItemsInStock();
-//   let output = null;
+describe('watchFetchItemsInStock saga test', () => {
+  const watchSaga = watchFetchItemsInStock();
+  let output = null;
 
-//   it('takes FETCH_CART_ITEMS action', () => {
-//     output = watchSaga.next().value;
-//     let expected = takeEvery(actionTypes.FETCH_CART_ITEMS, fetchItemsInStock);
-//     expect(output).toEqual(expected);
-//   });
-// });
-  
+  test('takes FETCH_CART_ITEMS action', () => {
+    output = watchSaga.next().value;
+    let expected = takeEvery(actionTypes.FETCH_CART_ITEMS, fetchItemsInStock);
+    expect(output).toEqual(expected);
+  });
+});
 
 // describe('fetchItemsInStock saga test', () => {
 //   const gen = fetchItemsInStock();

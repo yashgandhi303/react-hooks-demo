@@ -5,20 +5,23 @@ import Item from '../components/Item';
 
 describe("tests for Item component", () => {
 
+  const mockFn = jest.fn();
+
+  const mockItem = {
+    amt: 12,
+    description: "awesome taste",
+    id: "abc123",
+    name: "thing",
+    stock: 23,
+  };
+
+  const container = document.createElement('div');
+  ReactDOM.render(
+    <Item onClickFn={mockFn} item={mockItem} />,
+    container
+  );
+
   test("test Item component", () => {
-    // arange
-    const mockFn = jest.fn();
-
-    const mockItem = {
-      amt: 12,
-      id: "abc123",
-      name: "thing",
-      stock: 23,
-    };
-
-    const container = document.createElement('div');
-    // act
-    ReactDOM.render(<Item onClickFn={mockFn} item={mockItem} />, container);
     // console.log("container: ", container);
     
     // const h1 = container.querySelector('h1');
