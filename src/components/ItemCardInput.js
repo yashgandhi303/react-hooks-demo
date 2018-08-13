@@ -2,33 +2,31 @@ import React, { Component } from 'react';
 import { Form, Input } from 'semantic-ui-react';
 
 class ItemCardInput extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      amt: this.props.item.amt || 0,
-      initialAmt: this.props.item.amt || 0,
-    };
-    this.handleChange = this.handleChange.bind(this);
-  }
-  handleChange(e) {
+  state = {
+    amt: this.props.item.amt || 0,
+    initialAmt: this.props.item.amt || 0,
+  };
+
+  handleChange = ({ target: { value } }) => {
     this.setState({
-      amt: e.target.value,
+      amt: value,
     });
-  }
+  };
+
   render() {
     const { item, onClickFn } = this.props;
     const { amt, initialAmt } = this.state;
-
     return (
-      <Form onSubmit={() => onClickFn(item, amt, initialAmt)}>
+      <Form onSubmit={ () => onClickFn(item, amt, initialAmt) }>
         <Form.Field>
           <label>Amount</label>
           <Input
-            type='number'
+            onChange={this.handleChange}
+            name={`quantity`}
             min={0}
             max={item.stock}
+            type='number'
             value={amt}
-            onChange={this.handleChange}
           />
           <Form.Button
             disabled={amt === 0}
