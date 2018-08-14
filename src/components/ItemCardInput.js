@@ -19,12 +19,15 @@ class ItemCardInput extends Component {
     return (
       <Form onSubmit={ () => onClickFn(item, amt, initialAmt) }>
         <Form.Field>
-          <label>Amount</label>
+          <label htmlFor={`item-${ item.id }-quantity`}>
+            Amount
+          </label>
           <Input
-            onChange={this.handleChange}
-            name={`quantity`}
+            id={`item-${ item.id }-quantity`}
             min={0}
             max={item.stock}
+            name={`quantity`}
+            onChange={this.handleChange}
             type='number'
             value={amt}
           />
