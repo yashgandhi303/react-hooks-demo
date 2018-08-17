@@ -9,7 +9,7 @@ class ItemCardInput extends Component {
 
   handleChange = ({ target: { value } }) => {
     this.setState({
-      amt: value,
+      amt: parseInt(value, 10),
     });
   };
 
@@ -32,7 +32,7 @@ class ItemCardInput extends Component {
             value={amt}
           />
           <Form.Button
-            disabled={amt === 0}
+            disabled={ amt === 0 }
             content={window.location.pathname === "/cart" ? "Remove From Cart" : "Add to cart"}
           />
         </Form.Field>

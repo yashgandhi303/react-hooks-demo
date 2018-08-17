@@ -17,6 +17,7 @@ test scripts:
 
 
 ### TODOs:
+- bug with adding back to stock from items in cart...
 - use better patterns
 - write tests
 - more/better styling

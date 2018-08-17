@@ -1,5 +1,4 @@
 import React from 'react';
-// import ReactDOM from 'react-dom';
 import { cleanup, fireEvent, render } from 'react-testing-library';
 
 import ItemCardInput from '../components/ItemCardInput';
@@ -16,44 +15,61 @@ describe("tests for ItemCardInput component", () => {
     stock: 234,
   };
 
-  const { container, getByLabelText, getByText } = render(<ItemCardInput onClickFn={mockFn} item={mockItem} />);
-
+  const { container, getByLabelText } = render(<ItemCardInput onClickFn={mockFn} item={mockItem} />);
   const numInput = getByLabelText("Amount");
-  const form = container.querySelector('form');
+  // console.log(numInput);
+  // const form = container.querySelector('form');
   const submitButton = container.querySelector('button'); // getByText("Add to cart");
-  // const { quantity } = form.elements;
 
   test("mockFn gets called when button is clicked", () => {
-    fireEvent(
-      submitButton,
-      new MouseEvent('click', {
-        bubbles: true,
-        cancelable: true,
-      }),
-    );
+    fireEvent.click(submitButton);
     expect(mockFn).toHaveBeenCalledTimes(1);
+    expect(submitButton.type).toBe('submit');
+    expect(submitButton.disabled).toBe(false);
+  });
+
+  test("Button calls mockFn with correct data when clicked", () => {
+    fireEvent.click(submitButton);
     expect(mockFn).toHaveBeenCalledWith(
       mockItem,
       mockItem.amt,
       mockItem.amt
     );
-    expect(submitButton.type).toBe('submit');
   });
 
-  // test("Button calls mockFn with correct data when clicked", () => {
-  //   expect(parseInt(quantity.value, 10)).toBe(mockItem.amt);
-  //   form.dispatchEvent(new window.Event('submit'));
-  //   expect(mockFn).toHaveBeenCalledWith(
-  //     mockItem,
-  //     mockItem.amt,
-  //     mockItem.amt
-  //   );
-  // });
+  test("Button renders the correct verbiage based on current location - home page", () => {
+    expect(submitButton.textContent).toMatch("Add to cart");
+  });
 
-  // test.skip("Button renders the correct verbiage based on current location", () => {
-  //   const button = container.querySelectorAll('button');
-  //   console.log(button);
-  //   expect(button.textContent).toMatch("asdfasf");
-  // });
+  test("Button renders the correct verbiage based on current location - cart page", () => {
+    Object.defineProperty(window.location, 'pathname', {
+      writable: true,
+      value: '/cart',
+    });
+    const { container } = render(<ItemCardInput onClickFn={mockFn} item={mockItem} />);
+    const cartSubmitButton = container.querySelector('button');
+    expect(cartSubmitButton.textContent).toMatch("Remove From Cart");
+  });
+
+  test("Amount input changes are reflected in the UI", () => {
+
+
+    expect(submitButton.textContent).toMatch("Add to cart");
+
+  });
+
+  test("Submit button is disabled if the amount is 0", () => {
+    const mockFn = jest.fn();
+    const mockItem = {
+      amt: 0,
+      id: "abc123",
+      image: "",
+      name: "thing",
+      stock: 234,
+    };
+    const { container } = render(<ItemCardInput onClickFn={mockFn} item={mockItem} />);
+    const submitButton = container.querySelector('button');
+    expect(submitButton.disabled).toBe(true);
+  });
 
 });
