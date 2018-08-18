@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { Button, Container, Dimmer, Divider, Flag, Grid, Header, Loader } from 'semantic-ui-react';
+import { Button, Container, Divider, Flag, Grid, Header, Loader } from 'semantic-ui-react';
 import ItemCard from '../components/ItemCard';
 
 class Home extends React.Component {
@@ -22,14 +22,14 @@ class Home extends React.Component {
               location={"home"}
             />
           </Grid.Column>
-          )
-        )
+        ))
       }
     </Grid>
   );
 
   render() {
-    const { cartItems, storeStock } = this.props;
+    const { cartItems, loading, storeStock } = this.props;
+    if (loading) return <Loader content='Loading' />;
     return (
       <Container className='home-div'>
         <Header as='h1'>
@@ -39,7 +39,7 @@ class Home extends React.Component {
         </Header>
         
         {
-          cartItems.cartItemIds.length > 0 && (
+          cartItems.cartItemIds && cartItems.cartItemIds.length > 0 && (
             <Button
               as={Link}
               to={"/cart"}
@@ -55,14 +55,8 @@ class Home extends React.Component {
 
         <Header as='h4'>Store Stock:</Header>
 
-        { this.props.loading && (
-            <Dimmer active>
-              <Loader content='Loading' />
-            </Dimmer>
-          )
-        }
-
-        { (storeStock.stockItems && storeStock.stockItems.length) ?
+        {
+          storeStock.stockItems && storeStock.stockItems.length ?
             this.renderItems() :
             <p>No items in stock</p>
         }
