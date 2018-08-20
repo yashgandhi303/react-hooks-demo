@@ -83,4 +83,9 @@ describe("tests for ItemCardInput component", () => {
     expect(submitButton.disabled).toBe(false);
   });
 
+  test("snapshot test", () => {
+    const { container } = render(<ItemCardInput onClickFn={mockFn} item={mockItem} />);
+    expect(container.firstChild).toMatchSnapshot();
+  });
+
 });
