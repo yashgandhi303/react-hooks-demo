@@ -1,24 +1,49 @@
 import React from 'react';
-// import renderer from 'react-test-renderer';
-// import HomeContainer from '../containers/HomeContainer';
-// import store from '../store';
+import { cleanup, fireEvent, render } from 'react-testing-library';
+import { createStore } from 'redux';
+import { Provider, connect } from 'react-redux';
+import reducer from '../reducers/root_reducer';
 
-// it('renders without crashing', () => {
-//   const div = document.createElement('div');
-//   ReactDOM.render(<Home />, div);
-// });
+import Home from '../components/Home';
+// import HomeContainer from '../containers/HomeContainer';
+
+afterEach(cleanup);
+
+function renderWithRedux(
+  ui,
+  { initialState, store = createStore(reducer, initialState) } = {},
+) {
+  return {
+    ...render(<Provider store={store}>{ ui }</Provider>),
+    store,
+  }
+}
 
 describe.skip('All tests in this describe will be skipped', () => {
+  const mockProps = {
+    storeStock: {
+      stockItems: [
+        {
+          id: "id-1234",
+          stock: 172,
+          name: "fake item name",
+        }
+      ],
+    },
+    addItemToCartFn: () => jest.fn(),
+    getItemsInStock: () => jest.fn(),
+  };
 
-  it('Home: sanity check', () => {
+  const { container, getByLabelText } = renderWithRedux(<Home {...mockProps} />);
+  // const asdf = getByLabelText("Amount");
+  const h1 = container.querySelector('h1'); // getByText("Add to cart");
+  console.log("asdf: ", h1);
+  test('renders welcome message', () => {
+    expect(h1.textContent).toMatch("About this project:");
     expect(true).toEqual(true);
+    console.log("asdfas:: ", container);
+
   });
-    
-  // it('renders welcome message', () => {
-  //   const wrapper = shallow(<HomeContainer store={store} />).dive();
-  //   const welcome = <h1 id="welcome">Welcome</h1>;
-  //   expect(wrapper.contains(welcome)).toEqual(true);
-  // });
 
   // test('HomeContainer snapshot', () => {
   //   const component = renderer.create(<HomeContainer store={store} />, );
