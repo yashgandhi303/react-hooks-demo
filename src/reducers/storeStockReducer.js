@@ -1,9 +1,9 @@
 import {
-  FETCH_ITEMS_IN_STOCK, 
-  FETCH_CART_ITEMS,
   ADD_ITEM_TO_CART,
-  REMOVE_FROM_CART,
   BUY_ITEMS,
+  FETCH_CART_ITEMS,
+  FETCH_ITEMS_IN_STOCK, 
+  REMOVE_FROM_CART,
 } from '../actions/actionTypes';
 
 const initialState =  {

@@ -67,6 +67,8 @@ class Home extends React.Component {
 }
 
 Home.propTypes = {
+  addItemToCartFn: PropTypes.func.isRequired,
+  getItemsInStock: PropTypes.func.isRequired,
   storeStock: PropTypes.shape({
     stockItems: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.string.isRequired,
@@ -74,8 +76,6 @@ Home.propTypes = {
       name: PropTypes.string.isRequired,
     }))
   }).isRequired,
-  addItemToCartFn: PropTypes.func.isRequired,
-  getItemsInStock: PropTypes.func.isRequired,
 };
 
 export default Home;
