@@ -46,7 +46,7 @@ const Cart = ({ cartItems, buyAll, remove }) => (
 
 Cart.propTypes = {
   buyAll: PropTypes.func.isRequired,
-  remove: PropTypes.func.isRequired
+  remove: PropTypes.func.isRequired,
 };
 
 export default Cart;

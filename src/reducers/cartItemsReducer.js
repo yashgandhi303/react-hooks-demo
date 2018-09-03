@@ -57,7 +57,7 @@ const cartItemStock = (state = {}, action) => {
     default:
       return state;
   }
-}
+};
 
 const cartItemIds = (state = [], action) => {
   switch(action.type) {
@@ -74,11 +74,11 @@ const cartItemIds = (state = [], action) => {
     default:
       return state;
   }
-}
+};
 
 const cartItems = combineReducers({
   cartItemStock,
   cartItemIds,
-})
+});
 
 export default cartItems;

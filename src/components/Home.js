@@ -61,7 +61,6 @@ class Home extends React.Component {
             <p>No items in stock</p>
         }
 
-        {/* <Footer /> */}
       </Container>
     )
   }

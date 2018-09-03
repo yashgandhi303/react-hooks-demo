@@ -9,7 +9,7 @@ import {
 const initialState =  {
    isFetching: false,
    stockItems: [],
- }
+ };
 
 const storeStock = (state = initialState, action) => {
   switch (action.type) {
