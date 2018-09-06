@@ -20,8 +20,7 @@ const StyledButton = styled.button`
 
 const Item = (props) => (
   <div className="item-div" style={{ border: "1px solid black" }}>
-    {/* ant design component here nb??? */}
-    <StyledDiv> 
+    <StyledDiv>
       Item: {props.item.name}
       <br/>
       Stock: {props.item.stock}
@@ -47,7 +46,7 @@ const Item = (props) => (
         {/* TODO: need to get the value of the input for the onclick function below (have to use state???) */}
         <input type="number" min={0} max={props.item.amt} defaultValue={props.item.amt} />
 
-        <StyledButton 
+        <StyledButton
           onClick={() => props.onClickFn(props.item, props.item.amt)}
         >
           Remove Item From Cart

@@ -1,23 +1,23 @@
-import React from 'react';
-import Adapter from 'enzyme-adapter-react-16';
-Enzyme.configure({ adapter: new Adapter() })
-import Enzyme, { shallow, render, mount } from 'enzyme';
-import renderer from 'react-test-renderer';
-
 // import React from 'react';
-// import ReactDOM from 'react-dom';
-// import App from './App';
+// import Adapter from 'enzyme-adapter-react-16';
+// Enzyme.configure({ adapter: new Adapter() })
+// import Enzyme, { shallow, render, mount } from 'enzyme';
+// import renderer from 'react-test-renderer';
 
-// it('renders without crashing', () => {
-//   const div = document.createElement('div');
-//   ReactDOM.render(<App />, div);
-// });
+// // import React from 'react';
+// // import ReactDOM from 'react-dom';
+// // import App from './App';
 
-// import React from 'react';
-// import { shallow } from 'enzyme';
-import App from '../App';
+// // it('renders without crashing', () => {
+// //   const div = document.createElement('div');
+// //   ReactDOM.render(<App />, div);
+// // });
 
-it('sanity check', () => {
+// // import React from 'react';
+// // import { shallow } from 'enzyme';
+// import App from '../App';
+
+test.skip('sanity check', () => {
   // const wrapper = shallow(<App />);
   expect(true).toEqual(true);
 });

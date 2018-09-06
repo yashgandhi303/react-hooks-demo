@@ -1,42 +1,32 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { Container, Divider, Grid, Header, Flag, Button, Dimmer, Loader } from 'semantic-ui-react';
+import { Button, Container, Dimmer, Divider, Flag, Grid, Header, Loader } from 'semantic-ui-react';
 import ItemCard from '../components/ItemCard';
 
 class Home extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      nothing: true,
-      uiState: 'maybe',
-    }
-  }
-
   componentDidMount() {
-    // call to fetch stockItems for redux state
+    // call to fetch stockItems from firebase
     this.props.getItemsInStock();
   }
 
-  renderItems() {
-    return (
-      <Grid divided container stackable>
-        {
-          this.props.storeStock.stockItems.map((item, index) => (
-            <Grid.Column width={4} key={index}>
-              <ItemCard
-                onClickFn={this.props.addItemToCartFn}
-                item={item}
-                key={item.id}
-                location={"home"}
-              />
-            </Grid.Column>
-            )
+  renderItems = () => (
+    <Grid divided container stackable>
+      {
+        this.props.storeStock.stockItems.map((item, index) => (
+          <Grid.Column width={4} key={index}>
+            <ItemCard
+              onClickFn={this.props.addItemToCartFn}
+              item={item}
+              key={item.id}
+              location={"home"}
+            />
+          </Grid.Column>
           )
-        }
-      </Grid>
-    );
-  }
+        )
+      }
+    </Grid>
+  );
 
   render() {
     const { cartItems, storeStock } = this.props;
@@ -66,13 +56,16 @@ class Home extends React.Component {
         <Header as='h4'>Store Stock:</Header>
 
         { this.props.loading && (
-              <Dimmer active>
-                <Loader content='Loading' />
-              </Dimmer>
-            )
-          }
+            <Dimmer active>
+              <Loader content='Loading' />
+            </Dimmer>
+          )
+        }
 
-        { (storeStock.stockItems && storeStock.stockItems.length && this.renderItems()) || <p>No items in stock</p> }
+        { (storeStock.stockItems && storeStock.stockItems.length) ?
+            this.renderItems() :
+            <p>No items in stock</p>
+        }
 
         {/* <Footer /> */}
       </Container>
