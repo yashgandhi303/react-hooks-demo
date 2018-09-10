@@ -1,11 +1,10 @@
-
 import { connect } from 'react-redux';
 import Home from '../components/Home';
 
-const mapStateToProps = (state /*, ownProps */) => ({
+const mapStateToProps = (state) => ({
+  cartItems: state.cartItems,
   loading: state.storeStock.isFetching,
   storeStock: state.storeStock,
-  cartItems: state.cartItems,
 });
 
 const mapDispatchToProps = (dispatch) => ({

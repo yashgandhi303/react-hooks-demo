@@ -5,7 +5,6 @@ import {
   REMOVE_FROM_CART,
   BUY_ITEMS,
   UPDATE_ITEM_AMT,
-  // ADD_TO_CART,
 } from '../actions/actionTypes';
 
 const cartItemStock = (state = {}, action) => {
@@ -44,10 +43,7 @@ const cartItemStock = (state = {}, action) => {
         }
       };
     case REMOVE_FROM_CART:
-      const cartItems = state;
-      const id = action.id;
-      const newState = omit(cartItems, id);
-      
+      const newState = omit(state, action.id);
       return {
         ...newState
       }
@@ -57,7 +53,7 @@ const cartItemStock = (state = {}, action) => {
     default:
       return state;
   }
-}
+};
 
 const cartItemIds = (state = [], action) => {
   switch(action.type) {
@@ -74,11 +70,11 @@ const cartItemIds = (state = [], action) => {
     default:
       return state;
   }
-}
+};
 
 const cartItems = combineReducers({
   cartItemStock,
   cartItemIds,
-})
+});
 
 export default cartItems;

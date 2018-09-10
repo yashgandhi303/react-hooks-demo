@@ -13,5 +13,6 @@ module.exports = {
       lines: 20,
     },
   },
+  testURL: "http://test.com/"
   // projects: ['./client', './server'],
-}
+};

@@ -18,6 +18,6 @@ const ItemStats = () => (
       </Statistic>
     </Statistic.Group>
   </Segment>
-)
+);
 
 export default ItemStats;

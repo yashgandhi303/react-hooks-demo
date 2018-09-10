@@ -3,10 +3,6 @@ import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { injectGlobal } from 'styled-components';
 
-// import configureStore from './store';
-// import { logout } from './auth';
-// import firebaseAuth from './store';
-
 import HomeContainer from './containers/HomeContainer';
 import CartContainer from './containers/CartContainer';
 
@@ -19,22 +15,6 @@ import AdminCPContainer from './containers/AdminCPContainer';
 import './App.css';
 
 import store from './store';
-
-// if (process.env.NODE_ENV !== 'production') {
-//   const { whyDidYouUpdate } = require('why-did-you-update');
-//   whyDidYouUpdate(React);
-// }
-
-// function PrivateRoute ({ component: Component, authed, ...rest }) {
-//   return (
-//     <Route
-//       {...rest}
-//       render={(props) => authed === true
-//         ? <Component {...props} />
-//         : <Redirect to={{ pathname: '/login', state: { from: props.location }}} />}
-//     />
-//   )
-// }
 
 function PublicRoute ({ component: Component, authed, ...rest }) {
   return (
@@ -52,25 +32,7 @@ class App extends React.Component {
   state = {
     authed: false,
     loading: false,
-  }
-  // componentDidMount () {
-  //   this.removeListener = firebaseAuth().onAuthStateChanged((user) => {
-  //     if (user) {
-  //       this.setState({
-  //         authed: true,
-  //         loading: false,
-  //       })
-  //     } else {
-  //       this.setState({
-  //         authed: false,
-  //         loading: false
-  //       })
-  //     }
-  //   })
-  // }
-  // componentWillUnmount () {
-  //   this.removeListener();
-  // }
+  };
 
   render() {
     const { authed } = this.state;

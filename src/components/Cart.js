@@ -10,13 +10,11 @@ const Cart = ({ cartItems, buyAll, remove }) => (
 
     <Header as="h4">Item count: {cartItems.length}</Header>
 
-    { console.log('Cart props: ', cartItems) }
-
     <Grid>
       <Grid.Column width={6}>
         {
-            cartItems.length > 0 ? (
-              cartItems.map((item) => (
+          cartItems.length > 0 ? (
+            cartItems.map((item) => (
               <ItemCard
                 onClickFn={remove}
                 item={item}
@@ -37,8 +35,9 @@ const Cart = ({ cartItems, buyAll, remove }) => (
       </Grid.Column>
       
       <Grid.Column width={8} textAlign={"center"}>
-        {/* button to buy items and make cart go empty */}
-        <Button onClick={buyAll} disabled={!cartItems.length} secondary>Buy all</Button>
+        <Button onClick={buyAll} disabled={!cartItems.length} secondary>
+          Buy all
+        </Button>
       </Grid.Column>
     </Grid>
   </Container>
@@ -46,7 +45,7 @@ const Cart = ({ cartItems, buyAll, remove }) => (
 
 Cart.propTypes = {
   buyAll: PropTypes.func.isRequired,
-  remove: PropTypes.func.isRequired
+  remove: PropTypes.func.isRequired,
 };
 
 export default Cart;
