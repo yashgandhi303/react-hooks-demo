@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
+import { render } from 'react-testing-library';
 import About from '../components/About';
 
 describe('test About component', () => {
@@ -21,6 +21,11 @@ describe('test About component', () => {
   test("there are 11 links", () => {
     const a = container.querySelectorAll('a');
     expect(a).toHaveLength(11);
+  });
+
+  test("snapshot test", () => {
+    const { container } = render(<About />);
+    expect(container.firstChild).toMatchSnapshot();
   });
 
 });

@@ -108,7 +108,6 @@ export function* removeFromCart(action) {
   try {
     const { item, amt, initialAmt } = action;
     const { id, name, stock } = item;
-    debugger;
     const newStockAmt = stock + Number(amt);
     // TODO: need check to make sure stock doesn't go negative (will throw error so it catches below and dispatches)
     

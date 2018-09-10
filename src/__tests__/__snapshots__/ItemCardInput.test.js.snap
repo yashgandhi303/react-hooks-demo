@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`tests for ItemCardInput component snapshot test 1`] = `
+<form
+  class="ui form"
+>
+  <div
+    class="field"
+  >
+    <label
+      for="item-abc123-quantity"
+    >
+      Amount
+    </label>
+    <div
+      class="ui input"
+    >
+      <input
+        type="number"
+        min="0"
+        max="234"
+        id="item-abc123-quantity"
+        name="quantity"
+        value="12"
+      />
+    </div>
+    <div
+      class="field"
+    >
+      <button
+        class="ui button"
+        role="button"
+      >
+        Remove From Cart
+      </button>
+    </div>
+  </div>
+</form>
+`;

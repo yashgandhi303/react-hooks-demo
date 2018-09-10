@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
 import AdminCP from '../components/AdminCP';
 
-const mapStateToProps = (state /*, ownProps*/) => ({
+const mapStateToProps = state => ({
   stock: state.storeStock.stockItems
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   getItemsInStock: () => {
     dispatch({ type: 'FETCH_CART_ITEMS' });
   }

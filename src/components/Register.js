@@ -1,21 +1,22 @@
-// will be where you can update item quantity in stock, and add new items to stock
-
 import React, { Component } from 'react';
-import { auth } from '../auth';
+// import { auth } from '../auth';
 
 function setErrorMsg(error) {
   return {
-    registerError: error.message
+    registerError: error.message,
   }
 }
 
-export default class Register extends Component {
-  state = { registerError: null }
+class Register extends Component {
+  state = { registerError: null };
+
   handleSubmit = (e) => {
-    e.preventDefault()
-    auth(this.email.value, this.pw.value)
-      .catch(e => this.setState(setErrorMsg(e)))
-  }
+    alert("thanks for registering");
+    e.preventDefault();
+    // auth(this.email.value, this.pw.value)
+    //   .catch(e => this.setState(setErrorMsg(e)))
+  };
+
   render () {
     return (
       <div className="col-sm-6 col-sm-offset-3">
@@ -43,3 +44,5 @@ export default class Register extends Component {
     )
   }
 }
+
+export default Register;
