@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 // import { auth } from '../auth';
 
-function setErrorMsg(error) {
-  return {
-    registerError: error.message,
-  }
-}
+// function setErrorMsg(error) {
+//   return {
+//     registerError: error.message,
+//   }
+// }
 
 class Register extends Component {
   state = { registerError: null };

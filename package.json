@@ -2,17 +2,16 @@
   "name": "carrinho",
   "version": "0.6.0",
   "author": "nick bouldien",
-  "repository": "",
+  "repository": "https://github.com/nickbouldien/carrinho",
   "private": true,
   "scripts": {
-    "start": "node scripts/start.js",
     "build": "node scripts/build.js",
+    "start": "node scripts/start.js",
     "test": "node scripts/test.js --env=jsdom",
     "test:cov": "jest --coverage",
     "test:cov-report": "open coverage/lcov-report/index.html",
     "test:watch": "jest --env=jsdom --watch",
-    "test:jest": "jest --env=jsdom",
-    "testsagas": "tape ./src/__tests__/sagas.test.js"
+    "test:jest": "jest --env=jsdom"
   },
   "dependencies": {
     "autoprefixer": "7.1.6",
