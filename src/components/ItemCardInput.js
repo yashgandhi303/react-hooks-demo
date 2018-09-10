@@ -9,7 +9,7 @@ class ItemCardInput extends Component {
 
   handleChange = ({ target: { value } }) => {
     this.setState({
-      amt: value,
+      amt: parseInt(value, 10),
     });
   };
 
@@ -19,17 +19,20 @@ class ItemCardInput extends Component {
     return (
       <Form onSubmit={ () => onClickFn(item, amt, initialAmt) }>
         <Form.Field>
-          <label>Amount</label>
+          <label htmlFor={`item-${ item.id }-quantity`}>
+            Amount
+          </label>
           <Input
-            onChange={this.handleChange}
-            name={`quantity`}
+            id={`item-${ item.id }-quantity`}
             min={0}
             max={item.stock}
+            name={`quantity`}
+            onChange={this.handleChange}
             type='number'
             value={amt}
           />
           <Form.Button
-            disabled={amt === 0}
+            disabled={ amt === 0 }
             content={window.location.pathname === "/cart" ? "Remove From Cart" : "Add to cart"}
           />
         </Form.Field>

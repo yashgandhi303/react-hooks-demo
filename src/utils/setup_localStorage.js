@@ -1,5 +1,5 @@
 if (!window.localStorage) {
-  window.localStorage = {}
+  window.localStorage = {};
   Object.assign(window.localStorage, {
     removeItem: function removeItem(key) {
       delete this[key]

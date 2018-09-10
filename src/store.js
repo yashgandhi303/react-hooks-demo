@@ -32,12 +32,11 @@ const store = createStore(
   )
 );
 
-//   // store.subscribe(throttle(() => {
-//   //   // console.log('current state (store.js): ', store.getState());
-//   //   saveState({
-//   //    randomState
-//   //   });
-//   // }), 1000);
+// store.subscribe(throttle(() => {
+//   saveState({
+//    randomState
+//   });
+// }), 1000);
 
 sagaMiddleware.run(rootSaga);
 

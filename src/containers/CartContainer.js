@@ -4,7 +4,6 @@ import Cart from '../components/Cart';
 // TODO: refactor this
 function getArrayOfCartItems(cartItems, ids) {
   const arr = [];
-  console.log('getArrayOfCartItems ', cartItems, ids);
   for (let item in cartItems) {
     if (ids.includes(item)) {
       arr.push(cartItems[item]);
@@ -13,7 +12,7 @@ function getArrayOfCartItems(cartItems, ids) {
   return arr;
 }
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = (state) => ({
   cartItems: getArrayOfCartItems(state.cartItems.cartItemStock, state.cartItems.cartItemIds)
 });
 
@@ -30,6 +29,5 @@ const CartContainer = connect(
   mapStateToProps,
   mapDispatchToProps
 )(Cart);
-
 
 export default CartContainer;

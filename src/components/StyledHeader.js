@@ -1,13 +1,22 @@
 import React, { Component } from 'react';
-import { Menu, Icon } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
+import { Button, Icon, Menu } from 'semantic-ui-react';
 
-export default class StyledHeader extends Component {
-  state = { activeItem: "" }
+class StyledHeader extends Component {
+  static defaultProps = {
+    authed: false,
+  };
+
+  state = { activeItem: "" };
 
   handleItemClick = (e, { name }) => (
     this.setState({ activeItem: name })
   );
+
+  logout = () => {
+    // TODO: implement
+    console.log("logging out");
+  };
 
   render() {
     const { activeItem } = this.state;
@@ -55,24 +64,23 @@ export default class StyledHeader extends Component {
             Cart <Icon name={'cart'} size={"large"} color={"blue"} />
           </Menu.Item>
 
-          {/* { this.props.authed ?
+          { this.props.authed ? // TODO: implement
             <Menu.Item className='item'>
               <Button as={Link} to="login">Log in</Button>
             </Menu.Item>
-            : 
+            :
             <Menu.Item>
               <Button as={Link} to="register" primary>Sign Up</Button>
             </Menu.Item>
           }
           
-          { this.props.authed ?
+          { this.props.authed ? // TODO: implement
             <Menu.Item className='item'>
-              <Button onClick={logout} to="logout">Logout</Button>
+              <Button onClick={this.logout} to="logout">Logout</Button>
             </Menu.Item>
-            : 
+            :
             null
-          } */}
-
+          }
 
         </Menu.Menu>
       </Menu>
@@ -80,36 +88,4 @@ export default class StyledHeader extends Component {
   }
 }
 
-
-// {this.state.authed
-//   ? <button
-//       style={{border: 'none', background: 'transparent'}}
-//       onClick={() => {
-//         logout()
-//       }}
-//       className="navbar-brand">Logout</button>
-//   : <span>
-//       <Link to="/login" className="navbar-brand">Login</Link>
-//       <Link to="/register" className="navbar-brand">Register</Link>
-//     </span>}
-
-// import styled /*, { css } */ from 'styled-components';
-
-// const Header = () => (
-//   <div className="header-div">
-//     <Link to="/home">Home</Link>
-//     <Link to="/about">About</Link>
-//   </div>
-// );
-
-// const StyledHeader = styled(Header)`
-//   ${'' /* border-radius: 3px; */}
-//   ${'' /* padding: 0.25em 1em; */}
-//   ${'' /* margin: 0 1em; */}
-//   ${'' /* background: transparent; */}
-//   background-color: black;
-//     ${'' /* color: green;
-//   border: 2px solid green; */}
-// `;
-
-// export default StyledHeader;
+export default StyledHeader;

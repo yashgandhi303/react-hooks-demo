@@ -8,11 +8,11 @@ class AddItemForm extends Component {
     name: '',
     stock: 0,
     description: '',
-  }
+  };
 
   handleChange = (e /*, { name, value }*/) => {
     this.setState({[e.target.name]: e.target.value});
-  }
+  };
 
   handleSubmit = () => {
     const item = this.state;
@@ -21,7 +21,7 @@ class AddItemForm extends Component {
     if (item.stock === 0) return; // need to display something here
     this.props.addItemToStock(item);
     this.setState({ name: '', stock: 0, description: ''});
-  }
+  };
 
   render() {
     const { name, stock, description } = this.state;

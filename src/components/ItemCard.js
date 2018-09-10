@@ -39,7 +39,12 @@ const ItemCard = ({ item, onClickFn }) => (
 
 ItemCard.propTypes = {
   onClickFn: PropTypes.func.isRequired,
-  item: PropTypes.object.isRequired, // TODO: use shape aqui!!!
+  item: PropTypes.shape({
+    amt: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    stock: PropTypes.number.isRequired,
+  }),
 };
 
 export default ItemCard;
