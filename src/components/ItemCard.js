@@ -6,11 +6,14 @@ import ItemCardInput from './ItemCardInput';
 const ItemCard = ({ item, onClickFn }) => (
   <Card>
     <Image
-      src={item.image}
-      alt={`image for ${item.name}`}
-      size='tiny'
+      alt={`${item.name}`}
       centered={true}
+      height={"100"}
+      // size='tiny'
+      src={item.image}
+      width={"100"}
     />
+
     <Card.Content>
       <Card.Header>{item.name}</Card.Header>
       <Rating
@@ -40,7 +43,7 @@ const ItemCard = ({ item, onClickFn }) => (
 ItemCard.propTypes = {
   onClickFn: PropTypes.func.isRequired,
   item: PropTypes.shape({
-    amt: PropTypes.number.isRequired,
+    amt: PropTypes.number,
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     stock: PropTypes.number.isRequired,
