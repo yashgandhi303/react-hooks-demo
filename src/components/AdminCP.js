@@ -5,7 +5,6 @@ import { Container, Header /*, Divider */ } from 'semantic-ui-react';
 // import AddItemForm from '../components/AddItemForm';
 
 class AdminCP extends Component {
-  
   componentDidMount() {
     // call to fetch stockItems for redux state
     this.props.getItemsInStock();
