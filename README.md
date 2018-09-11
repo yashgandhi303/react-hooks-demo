@@ -18,6 +18,7 @@ test scripts:
 ### TODOs:
 - bug with adding back to stock from items in cart...
 - use better patterns
+- use localStorage to persist data
 - write tests
 - more/better styling
 - fix image issues

@@ -7,7 +7,6 @@ import ItemCard from '../components/ItemCard';
 class Home extends React.Component {
   componentDidMount() {
     // call to fetch stockItems from firebase
-    console.log("calling aqui");
     this.props.getItemsInStock();
   }
 

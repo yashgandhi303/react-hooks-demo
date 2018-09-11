@@ -3,16 +3,13 @@ import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { injectGlobal } from 'styled-components';
 
-import HomeContainer from './containers/HomeContainer';
-import CartContainer from './containers/CartContainer';
-
-import Register from './components/Register';
-import Login from './components/Login';
-import About from './components/About';
-import StyledHeader from './components/StyledHeader';
 import AdminCPContainer from './containers/AdminCPContainer';
-
-import './App.css';
+import CartContainer from './containers/CartContainer';
+import HomeContainer from './containers/HomeContainer';
+import About from './components/About';
+import Login from './components/Login';
+import Register from './components/Register';
+import StyledHeader from './components/StyledHeader';
 
 import store from './store';
 
