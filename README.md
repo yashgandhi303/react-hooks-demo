@@ -29,4 +29,7 @@ test scripts:
 - have item detail page
 - more refactoring
 - use flow
-- add demo gif
+
+
+### Quick Demo:
+![carrinho quick demo](https://github.com/nickbouldien/carrinho/blob/master/carrinho_1.gif)
