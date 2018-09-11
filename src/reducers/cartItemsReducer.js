@@ -16,9 +16,11 @@ const cartItemStock = (state = {}, action) => {
         return {
           ...state,
           [action.id]: {
-            id: action.id,
-            name: action.name,
             amt: newCartAmt,
+            description: action.description,
+            id: action.id,
+            image: action.image,
+            name: action.name,
             stock: action.stock
           }
         }
@@ -26,9 +28,11 @@ const cartItemStock = (state = {}, action) => {
       return {
         ...state,
         [action.id]: {
-          id: action.id,
-          name: action.name,
           amt: action.amt,
+          description: action.description,
+          id: action.id,
+          image: action.image,
+          name: action.name,
           stock: action.stock
         }
       };
@@ -46,7 +50,7 @@ const cartItemStock = (state = {}, action) => {
       const newState = omit(state, action.id);
       return {
         ...newState
-      }
+      };
     case BUY_ITEMS:
       // returns default state (after purchasing)
       return {};

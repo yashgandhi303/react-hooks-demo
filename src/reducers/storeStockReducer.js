@@ -26,11 +26,11 @@ const storeStock = (state = initialState, action) => {
       };
     case REMOVE_FROM_CART:
     case ADD_ITEM_TO_CART:
+      const addedItem = state.stockItems.find(item => item.id === action.id);
       const updatedItem = {
-          id: action.id,
-          name: action.name,
-          stock: action.stock,
-        };
+        ...addedItem,
+        stock: action.stock,
+      };
       return {
         ...state,
         stockItems: [

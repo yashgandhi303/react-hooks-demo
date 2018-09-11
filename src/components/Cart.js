@@ -20,21 +20,21 @@ const Cart = ({ cartItems, buyAll, remove }) => (
                 item={item}
                 id={item.id}
                 key={item.id}
-                location={"cart"}
+                location={'cart'}
               />
             ))
           ) : (
             <Button
               as={Link}
-              to={"/"}
+              to={'/'}
             >
               Go buy stuff
-            </Button> 
+            </Button>
           )
         }
       </Grid.Column>
-      
-      <Grid.Column width={8} textAlign={"center"}>
+
+      <Grid.Column width={8} textAlign={'center'}>
         <Button onClick={buyAll} disabled={!cartItems.length} secondary>
           Buy all
         </Button>
@@ -44,6 +44,7 @@ const Cart = ({ cartItems, buyAll, remove }) => (
 );
 
 Cart.propTypes = {
+  cartItems: PropTypes.array.isRequired,
   buyAll: PropTypes.func.isRequired,
   remove: PropTypes.func.isRequired,
 };
