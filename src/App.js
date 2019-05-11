@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { injectGlobal } from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 
 import AdminCPContainer from './containers/AdminCPContainer';
 import CartContainer from './containers/CartContainer';
@@ -63,7 +63,7 @@ class App extends React.Component {
   }
 }
 
-injectGlobal`
+createGlobalStyle`
   body {
     background-color: ghostwhite;
     ${'' /* font-size: 10px; */}
