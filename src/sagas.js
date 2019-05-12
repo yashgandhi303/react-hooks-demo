@@ -70,7 +70,6 @@ export function* fetchItemsInStock() {
 
 export function* addItemToCart(action) {
   try {
-    console.log("addItemToCart: ", action);
     const { description, id, image, name, stock } = action.item;
 
     const amt = Number(action.amt);
