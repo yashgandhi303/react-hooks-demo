@@ -14,7 +14,7 @@ class StyledHeader extends Component {
   );
 
   logout = () => {
-    // TODO: implement
+    // TODO: implement with firebase auth
     console.log("logging out");
   };
 
@@ -66,20 +66,17 @@ class StyledHeader extends Component {
 
           { this.props.authed ? // TODO: implement
             <Menu.Item className='item'>
-              <Button as={Link} to="login">Log in</Button>
-            </Menu.Item>
-            :
-            <Menu.Item>
-              <Button as={Link} to="register" primary>Sign Up</Button>
-            </Menu.Item>
-          }
-          
-          { this.props.authed ? // TODO: implement
-            <Menu.Item className='item'>
               <Button onClick={this.logout} to="logout">Logout</Button>
             </Menu.Item>
             :
-            null
+            <>
+              <Menu.Item>
+                <Button as={Link} to="register" primary>Sign Up</Button>
+              </Menu.Item>
+              <Menu.Item className='item'>
+              <Button as={Link} to="login">Log in</Button>
+              </Menu.Item>
+            </>
           }
 
         </Menu.Menu>

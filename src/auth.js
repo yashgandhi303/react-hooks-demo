@@ -13,7 +13,7 @@ export function login (email, pw) {
   return firebaseAuth().signInWithEmailAndPassword(email, pw);
 }
 
-export function resetPassword (email) {
+export function sendPasswordResetEmail (email) {
   return firebaseAuth().sendPasswordResetEmail(email);
 }
 

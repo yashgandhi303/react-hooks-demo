@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { login, resetPassword } from '../auth';
+import { Container } from 'semantic-ui-react';
+import { login, sendPasswordResetEmail } from '../auth';
 
 function setErrorMsg(error) {
   return {
@@ -7,23 +8,23 @@ function setErrorMsg(error) {
   }
 }
 
-export default class Login extends Component {
+class Login extends Component {
   state = { loginMessage: null };
   handleSubmit = (e) => {
     e.preventDefault();
     login(this.email.value, this.pw.value)
-      .catch((error) => {
+      .catch(() => {
           this.setState(setErrorMsg('Invalid username/password.'))
         })
   };
   resetPassword = () => {
-    resetPassword(this.email.value)
+    sendPasswordResetEmail(this.email.value)
       .then(() => this.setState(setErrorMsg(`Password reset email sent to ${this.email.value}.`)))
-      .catch((error) => this.setState(setErrorMsg(`Email address not found.`)))
+      .catch(() => this.setState(setErrorMsg(`Email address not found.`)))
   };
   render () {
     return (
-      <div className="col-sm-6 col-sm-offset-3">
+      <Container className="col-sm-6 col-sm-offset-3">
         <h1> Login </h1>
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
@@ -44,7 +45,9 @@ export default class Login extends Component {
           }
           <button type="submit" className="btn btn-primary">Login</button>
         </form>
-      </div>
+      </Container>
     )
   }
 }
+
+export default Login;
