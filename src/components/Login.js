@@ -28,12 +28,25 @@ class Login extends Component {
         <h1> Login </h1>
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
-            <label>Email</label>
-            <input className="form-control" ref={(email) => this.email = email} placeholder="Email"/>
+            <label htmlFor={"email"}>Email</label>
+            <input
+              name="email"
+              id="email"
+              className="form-control"
+              ref={(email) => this.email = email}
+              placeholder="Email"
+            />
           </div>
           <div className="form-group">
-            <label>Password</label>
-            <input type="password" className="form-control" placeholder="Password" ref={(pw) => this.pw = pw} />
+            <label htmlFor={"password"}>Password</label>
+            <input
+              name="password"
+              id="password"
+              type="password"
+              className="form-control"
+              placeholder="Password"
+              ref={(pw) => this.pw = pw}
+            />
           </div>
           {
             this.state.loginMessage &&
