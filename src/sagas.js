@@ -150,7 +150,8 @@ export function* buyAllItems() {
 export function* addItemToStock(action) {
   try {
     const { item } = action;
-  
+
+    // eslint-disable-next-line no-unused-vars
     const addedItem = yield call(Api.addItemToStock, item);
     // yield put({
     //   type: BUY_ITEMS

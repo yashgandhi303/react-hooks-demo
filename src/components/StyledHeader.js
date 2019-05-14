@@ -60,10 +60,10 @@ const StyledHeader = ({ authed = false }) => {
           :
           <>
             <Menu.Item>
-              <Button as={Link} to="register" primary>Sign Up</Button>
+              <Button as={Link} to="register" inverted color='black'>Sign Up</Button>
             </Menu.Item>
             <Menu.Item className='item'>
-            <Button as={Link} to="login">Log in</Button>
+              <Button as={Link} to="login">Log in</Button>
             </Menu.Item>
           </>
         }
