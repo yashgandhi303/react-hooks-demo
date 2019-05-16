@@ -1,0 +1,11 @@
+#about-div .item {
+    color: rgba(0,0,0,.87);
+}
+
+#about-div .item:hover {
+    text-decoration: underline;
+}
+
+.stock-amount {
+    color: rgba(0,0,0,.87);
+}

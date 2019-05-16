@@ -10,23 +10,6 @@ class Home extends React.Component {
     this.props.getItemsInStock();
   }
 
-  renderItems = () => (
-    <Grid divided container stackable>
-      {
-        this.props.storeStock.stockItems.map((item, index) => (
-          <Grid.Column width={4} key={index}>
-            <ItemCard
-              onClickFn={this.props.addItemToCartFn}
-              item={item}
-              key={item.id}
-              location={"home"}
-            />
-          </Grid.Column>
-        ))
-      }
-    </Grid>
-  );
-
   render() {
     const { cartItems, loading, storeStock } = this.props;
     if (loading) return <Loader content='Loading' />;
@@ -57,7 +40,22 @@ class Home extends React.Component {
 
         {
           storeStock.stockItems && storeStock.stockItems.length ?
-            this.renderItems() :
+            (
+              <Grid divided container stackable>
+                {
+                  this.props.storeStock.stockItems.map((item, index) => (
+                    <Grid.Column width={4} key={index}>
+                      <ItemCard
+                        onClickFn={this.props.addItemToCartFn}
+                        item={item}
+                        key={item.id}
+                        location={"home"}
+                      />
+                    </Grid.Column>
+                  ))
+                }
+              </Grid>
+            ) :
             <p>No items in stock</p>
         }
 

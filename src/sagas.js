@@ -70,7 +70,6 @@ export function* fetchItemsInStock() {
 
 export function* addItemToCart(action) {
   try {
-    console.log("addItemToCart: ", action);
     const { description, id, image, name, stock } = action.item;
 
     const amt = Number(action.amt);
@@ -151,7 +150,8 @@ export function* buyAllItems() {
 export function* addItemToStock(action) {
   try {
     const { item } = action;
-  
+
+    // eslint-disable-next-line no-unused-vars
     const addedItem = yield call(Api.addItemToStock, item);
     // yield put({
     //   type: BUY_ITEMS

@@ -1,13 +1,18 @@
 import axios from 'axios';
 import { config } from './fire';
+import { isDev } from './constants';
+
 const BASE_URL = config.databaseURL;
-console.log('BASE_URL: ', BASE_URL);
+if (isDev) {
+	console.log('BASE_URL: ', BASE_URL);
+}
+
 class Api {
 	static fetchItems() {
 		const result = axios.get(`${BASE_URL}/stockItems.json`)
 			.then(res => {
-			return res.data;
-	});
+				return res.data;
+			});
 		return result;
 	}
 
@@ -24,7 +29,7 @@ class Api {
 		const result = axios.put(`${BASE_URL}/stockItems/${id}/stock.json`, newStockAmt)
 			.then(res => {
 				return res.data;
-		});
+			});
 		return result;
 	}
 

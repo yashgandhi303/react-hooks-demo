@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Container } from 'semantic-ui-react';
+
 // import { auth } from '../auth';
 
 // function setErrorMsg(error) {
@@ -19,16 +21,29 @@ class Register extends Component {
 
   render () {
     return (
-      <div className="col-sm-6 col-sm-offset-3">
+      <Container className="col-sm-6 col-sm-offset-3">
         <h1>Register</h1>
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
-            <label>Email</label>
-            <input className="form-control" ref={(email) => this.email = email} placeholder="Email"/>
+            <label htmlFor="email">Email</label>
+            <input
+              name="email"
+              id="email"
+              className="form-control"
+              ref={(email) => this.email = email}
+              placeholder="Email"
+            />
           </div>
           <div className="form-group">
-            <label>Password</label>
-            <input type="password" className="form-control" placeholder="Password" ref={(pw) => this.pw = pw} />
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              className="form-control"
+              placeholder="Password"
+              ref={(pw) => this.pw = pw}
+            />
           </div>
           {
             this.state.registerError &&
@@ -40,7 +55,7 @@ class Register extends Component {
           }
           <button type="submit" className="btn btn-primary">Register</button>
         </form>
-      </div>
+      </Container>
     )
   }
 }

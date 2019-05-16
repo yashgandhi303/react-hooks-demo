@@ -4,15 +4,15 @@ Just a small React project to mess around with react, the Firebase REST API, red
 
 ### Installation
 - pull down the repo (fork/clone)
-- yarn install
-- yarn start (to run dev - uses port 3000 by default)
+- `yarn install`
+- `yarn start` (to run dev - uses port 3000 by default)
 
 
 ### Tests
 test scripts:
-- yarn test:watch
-- yarn test
-- yarn test:coverage
+- `yarn test:watch`
+- `yarn test`
+- `yarn test:coverage`
 
 
 ### TODOs:
@@ -28,8 +28,7 @@ test scripts:
 - let user update items in stock
 - have item detail page
 - more refactoring
-- use flow
-
+- add hooks
 
 ### Quick Demo:
 ![carrinho quick demo](https://github.com/nickbouldien/carrinho/blob/master/carrinho_1.gif)

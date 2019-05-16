@@ -1,6 +1,11 @@
-import * as firebase from 'firebase';
+import firebase from 'firebase/app';
+import 'firebase/database';
+import { isDev } from './constants';
 import { config } from './fire';
-console.log('db config: ', config);
+
+if (isDev) {
+  console.log('db config: ', config);
+}
 
 firebase.initializeApp(config);
 const database = firebase.database();

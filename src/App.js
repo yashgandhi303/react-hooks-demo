@@ -1,17 +1,19 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { injectGlobal } from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 
-import AdminCPContainer from './containers/AdminCPContainer';
 import CartContainer from './containers/CartContainer';
 import HomeContainer from './containers/HomeContainer';
-import About from './components/About';
 import Login from './components/Login';
+import LoadingSpinner from './components/LoadingSpinner';
+
 import Register from './components/Register';
 import StyledHeader from './components/StyledHeader';
-
 import store from './store';
+
+const About = lazy(() => import('./components/About'));
+const AdminCPContainer = lazy(() => import('./containers/AdminCPContainer'));
 
 function PublicRoute ({ component: Component, authed, ...rest }) {
   return (
@@ -40,21 +42,23 @@ class App extends React.Component {
         <div>
           <StyledHeader authed={authed} />
           <div className='container'>
-            <Switch>
-              <Route exact path='/' component={HomeContainer} />
-  
-              <PublicRoute authed={authed} exact path='/cart' component={CartContainer} />
-              <PublicRoute authed={authed} exact path='/register' component={Register} />
-              <PublicRoute authed={authed} exact path='/login' component={Login} />
-  
-              {/* /admin/* would be protected... */}
-              {/* <PrivateRoute authed={authed} exact path='/admin' component={AdminCP} /> */}
-              <PublicRoute authed={authed} exact path='/admin' component={AdminCPContainer} />
+            <Suspense fallback={<LoadingSpinner />}>
+              <Switch>
+                <Route exact path='/' component={HomeContainer} />
 
-              <PublicRoute authed={authed} exact path='/about' component={About} />
-  
-              <Redirect to='/' />
-            </Switch>
+                <PublicRoute authed={authed} exact path='/cart' component={CartContainer} />
+                <PublicRoute authed={authed} exact path='/register' component={Register} />
+                <PublicRoute authed={authed} exact path='/login' component={Login} />
+
+                {/* /admin/* would be protected... */}
+                {/* <PrivateRoute authed={authed} exact path='/admin' component={AdminCP} /> */}
+                <PublicRoute authed={authed} exact path='/admin' component={AdminCPContainer} />
+
+                <PublicRoute authed={authed} exact path='/about' component={About} />
+
+                <Redirect to='/' />
+              </Switch>
+            </Suspense>
           </div>
         </div>
       </BrowserRouter>
@@ -63,7 +67,7 @@ class App extends React.Component {
   }
 }
 
-injectGlobal`
+createGlobalStyle`
   body {
     background-color: ghostwhite;
     ${'' /* font-size: 10px; */}
