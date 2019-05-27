@@ -12,7 +12,7 @@ import Register from './components/Register';
 import StyledHeader from './components/StyledHeader';
 
 const About = lazy(() => import('./components/About'));
-const AdminCPContainer = lazy(() => import('./containers/AdminCPContainer'));
+const AdminCP = lazy(() => import('./components/AdminCP'));
 
 function PublicRoute ({ component: Component, authed, ...rest }) {
   return (
@@ -50,8 +50,7 @@ class App extends React.Component {
                   <PublicRoute authed={authed} exact path='/login' component={Login} />
 
                   {/* /admin/* would be protected... */}
-                  {/* <PrivateRoute authed={authed} exact path='/admin' component={AdminCP} /> */}
-                  <PublicRoute authed={authed} exact path='/admin' component={AdminCPContainer} />
+                  <PublicRoute authed={authed} exact path='/admin' component={AdminCP} />
 
                   <PublicRoute authed={authed} exact path='/about' component={About} />
 
