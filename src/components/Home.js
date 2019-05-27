@@ -50,7 +50,7 @@ const Home = () => {
       {
         stockItems && Object.keys(stockItems).length > 0 ?
           (
-            <Grid divided container stackable>
+            <Grid container stackable className={"item-grid"}>
               {
                 Object.entries(stockItems).map(([id, item]) => (
                   <Grid.Column width={4} key={id}>

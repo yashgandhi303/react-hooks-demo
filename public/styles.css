@@ -9,3 +9,11 @@
 .stock-amount {
     color: rgba(0,0,0,.87);
 }
+
+.item-grid .column .card {
+    min-height: 360px;
+}
+
+.item-grid .card button {
+    margin-top: 6px;
+}

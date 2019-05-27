@@ -11,7 +11,6 @@ class Api {
   static fetchItems() {
     return axios.get(`${BASE_URL}/stockItems.json`)
       .then(res => {
-        // console.log("data: ", res.data);
         return res.data;
       });
   }
