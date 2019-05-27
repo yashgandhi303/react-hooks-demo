@@ -1,52 +1,67 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Button, Header, Grid } from 'semantic-ui-react';
+import * as actions from '../actions/actionTypes';
 import ItemCard from '../components/ItemCard';
+import { AppContext } from '../hooks/AppProvider';
 
-const Cart = ({ cartItems, buyAll, remove }) => (
-  <Container>
-    <Header as="h2">Your cart: </Header>
+const Cart = () => {
+  const { state: { cartItems }, dispatch } = useContext(AppContext);
 
-    <Header as="h4">Item count: {cartItems.length}</Header>
+  function remove(item, amt, initialAmt) {
+    dispatch({
+      type: actions.REMOVE_FROM_CART,
+      payload: {
+        amt,
+        initialAmt,
+        item,
+      },
+    })
+  }
 
-    <Grid>
-      <Grid.Column width={6}>
-        {
-          cartItems.length > 0 ? (
-            cartItems.map((item) => (
-              <ItemCard
-                onClickFn={remove}
-                item={item}
-                id={item.id}
-                key={item.id}
-                location={'cart'}
-              />
-            ))
-          ) : (
-            <Button
-              as={Link}
-              to={'/'}
-            >
-              Go buy stuff
-            </Button>
-          )
-        }
-      </Grid.Column>
+  function buyAll() {
+    dispatch({
+      type: actions.BUY_CART_ITEMS,
+    })
+  }
 
-      <Grid.Column width={8} textAlign={'center'}>
-        <Button onClick={buyAll} disabled={!cartItems.length} secondary>
-          Buy all
-        </Button>
-      </Grid.Column>
-    </Grid>
-  </Container>
-);
+  return (
+    <Container>
+      <Header as="h2">Your cart: </Header>
 
-Cart.propTypes = {
-  cartItems: PropTypes.array.isRequired,
-  buyAll: PropTypes.func.isRequired,
-  remove: PropTypes.func.isRequired,
+      <Header as="h3">Item count: {Object.keys(cartItems).length}</Header>
+
+      <Grid>
+        <Grid.Column width={6}>
+          {
+            Object.keys(cartItems).length > 0 ? (
+              Object.entries(cartItems).map(([id, item]) => (
+                <ItemCard
+                  onClickFn={remove}
+                  item={item}
+                  key={id}
+                  location={'cart'}
+                />
+              ))
+            ) : (
+              <Button
+                as={Link}
+                to={'/'}
+              >
+                Go buy stuff
+              </Button>
+            )
+          }
+        </Grid.Column>
+
+        <Grid.Column width={8} textAlign={'center'}>
+          <Button onClick={buyAll} disabled={!Object.keys(cartItems).length} secondary>
+            Buy all
+          </Button>
+        </Grid.Column>
+      </Grid>
+    </Container>
+  )
 };
 
 export default Cart;

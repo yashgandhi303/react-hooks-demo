@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Card, Image, Rating } from 'semantic-ui-react';
 import ItemCardInput from './ItemCardInput';
 
-const ItemCard = ({ item, onClickFn }) => (
+const ItemCard = ({ location, item, onClickFn }) => (
   <Card>
     <Image
       alt={`${item.name}`}
@@ -18,7 +18,7 @@ const ItemCard = ({ item, onClickFn }) => (
       <Card.Header>{item.name}</Card.Header>
       <Rating
         icon='star'
-        defaultRating={Math.floor(Math.random() * 6)}
+        defaultRating={ Math.floor(Math.random() * 6) }
         maxRating={5}
         disabled
       />
@@ -33,6 +33,7 @@ const ItemCard = ({ item, onClickFn }) => (
     </Card.Content>
     <Card.Content extra>
       <ItemCardInput
+        location={location}
         item={item}
         onClickFn={onClickFn}
       />

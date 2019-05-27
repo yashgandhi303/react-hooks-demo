@@ -3,7 +3,7 @@ import { Form, Input } from 'semantic-ui-react';
 
 class ItemCardInput extends Component {
   state = {
-    amt: this.props.item.amt || 0,
+    amt: this.props.item.amt || 1,
     initialAmt: this.props.item.amt || 0,
   };
 
@@ -14,8 +14,11 @@ class ItemCardInput extends Component {
   };
 
   render() {
-    const { item, onClickFn } = this.props;
+    console.log("state: ", this.state);
+    console.log("props: ", this.props);
+
     const { amt, initialAmt } = this.state;
+    const { item, location, onClickFn } = this.props;
     return (
       <Form onSubmit={ () => onClickFn(item, amt, initialAmt) }>
         <Form.Field>
@@ -33,7 +36,7 @@ class ItemCardInput extends Component {
           />
           <Form.Button
             disabled={ amt === 0 }
-            content={window.location.pathname === "/cart" ? "Remove From Cart" : "Add to cart"}
+            content={ location === "cart" ? "Remove From Cart" : "Add to cart" }
           />
         </Form.Field>
       </Form>

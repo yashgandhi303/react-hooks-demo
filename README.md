@@ -32,3 +32,10 @@ test scripts:
 
 ### Quick Demo:
 ![carrinho quick demo](https://github.com/nickbouldien/carrinho/blob/master/carrinho_1.gif)
+
+### sources:
+- https://dev.to/bmcmahen/using-firebase-with-react-hooks-21ap
+- https://github.com/CSFrequency/react-firebase-hooks 
+- https://stackoverflow.com/questions/53146795/react-usereducer-async-data-fetch
+- https://reactjs.org/docs/hooks-reference.html
+- https://www.robinwieruch.de/react-hooks-fetch-data/

@@ -1,16 +1,15 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
-import { Provider } from 'react-redux';
 import { createGlobalStyle } from 'styled-components';
 
-import CartContainer from './containers/CartContainer';
-import HomeContainer from './containers/HomeContainer';
+import { AppContextProvider } from './hooks/AppProvider';
 import Login from './components/Login';
 import LoadingSpinner from './components/LoadingSpinner';
 
+import Cart from './components/Cart';
+import Home from './components/Home';
 import Register from './components/Register';
 import StyledHeader from './components/StyledHeader';
-import store from './store';
 
 const About = lazy(() => import('./components/About'));
 const AdminCPContainer = lazy(() => import('./containers/AdminCPContainer'));
@@ -37,32 +36,32 @@ class App extends React.Component {
     const { authed } = this.state;
 
     return (
-      <Provider store={store}>
-      <BrowserRouter>
-        <div>
-          <StyledHeader authed={authed} />
-          <div className='container'>
-            <Suspense fallback={<LoadingSpinner />}>
-              <Switch>
-                <Route exact path='/' component={HomeContainer} />
+      <AppContextProvider>
+        <BrowserRouter>
+          <div>
+            <StyledHeader authed={authed} />
+            <div className='container'>
+              <Suspense fallback={<LoadingSpinner />}>
+                <Switch>
+                  <Route exact path='/' component={Home} />
 
-                <PublicRoute authed={authed} exact path='/cart' component={CartContainer} />
-                <PublicRoute authed={authed} exact path='/register' component={Register} />
-                <PublicRoute authed={authed} exact path='/login' component={Login} />
+                  <PublicRoute authed={authed} exact path='/cart' component={Cart} />
+                  <PublicRoute authed={authed} exact path='/register' component={Register} />
+                  <PublicRoute authed={authed} exact path='/login' component={Login} />
 
-                {/* /admin/* would be protected... */}
-                {/* <PrivateRoute authed={authed} exact path='/admin' component={AdminCP} /> */}
-                <PublicRoute authed={authed} exact path='/admin' component={AdminCPContainer} />
+                  {/* /admin/* would be protected... */}
+                  {/* <PrivateRoute authed={authed} exact path='/admin' component={AdminCP} /> */}
+                  <PublicRoute authed={authed} exact path='/admin' component={AdminCPContainer} />
 
-                <PublicRoute authed={authed} exact path='/about' component={About} />
+                  <PublicRoute authed={authed} exact path='/about' component={About} />
 
-                <Redirect to='/' />
-              </Switch>
-            </Suspense>
+                  <Redirect to='/' />
+                </Switch>
+              </Suspense>
+            </div>
           </div>
-        </div>
-      </BrowserRouter>
-    </Provider>  
+        </BrowserRouter>
+      </AppContextProvider>
     )
   }
 }

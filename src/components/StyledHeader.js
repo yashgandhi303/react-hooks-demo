@@ -45,8 +45,8 @@ const StyledHeader = ({ authed = false }) => {
       <Menu.Menu position='right'>
         <Menu.Item
           name='cart'
-          active={activeItem === 'cart'}
-          onClick={() => setActiveItem('cart')}
+          active={activeItem === '/cart'}
+          onClick={() => setActiveItem('/cart')}
           as={Link}
           to={"/cart"}
         >

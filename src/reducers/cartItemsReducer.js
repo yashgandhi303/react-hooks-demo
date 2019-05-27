@@ -8,7 +8,7 @@ import {
 } from '../actions/actionTypes';
 
 const cartItemStock = (state = {}, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case ADD_ITEM_TO_CART:
       // add to the item in cart if it's already in there
       if (state.hasOwnProperty(action.id)) {
@@ -60,7 +60,7 @@ const cartItemStock = (state = {}, action) => {
 };
 
 const cartItemIds = (state = [], action) => {
-  switch(action.type) {
+  switch (action.type) {
     case ADD_ITEM_TO_CART:
       if (state.includes(action.id)) {
         return state;

@@ -1,8 +1,8 @@
 import {
   ADD_ITEM_TO_CART,
-  BUY_ITEMS,
-  FETCH_CART_ITEMS,
-  FETCH_ITEMS_IN_STOCK, 
+  BUY_CART_ITEMS,
+  // FETCH_CART_ITEMS,
+  FETCH_STOCK_ITEMS,
   REMOVE_FROM_CART,
 } from '../actions/actionTypes';
 
@@ -13,17 +13,17 @@ const initialState =  {
 
 const storeStock = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_ITEMS_IN_STOCK:
+    case FETCH_STOCK_ITEMS:
       return {
         ...state,
         isFetching: false,
         stockItems: getStockItemsArray(action.payload),
       };
-    case FETCH_CART_ITEMS:  // strictly for loading (for now)
-      return {
-        ...state,
-        isFetching: true,
-      };
+    // case FETCH_CART_ITEMS:  // strictly for loading (for now)
+    //   return {
+    //     ...state,
+    //     isFetching: true,
+    //   };
     case REMOVE_FROM_CART:
     case ADD_ITEM_TO_CART:
       const addedItem = state.stockItems.find(item => item.id === action.id);
@@ -39,7 +39,7 @@ const storeStock = (state = initialState, action) => {
           updatedItem
         ]
       };
-    case BUY_ITEMS:
+    case BUY_CART_ITEMS:
       // right now just going back to full stock; will update to subtract bought items
       // from store stock (if enough in stock)
       return initialState;
