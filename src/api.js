@@ -15,12 +15,11 @@ class Api {
       });
   }
 
-  static addItemToCart(id, newStockAmt) {
-    const result = axios.put(`${BASE_URL}/stockItems/${id}/stock.json`, newStockAmt)
+  static buyItem(id, newStockAmt) {
+    return axios.put(`${BASE_URL}/stockItems/${id}/stock.json`, newStockAmt)
       .then(res => {
         return res.data;
       });
-    return result;
   }
 
   // TODO: need to combine addItemToCart && removeItemFromCart

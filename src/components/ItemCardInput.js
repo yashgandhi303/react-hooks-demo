@@ -4,7 +4,7 @@ import { Form, Input } from 'semantic-ui-react';
 class ItemCardInput extends Component {
   state = {
     amt: this.props.item.amt || 1,
-    initialAmt: this.props.item.amt || 0,
+    // initialAmt: this.props.item.amt || 0,
   };
 
   handleChange = ({ target: { value } }) => {
@@ -14,13 +14,10 @@ class ItemCardInput extends Component {
   };
 
   render() {
-    console.log("state: ", this.state);
-    console.log("props: ", this.props);
-
-    const { amt, initialAmt } = this.state;
+    const { amt } = this.state;
     const { item, location, onClickFn } = this.props;
     return (
-      <Form onSubmit={ () => onClickFn(item, amt, initialAmt) }>
+      <Form onSubmit={ () => onClickFn(item, amt) }>
         <Form.Field>
           <label htmlFor={`item-${ item.id }-quantity`}>
             Amount

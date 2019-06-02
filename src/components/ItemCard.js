@@ -9,7 +9,6 @@ const ItemCard = ({ location, item, onClickFn }) => (
       alt={`${item.name}`}
       centered={true}
       height={"100"}
-      // size='tiny'
       src={item.image}
       width={"100"}
     />

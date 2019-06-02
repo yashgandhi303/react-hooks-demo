@@ -32,8 +32,46 @@ const AppContextProvider = (props) => {
     };
   }, []);
 
+  async function addToCart(item, amt, initialAmt) {
+    try {
+      // debugger;
+      // const newStockAmt = initialAmt - amt;
+      const newStockAmt = state.stockItems[item.id].stock - amt;
+      // const data = await Api.addItemToCart(item.id, newStockAmt);
+      dispatch({
+        type: actions.ADD_ITEM_TO_CART,
+        payload: {
+          amt,
+          item,
+          // initialAmt,
+        },
+      })
+    } catch (error) {
+      dispatch({ type: actions.ERROR, payload: error });
+    }
+  }
+
+  async function removeFromCart(item, amt, initialAmt) {
+    try {
+      debugger;
+      console.log("state.stockItems[item.id]: ", state.stockItems[item.id]);
+      const newStockAmt = state.stockItems[item.id].stock - amt;
+      const data = await Api.removeItemFromCart(item.id, newStockAmt);
+      dispatch({
+        type: actions.REMOVE_FROM_CART,
+        payload: {
+          amt,
+          initialAmt,
+          item,
+        },
+      })
+    } catch (error) {
+      dispatch({ type: actions.ERROR, payload: error });
+    }
+  }
+
   return (
-    <AppContext.Provider value={{ state, dispatch }}>
+    <AppContext.Provider value={{ state, dispatch, addToCart, removeFromCart }}>
       {props.children}
     </AppContext.Provider>
   )

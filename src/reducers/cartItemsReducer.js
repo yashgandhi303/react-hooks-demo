@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import omit from 'lodash/omit';
+import omit from 'lodash.omit';
 import {
   ADD_ITEM_TO_CART,
   REMOVE_FROM_CART,

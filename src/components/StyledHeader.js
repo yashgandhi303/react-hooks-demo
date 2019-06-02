@@ -67,7 +67,6 @@ const StyledHeader = ({ authed = false }) => {
             </Menu.Item>
           </>
         }
-
       </Menu.Menu>
     </Menu>
   )

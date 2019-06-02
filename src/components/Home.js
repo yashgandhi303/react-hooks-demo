@@ -1,26 +1,17 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Container, Divider, Flag, Grid, Header, Loader } from 'semantic-ui-react';
-import * as actions from '../actions/actionTypes';
 import ItemCard from '../components/ItemCard';
 import { AppContext } from "../hooks/AppProvider";
 
 const Home = () => {
-  const { state, dispatch } = useContext(AppContext);
+  const { state, addToCart } = useContext(AppContext);
   const { cartItems, loading, stockItems } = state;
 
   function addItemToCart(item, amt, initialAmt) {
-    dispatch({
-      type: actions.ADD_ITEM_TO_CART,
-      payload: {
-        amt,
-        initialAmt,
-        item,
-      },
-    })
+    addToCart(item, amt, initialAmt);
   }
 
-  console.log("state: ", state);
   if (loading) return <Loader content='Loading' />;
   return (
     <Container className='home-div'>

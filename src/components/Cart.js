@@ -6,17 +6,10 @@ import ItemCard from '../components/ItemCard';
 import { AppContext } from '../hooks/AppProvider';
 
 const Cart = () => {
-  const { state: { cartItems }, dispatch } = useContext(AppContext);
+  const { state: { cartItems }, dispatch, removeFromCart } = useContext(AppContext);
 
   function remove(item, amt, initialAmt) {
-    dispatch({
-      type: actions.REMOVE_FROM_CART,
-      payload: {
-        amt,
-        initialAmt,
-        item,
-      },
-    })
+    removeFromCart(item, amt, initialAmt);
   }
 
   function buyAll() {
