@@ -8,8 +8,8 @@ const Home = () => {
   const { state, addToCart } = useContext(AppContext);
   const { cartItems, loading, stockItems } = state;
 
-  function addItemToCart(item, amt, initialAmt) {
-    addToCart(item, amt, initialAmt);
+  function addItemToCart(item, amt) {
+    addToCart(item, amt);
   }
 
   if (loading) return <Loader content='Loading' />;

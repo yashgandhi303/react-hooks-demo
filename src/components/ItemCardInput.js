@@ -4,7 +4,6 @@ import { Form, Input } from 'semantic-ui-react';
 class ItemCardInput extends Component {
   state = {
     amt: this.props.item.amt || 1,
-    // initialAmt: this.props.item.amt || 0,
   };
 
   handleChange = ({ target: { value } }) => {
