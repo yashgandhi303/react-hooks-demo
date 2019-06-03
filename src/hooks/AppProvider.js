@@ -32,18 +32,14 @@ const AppContextProvider = (props) => {
     };
   }, []);
 
-  async function addToCart(item, amt, initialAmt) {
+  function addToCart(item, amt) {
     try {
-      // debugger;
-      // const newStockAmt = initialAmt - amt;
-      const newStockAmt = state.stockItems[item.id].stock - amt;
-      // const data = await Api.addItemToCart(item.id, newStockAmt);
+      // const newStockAmt = state.stockItems[item.id].stock - amt;
       dispatch({
         type: actions.ADD_ITEM_TO_CART,
         payload: {
           amt,
           item,
-          // initialAmt,
         },
       })
     } catch (error) {
@@ -51,19 +47,34 @@ const AppContextProvider = (props) => {
     }
   }
 
-  async function removeFromCart(item, amt, initialAmt) {
+  function removeFromCart(item, amt) {
     try {
-      debugger;
-      console.log("state.stockItems[item.id]: ", state.stockItems[item.id]);
-      const newStockAmt = state.stockItems[item.id].stock - amt;
-      const data = await Api.removeItemFromCart(item.id, newStockAmt);
+      // const newStockAmt = state.stockItems[item.id].stock - amt;
       dispatch({
         type: actions.REMOVE_FROM_CART,
         payload: {
           amt,
-          initialAmt,
           item,
         },
+      })
+    } catch (error) {
+      dispatch({ type: actions.ERROR, payload: error });
+    }
+  }
+
+  async function checkout() {
+    try {
+      const { cartItems } = state;
+
+      const reqData = {};
+
+      for (let [key, item] of Object.entries(cartItems)) {
+        const path = `${key}/stock`;
+        reqData[path] = item.stock;
+      }
+      const res = await Api.buyItems(reqData);
+      dispatch({
+        type: actions.BUY_CART_ITEMS,
       })
     } catch (error) {
       dispatch({ type: actions.ERROR, payload: error });
@@ -71,7 +82,13 @@ const AppContextProvider = (props) => {
   }
 
   return (
-    <AppContext.Provider value={{ state, dispatch, addToCart, removeFromCart }}>
+    <AppContext.Provider value={{
+      state,
+      dispatch,
+      addToCart,
+      checkout,
+      removeFromCart
+    }}>
       {props.children}
     </AppContext.Provider>
   )

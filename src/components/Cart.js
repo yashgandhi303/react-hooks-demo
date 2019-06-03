@@ -1,21 +1,18 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Button, Header, Grid } from 'semantic-ui-react';
-import * as actions from '../actions/actionTypes';
 import ItemCard from '../components/ItemCard';
 import { AppContext } from '../hooks/AppProvider';
 
 const Cart = () => {
-  const { state: { cartItems }, dispatch, removeFromCart } = useContext(AppContext);
+  const { state: { cartItems }, checkout , removeFromCart } = useContext(AppContext);
 
-  function remove(item, amt, initialAmt) {
-    removeFromCart(item, amt, initialAmt);
+  function remove(item, amt) {
+    removeFromCart(item, amt);
   }
 
   function buyAll() {
-    dispatch({
-      type: actions.BUY_CART_ITEMS,
-    })
+    checkout();
   }
 
   return (

@@ -22,6 +22,14 @@ class Api {
       });
   }
 
+  static buyItems(data) {
+    return axios.patch(`${BASE_URL}/stockItems.json`, data)
+      .then(res => {
+        console.log("res: ", res);
+        return res.data;
+      });
+  }
+
   // TODO: need to combine addItemToCart && removeItemFromCart
   static removeItemFromCart(id, newStockAmt) {
     const result = axios.put(`${BASE_URL}/stockItems/${id}/stock.json`, newStockAmt)
