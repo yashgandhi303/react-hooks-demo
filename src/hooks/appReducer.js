@@ -1,6 +1,6 @@
 import { useReducer } from 'react';
-import * as actions from '../actions/actionTypes';
 import omit from 'lodash.omit';
+import * as actions from '../actions/actionTypes';
 
 const initialState = {
   loading: true,
@@ -9,6 +9,7 @@ const initialState = {
   cartItems: {},
 };
 
+// TODO - break this into two reducers (cartItems / stockItems)
 const reducer = (state, action) => {
   console.log('action: ', action);
   switch (action.type) {
@@ -29,9 +30,8 @@ const reducer = (state, action) => {
         error: action.payload,
         loading: false,
       };
-    case actions.ADD_ITEM_TO_CART:
+    case actions.ADD_ITEM_TO_CART: {
       const { amt, item } = action.payload;
-
       const currentStockAmt = state.stockItems[item.id].stock;
 
       let newStockAmt = currentStockAmt - amt;
@@ -64,15 +64,44 @@ const reducer = (state, action) => {
           },
         },
       };
-    case actions.REMOVE_FROM_CART:
+    }
+    case actions.REMOVE_FROM_CART: { // update cart amount
+      let { amt, item } = action.payload;
+      const amtToRemove = amt;
+
+      const currStockAmt = state.stockItems[item.id].stock;
+      const currentCartAmt = state.cartItems[item.id].amt;
+
+      const removeAll = amtToRemove === currentCartAmt;
+
+      let updatedCartAmt = 0;
+      let updatedStockAmt = 0;
+
+      if (removeAll) {
+
+        return {
+          ...state,
+          cartItems: {
+            ...omit(state.cartItems, item.id),
+          },
+          stockItems: {
+            ...state.stockItems,
+          }
+        };
+      }
+
       // TODO - also use an update cart to update the # in the cart (without removing)
-      const newCartItems = omit(state.cartItems, action.payload.item.id);
-      return {
-        ...state,
-        cartItems: {
-          ...newCartItems,
-        }
-      };
+      // return {
+      //   ...state,
+      //   cartItems: {
+      //     ...updatedCartItems,
+      //   },
+      //   stockItems: {
+      //     ...state.stockItems,
+      //
+      //   }
+      // };
+    }
     case actions.BUY_CART_ITEMS:
       return {
         ...state,

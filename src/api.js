@@ -42,11 +42,6 @@ class Api {
   static async addItemToStock(item) {
     return axios.post(`${BASE_URL}/stockItems.json`, item).res.data;
   }
-
-  // static requestItems = () => ({
-  //     // TODO: initiate spinner
-  //     type: REQUEST_ITEMS_IN_STOCK
-  //   });
 }
 
 export default Api;

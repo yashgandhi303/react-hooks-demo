@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
-import useFirebaseReducer from './appReducer';
-import * as actions from '../actions/actionTypes';
+import useAppReducer from './appReducer';
 import Api from '../api';
+import * as actions from '../actions/actionTypes';
 
 const AppContext = React.createContext({});
 
 const AppContextProvider = (props) => {
-  const [state, dispatch] = useFirebaseReducer();
+  const [state, dispatch] = useAppReducer();
 
   useEffect(() => {
     let didCancel = false;

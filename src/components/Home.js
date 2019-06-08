@@ -62,16 +62,4 @@ const Home = () => {
   )
 };
 
-// Home.propTypes = {
-//   addItemToCartFn: PropTypes.func.isRequired,
-//   getItemsInStock: PropTypes.func.isRequired,
-//   storeStock: PropTypes.shape({
-//     stockItems: PropTypes.arrayOf(PropTypes.shape({
-//       id: PropTypes.string.isRequired,
-//       stock: PropTypes.number.isRequired,
-//       name: PropTypes.string.isRequired,
-//     }))
-//   }).isRequired,
-// };
-
 export default Home;
