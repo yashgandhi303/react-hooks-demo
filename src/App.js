@@ -42,7 +42,7 @@ class App extends React.Component {
             <Helmet>
               <meta charSet="utf-8" />
               <title>Carrinho</title>
-              <link rel="canonical" href="http://carrinho.com" />
+              <link rel="canonical" href="https://carrinho1.herokuapp.com/" />
             </Helmet>
             <StyledHeader authed={authed} />
             <div className='container'>

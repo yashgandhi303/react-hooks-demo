@@ -1,5 +1,5 @@
 ## Carrinho
-((shopping) cart in Portugues)
+((shopping) cart in Português)
 Just a small React project to mess around with react, the Firebase REST API, redux, redux-saga, semantic-ui, and more.  Bootstrapped with create-react-app (and ejected).
 
 ### Installation
@@ -16,7 +16,6 @@ test scripts:
 
 
 ### TODOs:
-- bug with adding back to stock from items in cart...
 - use better patterns
 - use localStorage to persist data
 - write tests
@@ -27,8 +26,7 @@ test scripts:
 - let user add new items to stock
 - let user update items in stock
 - have item detail page
-- more refactoring
-- add hooks
+- more refactoring (add hooks)
 
 ### Quick Demo:
 ![carrinho quick demo](https://github.com/nickbouldien/carrinho/blob/master/carrinho_1.gif)
