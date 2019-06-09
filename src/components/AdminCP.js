@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { Helmet } from 'react-helmet';
 import { Bar, BarChart, CartesianGrid, Legend, Tooltip, YAxis, XAxis } from 'recharts';
 import { Container, Header } from 'semantic-ui-react';
 import { AppContext } from '../hooks/AppProvider';
@@ -9,6 +10,10 @@ const AdminCP = () => {
   const stock = Object.keys(stockItems).length > 0 ? Object.values(stockItems) : [];
   return (
     <Container>
+      <Helmet>
+        <title>Carrinho - admin</title>
+      </Helmet>
+
       {/* <AddItemForm /> */}
       <Header as="h2">Store stock: </Header>
 

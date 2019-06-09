@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { Helmet } from "react-helmet";
 import { Container, Button, Header, Grid } from 'semantic-ui-react';
 import ItemCard from '../components/ItemCard';
 import { AppContext } from '../hooks/AppProvider';
@@ -16,41 +17,45 @@ const Cart = () => {
   }
 
   return (
-    <Container>
-      <Header as="h2">Your cart: </Header>
+      <Container>
+        <Helmet>
+          <title>Carrinho - cart</title>
+        </Helmet>
 
-      <Header as="h3">Item count: {Object.keys(cartItems).length}</Header>
+        <Header as="h2">Your cart: </Header>
 
-      <Grid>
-        <Grid.Column width={6}>
-          {
-            Object.keys(cartItems).length > 0 ? (
-              Object.entries(cartItems).map(([id, item]) => (
-                <ItemCard
-                  onClickFn={remove}
-                  item={item}
-                  key={id}
-                  location={'cart'}
-                />
-              ))
-            ) : (
-              <Button
-                as={Link}
-                to={'/'}
-              >
-                Go buy stuff
-              </Button>
-            )
-          }
-        </Grid.Column>
+        <Header as="h3">Item count: {Object.keys(cartItems).length}</Header>
 
-        <Grid.Column width={8} textAlign={'center'}>
-          <Button onClick={buyAll} disabled={!Object.keys(cartItems).length} secondary>
-            Buy all
-          </Button>
-        </Grid.Column>
-      </Grid>
-    </Container>
+        <Grid>
+          <Grid.Column width={6}>
+            {
+              Object.keys(cartItems).length > 0 ? (
+                Object.entries(cartItems).map(([id, item]) => (
+                  <ItemCard
+                    onClickFn={remove}
+                    item={item}
+                    key={id}
+                    location={'cart'}
+                  />
+                ))
+              ) : (
+                <Button
+                  as={Link}
+                  to={'/'}
+                >
+                  Go buy stuff
+                </Button>
+              )
+            }
+          </Grid.Column>
+
+          <Grid.Column width={8} textAlign={'center'}>
+            <Button onClick={buyAll} disabled={!Object.keys(cartItems).length} secondary>
+              Buy all
+            </Button>
+          </Grid.Column>
+        </Grid>
+      </Container>
   )
 };
 

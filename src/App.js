@@ -1,5 +1,6 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import { createGlobalStyle } from 'styled-components';
 
 import { AppContextProvider } from './hooks/AppProvider';
@@ -38,6 +39,11 @@ class App extends React.Component {
       <AppContextProvider>
         <BrowserRouter>
           <div>
+            <Helmet>
+              <meta charSet="utf-8" />
+              <title>Carrinho</title>
+              <link rel="canonical" href="http://carrinho.com" />
+            </Helmet>
             <StyledHeader authed={authed} />
             <div className='container'>
               <Suspense fallback={<LoadingSpinner />}>
