@@ -1,9 +1,14 @@
 import React from 'react';
 import { Container, List } from 'semantic-ui-react';
+import {Helmet} from 'react-helmet';
 
 const About = () => (
   <div id='about-div'>
     <Container>
+      <Helmet>
+        <title>Carrinho - about</title>
+      </Helmet>
+
       <h1>About this project:</h1>
 
       <List link>

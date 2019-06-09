@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Helmet } from 'react-helmet';
 import { Container } from 'semantic-ui-react';
 import { login, sendPasswordResetEmail } from '../auth';
 
@@ -25,6 +26,10 @@ class Login extends Component {
   render () {
     return (
       <Container className="col-sm-6 col-sm-offset-3">
+        <Helmet>
+          <title>Carrinho - login</title>
+        </Helmet>
+
         <h1> Login </h1>
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">

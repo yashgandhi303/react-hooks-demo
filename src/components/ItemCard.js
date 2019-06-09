@@ -1,44 +1,57 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Card, Image, Rating } from 'semantic-ui-react';
-import ItemCardInput from './ItemCardInput';
+import { Button, Card, Image, Rating } from 'semantic-ui-react';
+import useInput from "../hooks/useInput";
 
-const ItemCard = ({ item, onClickFn }) => (
-  <Card>
-    <Image
-      alt={`${item.name}`}
-      centered={true}
-      height={"100"}
-      // size='tiny'
-      src={item.image}
-      width={"100"}
-    />
+const ItemCard = ({ location, item, onClickFn }) => {
+  const defaultAmt = location === "cart" ? item.amt : 1;
+  const maxAmt = location === "cart" ? item.amt : item.stock;
 
-    <Card.Content>
-      <Card.Header>{item.name}</Card.Header>
-      <Rating
-        icon='star'
-        defaultRating={Math.floor(Math.random() * 6)}
-        maxRating={5}
-        disabled
+  const [itemAmt, ItemInput] = useInput("Amount", `item-${item.id}-quantity`, defaultAmt, {
+    type: "number",
+    max: maxAmt,
+    min: 0,
+  });
+
+  return (
+    <Card>
+      <Image
+        alt={`${item.name}`}
+        centered={true}
+        height={"100"}
+        src={item.image}
+        width={"100"}
       />
-      <Card.Meta>
+
+      <Card.Content>
+        <Card.Header>{item.name}</Card.Header>
+        <Rating
+          icon='star'
+          defaultRating={Math.floor(Math.random() * 6)}
+          maxRating={5}
+          disabled
+        />
+        <Card.Meta>
         <span className='stock-amount'>
-          { `Stock: ${item.stock}` }
+          {`Stock: ${item.stock}`}
         </span>
-      </Card.Meta>
-      <Card.Description>
-        { item.description || 'Deliciousness' }
-      </Card.Description>
-    </Card.Content>
-    <Card.Content extra>
-      <ItemCardInput
-        item={item}
-        onClickFn={onClickFn}
-      />
-    </Card.Content>
-  </Card>
-);
+        </Card.Meta>
+        <Card.Description>
+          {item.description || 'Deliciousness'}
+        </Card.Description>
+      </Card.Content>
+      <Card.Content extra>
+        <ItemInput />
+        <Button
+          onClick={ () => onClickFn(item, itemAmt) }
+          disabled={parseInt(itemAmt) === 0}
+        >
+          { location === "cart" ? "Remove From Cart" : "Add to cart" }
+        </Button>
+      </Card.Content>
+    </Card>
+  );
+};
 
 ItemCard.propTypes = {
   onClickFn: PropTypes.func.isRequired,

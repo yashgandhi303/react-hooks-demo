@@ -8,14 +8,14 @@ const logout = () => {
 };
 
 const StyledHeader = ({ authed = false }) => {
-  const [activeItem, setActiveItem] = useState("home");
+  const [activeItem, setActiveItem] = useState(window.location.pathname);
 
   return (
     <Menu stackable inverted pointing>
       <Menu.Item
         name='home'
-        active={activeItem === 'home'}
-        onClick={() => setActiveItem('home')}
+        active={activeItem === '/'}
+        onClick={() => setActiveItem('/')}
         as={Link}
         to={"/"}
       >
@@ -24,8 +24,8 @@ const StyledHeader = ({ authed = false }) => {
 
       <Menu.Item
         name='about'
-        active={activeItem === 'about'}
-        onClick={() => setActiveItem('about')}
+        active={activeItem === '/about'}
+        onClick={() => setActiveItem('/about')}
         as={Link}
         to={"/about"}
       >
@@ -34,8 +34,8 @@ const StyledHeader = ({ authed = false }) => {
 
       <Menu.Item
         name='admin'
-        active={activeItem === 'admin'}
-        onClick={() => setActiveItem('admin')}
+        active={activeItem === '/admin'}
+        onClick={() => setActiveItem('/admin')}
         as={Link}
         to={"/admin"}
       >
@@ -45,8 +45,8 @@ const StyledHeader = ({ authed = false }) => {
       <Menu.Menu position='right'>
         <Menu.Item
           name='cart'
-          active={activeItem === 'cart'}
-          onClick={() => setActiveItem('cart')}
+          active={activeItem === '/cart'}
+          onClick={() => setActiveItem('/cart')}
           as={Link}
           to={"/cart"}
         >
@@ -67,7 +67,6 @@ const StyledHeader = ({ authed = false }) => {
             </Menu.Item>
           </>
         }
-
       </Menu.Menu>
     </Menu>
   )

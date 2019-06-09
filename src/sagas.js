@@ -8,7 +8,7 @@ import {
   BUY_CART_ITEMS,
   BUY_ITEMS,
   FETCH_CART_ITEMS,
-  FETCH_ITEMS_IN_STOCK,
+  FETCH_STOCK_ITEMS,
   REQUEST_ITEMS_IN_STOCK,
   REMOVE_FROM_CART,
   REMOVE_ITEM_FROM_CART,
@@ -58,7 +58,7 @@ export function* fetchItemsInStock() {
     const itemsInStock = yield call(Api.fetchItems);
     
     yield put({
-      type: FETCH_ITEMS_IN_STOCK,
+      type: FETCH_STOCK_ITEMS,
       payload: itemsInStock
     });
 
