@@ -5,7 +5,13 @@ import useInput from "../hooks/useInput";
 
 const ItemCard = ({ location, item, onClickFn }) => {
   const defaultAmt = location === "cart" ? item.amt : 1;
-  const [itemAmt, ItemInput] = useInput("Amount", `item-${item.id}-quantity`, defaultAmt, {type: "number"});
+  const maxAmt = location === "cart" ? item.amt : item.stock;
+
+  const [itemAmt, ItemInput] = useInput("Amount", `item-${item.id}-quantity`, defaultAmt, {
+    type: "number",
+    max: maxAmt,
+    min: 0,
+  });
 
   return (
     <Card>
