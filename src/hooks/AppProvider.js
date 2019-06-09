@@ -30,7 +30,7 @@ const AppContextProvider = (props) => {
     return () => {
       didCancel = true;
     };
-  }, []);
+  }, [dispatch]);
 
   function addToCart(item, amt) {
     try {

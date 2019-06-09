@@ -67,8 +67,6 @@ class App extends React.Component {
 createGlobalStyle`
   body {
     background-color: ghostwhite;
-    ${'' /* font-size: 10px; */}
-    ${'' /* padding: 10px; */}
   }
 `;
 

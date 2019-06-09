@@ -66,18 +66,17 @@ const reducer = (state, action) => {
       };
     }
     case actions.REMOVE_FROM_CART: { // update cart amount
-      let { amt, item } = action.payload;
-      const amtToRemove = amt;
+      let { amt: amtToRemove, item } = action.payload;
 
       const currStockAmt = state.stockItems[item.id].stock;
       const currentCartAmt = state.cartItems[item.id].amt;
 
-      const removeAll = amtToRemove === currentCartAmt;
-
-      let updatedCartAmt = 0;
-      let updatedStockAmt = 0;
+      const removeAll = amtToRemove >= currentCartAmt; // added the > since user could edit and put in higher than their actual amount - in that case, just remove all from the cart
 
       if (removeAll) {
+        const updatedStockAmt = amtToRemove === currentCartAmt
+          ? currStockAmt + amtToRemove
+          : currStockAmt + currentCartAmt;
 
         return {
           ...state,
@@ -86,21 +85,32 @@ const reducer = (state, action) => {
           },
           stockItems: {
             ...state.stockItems,
+            [item.id]: {
+              ...item,
+              stock: updatedStockAmt,
+            }
           }
         };
       }
 
-      // TODO - also use an update cart to update the # in the cart (without removing)
-      // return {
-      //   ...state,
-      //   cartItems: {
-      //     ...updatedCartItems,
-      //   },
-      //   stockItems: {
-      //     ...state.stockItems,
-      //
-      //   }
-      // };
+      return {
+        ...state,
+        cartItems: {
+          ...state.cartItems,
+          [item.id]: {
+            ...item,
+            stock: currStockAmt + amtToRemove,
+            amt: currentCartAmt - amtToRemove,
+          },
+        },
+        stockItems: {
+          ...state.stockItems,
+          [item.id]: {
+            ...item,
+            stock: currStockAmt + amtToRemove,
+          },
+        },
+      };
     }
     case actions.BUY_CART_ITEMS:
       return {
