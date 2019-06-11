@@ -32,10 +32,10 @@ const Cart = () => {
               Object.keys(cartItems).length > 0 ? (
                 Object.entries(cartItems).map(([id, item]) => (
                   <ItemCard
-                    onClickFn={remove}
-                    item={item}
                     key={id}
+                    item={item}
                     location={'cart'}
+                    onClickFn={remove}
                   />
                 ))
               ) : (

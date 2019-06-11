@@ -32,7 +32,7 @@ const Home = () => {
         )
       }
 
-      <Header as='h5'>Number of items in cart: {Object.keys(cartItems).length}</Header>
+      <Header as='h4'>Number of items in cart: {Object.keys(cartItems).length}</Header>
 
       <Divider />
 
@@ -46,17 +46,18 @@ const Home = () => {
                 Object.entries(stockItems).map(([id, item]) => (
                   <Grid.Column width={4} key={id}>
                     <ItemCard
-                      onClickFn={addItemToCart}
-                      item={item}
                       key={id}
+                      item={item}
                       location={"home"}
+                      onClickFn={addItemToCart}
                     />
                   </Grid.Column>
                 ))
               }
             </Grid>
-          ) :
-          <p>No items in stock</p>
+          ) : (
+            <p>No items in stock</p>
+          )
       }
     </Container>
   )
