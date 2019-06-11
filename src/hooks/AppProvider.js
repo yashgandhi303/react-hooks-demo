@@ -34,7 +34,6 @@ const AppContextProvider = (props) => {
 
   function addToCart(item, amt) {
     try {
-      // const newStockAmt = state.stockItems[item.id].stock - amt;
       dispatch({
         type: actions.ADD_ITEM_TO_CART,
         payload: {
@@ -49,7 +48,6 @@ const AppContextProvider = (props) => {
 
   function removeFromCart(item, amt) {
     try {
-      // const newStockAmt = state.stockItems[item.id].stock - amt;
       dispatch({
         type: actions.REMOVE_FROM_CART,
         payload: {

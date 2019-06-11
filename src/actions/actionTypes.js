@@ -2,7 +2,6 @@ export const ERROR = "ERROR";
 
 /* admin */
 export const UPDATE_ITEM_AMT = 'UPDATE_ITEM_AMT';
-// export const CHANGE_ITEM_QUANTITY = 'CHANGE_ITEM_QUANTITY';
 
 /* stock */
 export const FETCH_STOCK_ITEMS = 'FETCH_STOCK_ITEMS';
@@ -17,8 +16,6 @@ export const ADD_ITEM_TO_CART = 'ADD_ITEM_TO_CART';
 export const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
 export const REMOVE_ITEM_FROM_CART = 'REMOVE_ITEM_FROM_CART';
 export const FETCH_CART_ITEMS = 'FETCH_CART_ITEMS';
-// export const CHECKOUT = 'CHECKOUT';
-// export const SHOW_CART_ITEMS = 'SHOW_CART_ITEMS';
 
 /* sagas */
 export const BUY_ITEMS = 'BUY_ITEMS';

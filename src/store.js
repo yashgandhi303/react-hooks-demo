@@ -20,7 +20,6 @@ const middleware = [
 
 const store = createStore(
   rootReducer,
-  // persistedState,
   compose(
     applyMiddleware( // can use thunks, sagas, etc.
       ...middleware
@@ -28,12 +27,6 @@ const store = createStore(
     typeof window === 'object' && typeof window.devToolsExtension !== 'undefined' ? window.devToolsExtension() : f => f
   )
 );
-
-// store.subscribe(throttle(() => {
-//   saveState({
-//    randomState
-//   });
-// }), 1000);
 
 sagaMiddleware.run(rootSaga);
 
