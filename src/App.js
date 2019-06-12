@@ -9,6 +9,7 @@ import LoadingSpinner from './components/LoadingSpinner';
 
 import Cart from './components/Cart';
 import Home from './components/Home';
+import NoMatch from './components/NoMatch';
 import Register from './components/Register';
 import StyledHeader from './components/StyledHeader';
 
@@ -59,7 +60,7 @@ class App extends React.Component {
 
                   <PublicRoute authed={authed} exact path='/about' component={About} />
 
-                  <Redirect to='/' />
+                  <Route component={NoMatch} />
                 </Switch>
               </Suspense>
             </div>
