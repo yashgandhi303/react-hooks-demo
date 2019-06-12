@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Button, Container, Divider, Flag, Grid, Header, Loader } from 'semantic-ui-react';
 import ItemCard from '../components/ItemCard';
 import { AppContext } from "../hooks/AppProvider";
+import ErrorBoundary from '../utils/ErrorBoundary';
 
 const Home = () => {
   const { state, addToCart } = useContext(AppContext);
@@ -63,4 +64,10 @@ const Home = () => {
   )
 };
 
-export default Home;
+export default function HomeWithErrorBoundary(props) {
+  return (
+    <ErrorBoundary>
+      <Home {...props} />
+    </ErrorBoundary>
+  )
+}
