@@ -3,15 +3,18 @@ import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { createGlobalStyle } from 'styled-components';
 
-import { AppContextProvider } from './hooks/AppProvider';
-import Login from './components/Login';
-import LoadingSpinner from './components/LoadingSpinner';
+import { AppContextProvider } from './providers/AppProvider';
+import { ThemeContextProvider } from './providers/ThemeProvider';
 
 import Cart from './components/Cart';
 import Home from './components/Home';
+import Login from './components/Login';
+import LoadingSpinner from './components/LoadingSpinner';
 import NoMatch from './components/NoMatch';
 import Register from './components/Register';
 import StyledHeader from './components/StyledHeader';
+
+import "./styles.css";
 
 const About = lazy(() => import('./components/About'));
 const AdminCP = lazy(() => import('./components/AdminCP'));
@@ -38,34 +41,35 @@ class App extends React.Component {
     const { authed } = this.state;
     return (
       <AppContextProvider>
-        <BrowserRouter>
-          <div>
-            <Helmet>
-              <meta charSet="utf-8" />
-              <title>Carrinho</title>
-              <link rel="canonical" href="https://carrinho1.herokuapp.com/" />
-            </Helmet>
-            <StyledHeader authed={authed} />
-            <div className='container'>
-              <Suspense fallback={<LoadingSpinner />}>
-                <Switch>
-                  <Route exact path='/' component={Home} />
+        <ThemeContextProvider>
+          <BrowserRouter>
+            <div>
+              <Helmet>
+                <meta charSet="utf-8" />
+                <title>Carrinho</title>
+                <link rel="canonical" href="https://carrinho1.herokuapp.com/" />
+              </Helmet>
+              <StyledHeader authed={authed} />
+              <div className='container'>
+                <Suspense fallback={<LoadingSpinner />}>
+                  <Switch>
+                    <Route exact path='/' component={Home} />
 
-                  <PublicRoute authed={authed} exact path='/cart' component={Cart} />
-                  <PublicRoute authed={authed} exact path='/register' component={Register} />
-                  <PublicRoute authed={authed} exact path='/login' component={Login} />
+                    <PublicRoute authed={authed} exact path='/cart' component={Cart} />
+                    <PublicRoute authed={authed} exact path='/register' component={Register} />
+                    <PublicRoute authed={authed} exact path='/login' component={Login} />
 
-                  {/* /admin/* would be protected... */}
-                  <PublicRoute authed={authed} exact path='/admin' component={AdminCP} />
+                    {/* /admin/* would be protected... */}
+                    <PublicRoute authed={authed} exact path='/admin' component={AdminCP} />
+                    <PublicRoute authed={authed} exact path='/about' component={About} />
 
-                  <PublicRoute authed={authed} exact path='/about' component={About} />
-
-                  <Route component={NoMatch} />
-                </Switch>
-              </Suspense>
+                    <Route component={NoMatch} />
+                  </Switch>
+                </Suspense>
+              </div>
             </div>
-          </div>
-        </BrowserRouter>
+          </BrowserRouter>
+        </ThemeContextProvider>
       </AppContextProvider>
     )
   }

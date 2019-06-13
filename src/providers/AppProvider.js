@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import useAppReducer from './appReducer';
+import useAppReducer from '../hooks/appReducer';
 import Api from '../api';
 import * as actions from '../actions/actionTypes';
 

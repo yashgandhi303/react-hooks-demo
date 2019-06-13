@@ -1,14 +1,22 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Card, Image, Rating } from 'semantic-ui-react';
+import { ThemeContext } from '../providers/ThemeProvider';
+import { parseIntWithFallback } from '../utils/nutils';
 
 const ItemCard = ({ location, item, onClickFn }) => {
   const initialAmt = location === "cart" ? item.amt : 1;
 
   const [itemAmt, setState] = useState(initialAmt);
+  const [theme] = useContext(ThemeContext);
+  const [raised, setRaised] = useState(false);
 
   return (
-    <Card>
+    <Card
+      className={`${theme}`}
+      onClick={() => setRaised(!raised)}
+      raised={raised}
+    >
       <Image
         alt={`${item.name}`}
         centered={true}
@@ -41,8 +49,8 @@ const ItemCard = ({ location, item, onClickFn }) => {
             id={`item-${item.id}-quantity`}
             type={"number"}
             value={itemAmt}
-            onChange={ (e) => setState(parseInt(e.target.value)) }
-            onBlur={ (e) => setState(parseInt(e.target.value)) }
+            onChange={ (e) => setState(parseIntWithFallback(e.target.value)) }
+            onBlur={ (e) => setState(parseIntWithFallback(e.target.value)) }
           />
         </label>
         <Button
