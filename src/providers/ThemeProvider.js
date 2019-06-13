@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 const ThemeContext = React.createContext(["light", () => {}]);
 
 const ThemeContextProvider = (props) => {
-  const themeHook = useState("dark");
+  const themeHook = useState("light");
   return (
     <ThemeContext.Provider value={themeHook}>
       {props.children}

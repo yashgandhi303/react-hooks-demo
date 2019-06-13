@@ -5,6 +5,7 @@ import { isDev } from './constants';
 
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
+import "react-toggle/style.css";
 
 const rootElement = document.getElementById("root");
 
