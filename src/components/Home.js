@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Container, Divider, Flag, Grid, Header, Loader } from 'semantic-ui-react';
 import ItemCard from '../components/ItemCard';
-import { AppContext } from "../hooks/AppProvider";
+import { AppContext } from "../providers/AppProvider";
 import ErrorBoundary from '../utils/ErrorBoundary';
 
 const Home = () => {

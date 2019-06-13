@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
 import { Container } from 'semantic-ui-react';
 import { login, sendPasswordResetEmail } from '../auth';

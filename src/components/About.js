@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, List } from 'semantic-ui-react';
-import {Helmet} from 'react-helmet';
+import { Helmet } from 'react-helmet';
 
 const About = () => (
   <div id='about-div'>

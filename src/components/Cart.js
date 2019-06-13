@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Helmet } from "react-helmet";
 import { Container, Button, Header, Grid } from 'semantic-ui-react';
 import ItemCard from '../components/ItemCard';
-import { AppContext } from '../hooks/AppProvider';
+import { AppContext } from '../providers/AppProvider';
 
 const Cart = () => {
   const { state: { cartItems }, checkout , removeFromCart } = useContext(AppContext);
