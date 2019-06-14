@@ -55,6 +55,11 @@ const StyledHeader = ({ authed = false }) => {
           <Toggle
             defaultChecked={theme === "dark"}
             onChange={() => updateTheme()}
+            className='theme-toggle'
+            icons={{
+              checked: <Icon name='moon' color={"yellow"} />,
+              unchecked: <Icon name='sun' color={"yellow"} />
+            }}
           />
         </Menu.Item>
       </Menu.Menu>

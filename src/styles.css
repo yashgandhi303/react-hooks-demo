@@ -39,6 +39,19 @@
     text-align: center;
 }
 
+.menu .react-toggle-track-check,
+.menu .react-toggle-track-x {
+    height: 0;
+}
+
+.theme-toggle.react-toggle--checked .react-toggle-track {
+    background-color: white;
+}
+
+.theme-toggle.react-toggle--checked .react-toggle-track {
+    background-color: darkblue;
+}
+
 .stock-amount {
     color: rgba(0,0,0,.87);
 }
