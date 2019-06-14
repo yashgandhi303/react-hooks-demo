@@ -6,14 +6,39 @@
     text-decoration: underline;
 }
 
-.stock-amount {
-    color: rgba(0,0,0,.87);
-}
-
 .item-grid .column .card {
     min-height: 360px;
 }
 
 .item-grid .card button {
     margin-top: 6px;
+}
+
+#modal-root {
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.9);
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 20;
+}
+
+#modal-root:empty {
+    display: none;
+}
+
+#modal-root div {
+    background-color: white;
+    border-radius: 6px;
+    max-width: 550px;
+    padding: 30px;
+    text-align: center;
+}
+
+.stock-amount {
+    color: rgba(0,0,0,.87);
 }

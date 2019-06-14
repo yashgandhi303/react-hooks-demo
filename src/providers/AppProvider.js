@@ -73,7 +73,8 @@ const AppContextProvider = (props) => {
       const res = await Api.buyItems(reqData);
       dispatch({
         type: actions.BUY_CART_ITEMS,
-      })
+      });
+      return true;
     } catch (error) {
       dispatch({ type: actions.ERROR, payload: error });
     }
