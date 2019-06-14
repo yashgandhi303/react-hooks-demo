@@ -45,6 +45,7 @@ const ItemCard = ({ location, item, onClickFn }) => {
       <Card.Content extra>
         <label htmlFor={`item-${item.id}-quantity`}>
           Amount
+          <br />
           <input
             id={`item-${item.id}-quantity`}
             type={"number"}

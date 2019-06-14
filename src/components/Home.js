@@ -45,7 +45,7 @@ const Home = () => {
             <Grid container stackable className={"item-grid"}>
               {
                 Object.entries(stockItems).map(([id, item]) => (
-                  <Grid.Column width={4} key={id}>
+                  <Grid.Column mobile={16} tablet={8} computer={4} key={id}>
                     <ItemCard
                       key={id}
                       item={item}

@@ -14,6 +14,12 @@
     margin-top: 6px;
 }
 
+.item-grid .card .content {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
 #modal-root {
     align-items: center;
     background-color: rgba(0, 0, 0, 0.9);

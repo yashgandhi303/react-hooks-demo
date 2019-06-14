@@ -50,19 +50,17 @@ const StyledHeader = ({ authed = false }) => {
         Admin
       </Menu.Item>
 
-      <Menu.Menu position='right'>
-        <Menu.Item>
-          <Toggle
-            defaultChecked={theme === "dark"}
-            onChange={() => updateTheme()}
-            className='theme-toggle'
-            icons={{
-              checked: <Icon name='moon' color={"yellow"} />,
-              unchecked: <Icon name='sun' color={"yellow"} />
-            }}
-          />
-        </Menu.Item>
-      </Menu.Menu>
+      <Menu.Item>
+        <Toggle
+          defaultChecked={theme === "dark"}
+          onChange={() => updateTheme()}
+          className='theme-toggle'
+          icons={{
+            checked: <Icon name='moon' color={"yellow"} />,
+            unchecked: <Icon name='sun' color={"yellow"} />
+          }}
+        />
+      </Menu.Item>
 
       <Menu.Menu position='right'>
         <Menu.Item
