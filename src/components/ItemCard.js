@@ -29,7 +29,7 @@ const ItemCard = ({ location, item, onClickFn }) => {
         <Card.Header>{item.name}</Card.Header>
         <Rating
           icon='star'
-          defaultRating={Math.floor(Math.random() * 6)}
+          defaultRating={item.rating}
           maxRating={5}
           disabled
         />
@@ -55,6 +55,7 @@ const ItemCard = ({ location, item, onClickFn }) => {
           />
         </label>
         <Button
+          inverted={theme === 'dark'}
           onClick={ () => onClickFn(item, itemAmt) }
           disabled={itemAmt === 0}
         >

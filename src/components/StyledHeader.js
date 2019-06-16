@@ -52,13 +52,14 @@ const StyledHeader = ({ authed = false }) => {
 
       <Menu.Item>
         <Toggle
-          defaultChecked={theme === "dark"}
-          onChange={() => updateTheme()}
+          aria-label={"toggle theme mode"}
           className='theme-toggle'
+          defaultChecked={theme === "dark"}
           icons={{
             checked: <Icon name='moon' color={"yellow"} />,
             unchecked: <Icon name='sun' color={"yellow"} />
           }}
+          onChange={() => updateTheme()}
         />
       </Menu.Item>
 

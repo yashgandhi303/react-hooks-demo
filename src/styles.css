@@ -61,3 +61,24 @@
 .stock-amount {
     color: rgba(0,0,0,.87);
 }
+
+.ui.card {
+    padding-top: 10px;
+}
+
+/* dark mode styles */
+a.ui.card.dark,
+a.ui.card.dark:hover {
+    /*background-color: #282C35;*/
+    background-color: #101e26;
+}
+
+a.ui.card.dark .content *,
+a.ui.card.dark.raised .content * {
+    color: white !important;
+}
+
+a.ui.card.dark .content input,
+a.ui.card.dark .content button:hover {
+    color: black !important;
+}
