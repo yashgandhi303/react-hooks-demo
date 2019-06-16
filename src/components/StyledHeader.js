@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Toggle from 'react-toggle';
 import { Button, Icon, Menu } from 'semantic-ui-react';
+import { ThemeContext } from '../providers/ThemeProvider';
 
 const logout = () => {
   // TODO: implement with firebase auth
@@ -9,6 +11,12 @@ const logout = () => {
 
 const StyledHeader = ({ authed = false }) => {
   const [activeItem, setActiveItem] = useState(window.location.pathname);
+  const [theme, setTheme] = useContext(ThemeContext);
+
+  const updateTheme = () => {
+    const newTheme = theme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+  };
 
   return (
     <Menu stackable inverted pointing>
@@ -40,6 +48,19 @@ const StyledHeader = ({ authed = false }) => {
         to={"/admin"}
       >
         Admin
+      </Menu.Item>
+
+      <Menu.Item>
+        <Toggle
+          aria-label={"toggle theme mode"}
+          className='theme-toggle'
+          defaultChecked={theme === "dark"}
+          icons={{
+            checked: <Icon name='moon' color={"yellow"} />,
+            unchecked: <Icon name='sun' color={"yellow"} />
+          }}
+          onChange={() => updateTheme()}
+        />
       </Menu.Item>
 
       <Menu.Menu position='right'>

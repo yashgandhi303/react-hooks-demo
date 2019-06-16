@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import useAppReducer from './appReducer';
+import useAppReducer from '../hooks/appReducer';
 import Api from '../api';
 import * as actions from '../actions/actionTypes';
 
@@ -34,7 +34,6 @@ const AppContextProvider = (props) => {
 
   function addToCart(item, amt) {
     try {
-      // const newStockAmt = state.stockItems[item.id].stock - amt;
       dispatch({
         type: actions.ADD_ITEM_TO_CART,
         payload: {
@@ -49,7 +48,6 @@ const AppContextProvider = (props) => {
 
   function removeFromCart(item, amt) {
     try {
-      // const newStockAmt = state.stockItems[item.id].stock - amt;
       dispatch({
         type: actions.REMOVE_FROM_CART,
         payload: {
@@ -75,7 +73,8 @@ const AppContextProvider = (props) => {
       const res = await Api.buyItems(reqData);
       dispatch({
         type: actions.BUY_CART_ITEMS,
-      })
+      });
+      return true;
     } catch (error) {
       dispatch({ type: actions.ERROR, payload: error });
     }

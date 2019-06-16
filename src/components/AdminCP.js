@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Helmet } from 'react-helmet';
 import { Bar, BarChart, CartesianGrid, Legend, Tooltip, YAxis, XAxis } from 'recharts';
 import { Container, Header } from 'semantic-ui-react';
-import { AppContext } from '../hooks/AppProvider';
+import { AppContext } from '../providers/AppProvider';
 // import AddItemForm from '../components/AddItemForm';
 
 const AdminCP = () => {

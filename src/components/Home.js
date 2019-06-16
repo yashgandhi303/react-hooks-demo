@@ -2,7 +2,8 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Container, Divider, Flag, Grid, Header, Loader } from 'semantic-ui-react';
 import ItemCard from '../components/ItemCard';
-import { AppContext } from "../hooks/AppProvider";
+import { AppContext } from "../providers/AppProvider";
+import ErrorBoundary from '../utils/ErrorBoundary';
 
 const Home = () => {
   const { state, addToCart } = useContext(AppContext);
@@ -32,7 +33,7 @@ const Home = () => {
         )
       }
 
-      <Header as='h5'>Number of items in cart: {Object.keys(cartItems).length}</Header>
+      <Header as='h4'>Number of items in cart: {Object.keys(cartItems).length}</Header>
 
       <Divider />
 
@@ -44,22 +45,29 @@ const Home = () => {
             <Grid container stackable className={"item-grid"}>
               {
                 Object.entries(stockItems).map(([id, item]) => (
-                  <Grid.Column width={4} key={id}>
+                  <Grid.Column mobile={16} tablet={8} computer={4} key={id}>
                     <ItemCard
-                      onClickFn={addItemToCart}
-                      item={item}
                       key={id}
+                      item={item}
                       location={"home"}
+                      onClickFn={addItemToCart}
                     />
                   </Grid.Column>
                 ))
               }
             </Grid>
-          ) :
-          <p>No items in stock</p>
+          ) : (
+            <p>No items in stock</p>
+          )
       }
     </Container>
   )
 };
 
-export default Home;
+export default function HomeWithErrorBoundary(props) {
+  return (
+    <ErrorBoundary>
+      <Home {...props} />
+    </ErrorBoundary>
+  )
+}
