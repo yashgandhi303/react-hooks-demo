@@ -1,20 +1,26 @@
 import { ref, firebaseAuth } from './database';
 
-export function auth (email, pw) {
-  return firebaseAuth().createUserWithEmailAndPassword(email, pw)
-    .then(saveUser);
+export function auth(email, pw) {
+  return firebaseAuth.createUserWithEmailAndPassword(email, pw)
+    .then(saveUser)
 }
 
-export function logout () {
-  return firebaseAuth().signOut();
+export function checkAuthStatus(user) {
+  if (!user) return false;
+
+  return Object.keys(user).length > 0 && true; // TODO implement
 }
 
-export function login (email, pw) {
-  return firebaseAuth().signInWithEmailAndPassword(email, pw);
+export function logout() {
+  return firebaseAuth.signOut();
 }
 
-export function sendPasswordResetEmail (email) {
-  return firebaseAuth().sendPasswordResetEmail(email);
+export function login(email, pw) {
+  return firebaseAuth.signInWithEmailAndPassword(email, pw);
+}
+
+export function sendPasswordResetEmail(email) {
+  return firebaseAuth.sendPasswordResetEmail(email);
 }
 
 export function saveUser (user) {

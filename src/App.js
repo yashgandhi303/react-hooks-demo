@@ -3,7 +3,11 @@ import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { createGlobalStyle } from 'styled-components';
 
+import { checkAuthStatus } from './auth';
+import { SITE_URL } from './constants';
+
 import { AppContextProvider } from './providers/AppProvider';
+import { AuthProvider } from './providers/AuthProvider';
 import { ThemeContextProvider } from './providers/ThemeProvider';
 
 import Cart from './components/Cart';
@@ -19,61 +23,65 @@ import "./styles.css";
 const About = lazy(() => import('./components/About'));
 const AdminCP = lazy(() => import('./components/AdminCP'));
 
-function PublicRoute ({ component: Component, authed, ...rest }) {
+function PrivateRoute ({ component: Component, user, ...rest }) {
   return (
     <Route
       {...rest}
-      render={(props) => authed === false
-        ? <Component { ...props } />
-        : <Redirect to='/dashboard' />}
+      render={(props) => checkAuthStatus(user) === false
+        ? <Redirect to='/login' />
+        : <Component {...props} />
+      }
     />
   )
 }
 
-class App extends React.Component {
-  // TODO: move all the auth logic to redux, sagas, etc. (global...)
-  state = {
-    authed: false,
-    loading: false,
-  };
+const App = () => (
+  <AppContextProvider>
+    <ThemeContextProvider>
+      <AuthProvider render={ (user) => (
+        <BrowserRouter>
+          <div>
+            <Helmet>
+              <meta charSet="utf-8" />
+              <title>Carrinho</title>
+              <link rel="canonical" href={SITE_URL} />
+            </Helmet>
+            <StyledHeader user={user} />
+            <div className='container'>
+              <Suspense fallback={<LoadingSpinner/>}>
+                <Switch>
+                  <Route exact path='/' component={Home} />
+                  <Route exact path='/about' component={About} />
+                  <Route user={user} exact path='/cart' component={Cart} />
 
-  render() {
-    const { authed } = this.state;
-    return (
-      <AppContextProvider>
-        <ThemeContextProvider>
-          <BrowserRouter>
-            <div>
-              <Helmet>
-                <meta charSet="utf-8" />
-                <title>Carrinho</title>
-                <link rel="canonical" href="https://carrinho1.herokuapp.com/" />
-              </Helmet>
-              <StyledHeader authed={authed} />
-              <div className='container'>
-                <Suspense fallback={<LoadingSpinner />}>
-                  <Switch>
-                    <Route exact path='/' component={Home} />
+                  {/* redirect home if user is already logged in */}
+                  <Route exact path='/register' render={(props) => (
+                    checkAuthStatus(user) === true
+                      ? <Redirect to='/' />
+                      : <Register {...props} />
+                    )}
+                  />
+                  <Route exact path='/login' render={(props) => (
+                     checkAuthStatus(user) === true
+                      ? <Redirect to='/' />
+                      : <Login {...props} />
+                    )}
+                  />
 
-                    <PublicRoute authed={authed} exact path='/cart' component={Cart} />
-                    <PublicRoute authed={authed} exact path='/register' component={Register} />
-                    <PublicRoute authed={authed} exact path='/login' component={Login} />
+                  {/* /admin is protected... */}
+                  <PrivateRoute user={user} exact path='/admin' component={AdminCP} />
 
-                    {/* /admin/* would be protected... */}
-                    <PublicRoute authed={authed} exact path='/admin' component={AdminCP} />
-                    <PublicRoute authed={authed} exact path='/about' component={About} />
-
-                    <Route component={NoMatch} />
-                  </Switch>
-                </Suspense>
-              </div>
+                  <Route component={NoMatch} />
+                </Switch>
+              </Suspense>
             </div>
-          </BrowserRouter>
-        </ThemeContextProvider>
-      </AppContextProvider>
-    )
-  }
-}
+          </div>
+        </BrowserRouter>
+      )} />
+    </ThemeContextProvider>
+  </AppContextProvider>
+);
+
 
 createGlobalStyle`
   body {
