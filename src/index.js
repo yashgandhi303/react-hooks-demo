@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import 'semantic-ui-css/semantic.min.css';
-import { isDev } from './constants';
+import { isDev } from './constants/config';
 
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';

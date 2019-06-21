@@ -2,6 +2,8 @@ import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Toggle from 'react-toggle';
 import { Button, Icon, Menu } from 'semantic-ui-react';
+
+import * as ROUTES from '../constants/routes';
 import { ThemeContext } from '../providers/ThemeProvider';
 
 const logout = () => {
@@ -22,30 +24,30 @@ const StyledHeader = ({ authed = false }) => {
     <Menu stackable inverted pointing>
       <Menu.Item
         name='home'
-        active={activeItem === '/'}
-        onClick={() => setActiveItem('/')}
+        active={activeItem === ROUTES.HOME}
+        onClick={() => setActiveItem(ROUTES.HOME)}
         as={Link}
-        to={"/"}
+        to={ROUTES.HOME}
       >
         Carrinho.com <Icon name={'shopping cart'} size={"large"} />
       </Menu.Item>
 
       <Menu.Item
         name='about'
-        active={activeItem === '/about'}
-        onClick={() => setActiveItem('/about')}
+        active={activeItem === ROUTES.ABOUT}
+        onClick={() => setActiveItem(ROUTES.ABOUT)}
         as={Link}
-        to={"/about"}
+        to={ROUTES.ABOUT}
       >
         About
       </Menu.Item>
 
       <Menu.Item
         name='admin'
-        active={activeItem === '/admin'}
-        onClick={() => setActiveItem('/admin')}
+        active={activeItem === ROUTES.ADMIN}
+        onClick={() => setActiveItem(ROUTES.ADMIN)}
         as={Link}
-        to={"/admin"}
+        to={ROUTES.ADMIN}
       >
         Admin
       </Menu.Item>
@@ -66,25 +68,25 @@ const StyledHeader = ({ authed = false }) => {
       <Menu.Menu position='right'>
         <Menu.Item
           name='cart'
-          active={activeItem === '/cart'}
-          onClick={() => setActiveItem('/cart')}
+          active={activeItem === ROUTES.CART}
+          onClick={() => setActiveItem(ROUTES.CART)}
           as={Link}
-          to={"/cart"}
+          to={ROUTES.CART}
         >
           Cart <Icon name={'cart'} size={"large"} color={"blue"} />
         </Menu.Item>
 
         { authed ? // TODO: implement
           <Menu.Item className='item'>
-            <Button onClick={logout} to="logout">Logout</Button>
+            <Button onClick={logout}>Logout</Button>
           </Menu.Item>
           :
           <>
             <Menu.Item>
-              <Button as={Link} to="register" inverted color='black'>Sign Up</Button>
+              <Button as={Link} to={ROUTES.REGISTER} inverted color='black'>Sign Up</Button>
             </Menu.Item>
             <Menu.Item className='item'>
-              <Button as={Link} to="login">Log in</Button>
+              <Button as={Link} to={ROUTES.LOGIN}>Log in</Button>
             </Menu.Item>
           </>
         }

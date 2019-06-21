@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { isDev } from './constants';
+import { isDev } from './constants/config';
 import { config } from './firebaseConfig';
 
 const BASE_URL = config.databaseURL;

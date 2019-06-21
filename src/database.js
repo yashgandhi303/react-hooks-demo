@@ -1,7 +1,7 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
-import { isDev } from './constants';
+import { isDev } from './constants/config';
 import { config } from './firebaseConfig';
 
 if (isDev) {

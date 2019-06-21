@@ -4,7 +4,8 @@ import { Helmet } from 'react-helmet';
 import { createGlobalStyle } from 'styled-components';
 
 import { checkAuthStatus } from './auth';
-import { SITE_URL } from './constants';
+import { SITE_URL } from './constants/config';
+import * as ROUTES from './constants/routes';
 
 import { AppContextProvider } from './providers/AppProvider';
 import { AuthProvider } from './providers/AuthProvider';
@@ -12,8 +13,8 @@ import { ThemeContextProvider } from './providers/ThemeProvider';
 
 import Cart from './components/Cart';
 import Home from './components/Home';
-import Login from './components/Login';
 import LoadingSpinner from './components/LoadingSpinner';
+import Login from './components/Login';
 import NoMatch from './components/NoMatch';
 import Register from './components/Register';
 import StyledHeader from './components/StyledHeader';
@@ -50,26 +51,26 @@ const App = () => (
             <div className='container'>
               <Suspense fallback={<LoadingSpinner/>}>
                 <Switch>
-                  <Route exact path='/' component={Home} />
-                  <Route exact path='/about' component={About} />
-                  <Route user={user} exact path='/cart' component={Cart} />
+                  <Route exact path={ROUTES.HOME} component={Home} />
+                  <Route exact path={ROUTES.ABOUT} component={About} />
+                  <Route user={user} exact path={ROUTES.CART} component={Cart} />
 
                   {/* redirect home if user is already logged in */}
-                  <Route exact path='/register' render={(props) => (
+                  <Route exact path={ROUTES.REGISTER} render={(props) => (
                     checkAuthStatus(user) === true
-                      ? <Redirect to='/' />
+                      ? <Redirect to={ROUTES.HOME} />
                       : <Register {...props} />
                     )}
                   />
-                  <Route exact path='/login' render={(props) => (
+                  <Route exact path={ROUTES.LOGIN} render={(props) => (
                      checkAuthStatus(user) === true
-                      ? <Redirect to='/' />
+                      ? <Redirect to={ROUTES.HOME} />
                       : <Login {...props} />
                     )}
                   />
 
                   {/* /admin is protected... */}
-                  <PrivateRoute user={user} exact path='/admin' component={AdminCP} />
+                  <PrivateRoute user={user} exact path={ROUTES.ADMIN} component={AdminCP} />
 
                   <Route component={NoMatch} />
                 </Switch>
