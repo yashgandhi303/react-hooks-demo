@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import {Button, Container, Divider, Flag, Grid, Header, Loader, Menu} from 'semantic-ui-react';
 import ItemCard from '../components/ItemCard';
 import { AppContext } from "../providers/AppProvider";
-import ErrorBoundary from '../utils/ErrorBoundary';
-import PrettyCodeFormatter from '../utils/PrettyCodeFormatter';
+import ErrorBoundary from '../common/ErrorBoundary';
+import PrettyCodeFormatter from '../common/PrettyCodeFormatter';
 
 const Home = ({ user }) => {
   const { state, addToCart } = useContext(AppContext);
