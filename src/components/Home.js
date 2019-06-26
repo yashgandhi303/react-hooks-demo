@@ -1,11 +1,12 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Container, Divider, Flag, Grid, Header, Loader } from 'semantic-ui-react';
+import {Button, Container, Divider, Flag, Grid, Header, Loader, Menu} from 'semantic-ui-react';
 import ItemCard from '../components/ItemCard';
 import { AppContext } from "../providers/AppProvider";
 import ErrorBoundary from '../utils/ErrorBoundary';
+import PrettyCodeFormatter from '../utils/PrettyCodeFormatter';
 
-const Home = () => {
+const Home = ({ user }) => {
   const { state, addToCart } = useContext(AppContext);
   const { cartItems, loading, stockItems } = state;
 
@@ -21,6 +22,8 @@ const Home = () => {
         Welcome to Carrinho &nbsp;
         <Flag name={'br'} />
       </Header>
+
+      <PrettyCodeFormatter data={user} />
 
       {
         cartItems && Object.keys(cartItems).length > 0 && (

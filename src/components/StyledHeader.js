@@ -3,12 +3,25 @@ import { Link } from 'react-router-dom';
 import Toggle from 'react-toggle';
 import { Button, Icon, Menu } from 'semantic-ui-react';
 
+import { logout } from '../auth';
 import * as ROUTES from '../constants/routes';
 import { ThemeContext } from '../providers/ThemeProvider';
 
-const logout = () => {
-  // TODO: implement with firebase auth
+const logoutUser = () => {
   console.log("logging out");
+  logout()
+    .then( (res) => {
+      console.log("res: ", res);
+      this.props.setUser(null);
+      // eslint-disable-next-line no-restricted-globals
+      history.push("/login");
+    })
+    .catch(err => {
+      console.error("err: ", err);
+      this.props.setUser(null);
+      // eslint-disable-next-line no-restricted-globals
+      history.push("/login");
+    })
 };
 
 const StyledHeader = ({ authed = false }) => {
@@ -76,9 +89,9 @@ const StyledHeader = ({ authed = false }) => {
           Cart <Icon name={'cart'} size={"large"} color={"blue"} />
         </Menu.Item>
 
-        { authed ? // TODO: implement
+        { authed ?
           <Menu.Item className='item'>
-            <Button onClick={logout}>Logout</Button>
+            <Button onClick={logoutUser}>Logout</Button>
           </Menu.Item>
           :
           <>

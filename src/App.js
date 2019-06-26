@@ -39,46 +39,49 @@ function PrivateRoute ({ component: Component, user, ...rest }) {
 const App = () => (
   <AppContextProvider>
     <ThemeContextProvider>
-      <AuthProvider render={ (user) => (
-        <BrowserRouter>
-          <div>
-            <Helmet>
-              <meta charSet="utf-8" />
-              <title>Carrinho</title>
-              <link rel="canonical" href={SITE_URL} />
-            </Helmet>
-            <StyledHeader user={user} />
-            <div className='container'>
-              <Suspense fallback={<LoadingSpinner/>}>
-                <Switch>
-                  <Route exact path={ROUTES.HOME} component={Home} />
-                  <Route exact path={ROUTES.ABOUT} component={About} />
-                  <Route user={user} exact path={ROUTES.CART} component={Cart} />
+      <AuthProvider render={ (authState) => {
+        // TODO - find a better way to deal with the auth state
+        return (
+          <BrowserRouter>
+            <div>
+              <Helmet>
+                <meta charSet="utf-8" />
+                <title>Carrinho</title>
+                <link rel="canonical" href={SITE_URL} />
+              </Helmet>
+              <StyledHeader authed={checkAuthStatus(authState.user)} />
+              <div className='container'>
+                <Suspense fallback={<LoadingSpinner />}>
+                  <Switch>
+                    <Route exact path={ROUTES.HOME} component={Home} user={authState.user} />
+                    <Route exact path={ROUTES.ABOUT} component={About} />
+                    <Route user={authState.user} exact path={ROUTES.CART} component={Cart} />
 
-                  {/* redirect home if user is already logged in */}
-                  <Route exact path={ROUTES.REGISTER} render={(props) => (
-                    checkAuthStatus(user) === true
-                      ? <Redirect to={ROUTES.HOME} />
-                      : <Register {...props} />
+                    {/* redirect home if user is already logged in */}
+                    <Route exact path={ROUTES.REGISTER} render={(props) => (
+                      checkAuthStatus(authState.user) === true
+                        ? <Redirect to={ROUTES.HOME}/>
+                        : <Register {...props} />
                     )}
-                  />
-                  <Route exact path={ROUTES.LOGIN} render={(props) => (
-                     checkAuthStatus(user) === true
-                      ? <Redirect to={ROUTES.HOME} />
-                      : <Login {...props} />
+                    />
+                    <Route exact path={ROUTES.LOGIN} render={(props) => (
+                      checkAuthStatus(authState.user) === true
+                        ? <Redirect to={ROUTES.HOME}/>
+                        : <Login {...props} setUser={authState.setUser} />
                     )}
-                  />
+                    />
 
-                  {/* /admin is protected... */}
-                  <PrivateRoute user={user} exact path={ROUTES.ADMIN} component={AdminCP} />
+                    {/* /admin is protected... */}
+                    <PrivateRoute user={authState.user} exact path={ROUTES.ADMIN} component={AdminCP} />
 
-                  <Route component={NoMatch} />
-                </Switch>
-              </Suspense>
+                    <Route component={NoMatch} />
+                  </Switch>
+                </Suspense>
+              </div>
             </div>
-          </div>
-        </BrowserRouter>
-      )} />
+          </BrowserRouter>
+        );
+      }} />
     </ThemeContextProvider>
   </AppContextProvider>
 );

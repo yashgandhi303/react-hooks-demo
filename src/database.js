@@ -2,7 +2,7 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
 import { isDev } from './constants/config';
-import { config } from './firebaseConfig';
+import { config } from './constants/firebaseConfig';
 
 if (isDev) {
   console.log('db config: ', config);

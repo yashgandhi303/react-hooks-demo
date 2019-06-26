@@ -6,6 +6,7 @@ export function auth(email, pw) {
 }
 
 export function checkAuthStatus(user) {
+  console.log("checkAuthStatus: ", user);
   if (!user) return false;
 
   return Object.keys(user).length > 0 && true; // TODO implement
