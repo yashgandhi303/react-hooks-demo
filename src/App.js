@@ -49,7 +49,7 @@ const App = () => (
                 <title>Carrinho</title>
                 <link rel="canonical" href={SITE_URL} />
               </Helmet>
-              <StyledHeader authed={checkAuthStatus(authState.user)} />
+              <StyledHeader authed={checkAuthStatus(authState.user)} setUser={authState.setUser} />
               <div className='container'>
                 <Suspense fallback={<LoadingSpinner />}>
                   <Switch>
@@ -60,18 +60,18 @@ const App = () => (
                     {/* redirect home if user is already logged in */}
                     <Route exact path={ROUTES.REGISTER} render={(props) => (
                       checkAuthStatus(authState.user) === true
-                        ? <Redirect to={ROUTES.HOME}/>
+                        ? <Redirect to={ROUTES.HOME} />
                         : <Register {...props} />
                     )}
                     />
                     <Route exact path={ROUTES.LOGIN} render={(props) => (
                       checkAuthStatus(authState.user) === true
-                        ? <Redirect to={ROUTES.HOME}/>
+                        ? <Redirect to={ROUTES.HOME} />
                         : <Login {...props} setUser={authState.setUser} />
                     )}
                     />
 
-                    {/* /admin is protected... */}
+                    {/* protected routes */}
                     <PrivateRoute user={authState.user} exact path={ROUTES.ADMIN} component={AdminCP} />
 
                     <Route component={NoMatch} />

@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import Toggle from 'react-toggle';
 import { Button, Icon, Menu } from 'semantic-ui-react';
 
@@ -7,30 +7,30 @@ import { logout } from '../auth';
 import * as ROUTES from '../constants/routes';
 import { ThemeContext } from '../providers/ThemeProvider';
 
-const logoutUser = () => {
-  console.log("logging out");
-  logout()
-    .then( (res) => {
-      console.log("res: ", res);
-      this.props.setUser(null);
-      // eslint-disable-next-line no-restricted-globals
-      history.push("/login");
-    })
-    .catch(err => {
-      console.error("err: ", err);
-      this.props.setUser(null);
-      // eslint-disable-next-line no-restricted-globals
-      history.push("/login");
-    })
-};
-
-const StyledHeader = ({ authed = false }) => {
+const StyledHeader = ({ authed = false, setUser, history }) => {
   const [activeItem, setActiveItem] = useState(window.location.pathname);
   const [theme, setTheme] = useContext(ThemeContext);
 
   const updateTheme = () => {
     const newTheme = theme === "light" ? "dark" : "light";
     setTheme(newTheme);
+  };
+
+  const logoutUser = () => {
+    console.log("logging out");
+    logout()
+      .then( (res) => {
+        console.log("res: ", res);
+        setUser(null);
+        // eslint-disable-next-line no-restricted-globals
+        history.push("/login");
+      })
+      .catch(err => {
+        console.error("err: ", err);
+        setUser(null);
+        // eslint-disable-next-line no-restricted-globals
+        history.push("/login");
+      })
   };
 
   return (
@@ -108,4 +108,4 @@ const StyledHeader = ({ authed = false }) => {
   )
 };
 
-export default StyledHeader;
+export default withRouter(StyledHeader);

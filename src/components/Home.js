@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import {Button, Container, Divider, Flag, Grid, Header, Loader, Menu} from 'semantic-ui-react';
+import { Button, Container, Divider, Flag, Grid, Header, Loader } from 'semantic-ui-react';
 import ItemCard from '../components/ItemCard';
 import { AppContext } from "../providers/AppProvider";
 import ErrorBoundary from '../common/ErrorBoundary';
@@ -14,7 +14,10 @@ const Home = ({ user }) => {
     addToCart(item, amt);
   }
 
-  if (loading) return <Loader content='Loading' />;
+  if (loading) {
+    return <Loader content='Loading' />;
+  }
+
   return (
     <Container className='home-div'>
       <Header as='h1'>
@@ -72,5 +75,5 @@ export default function HomeWithErrorBoundary(props) {
     <ErrorBoundary>
       <Home {...props} />
     </ErrorBoundary>
-  )
+  );
 }

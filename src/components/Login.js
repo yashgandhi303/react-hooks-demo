@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
+import { withRouter } from 'react-router';
 import { Button, Container } from 'semantic-ui-react';
 import { login, sendPasswordResetEmail } from '../auth';
 
@@ -24,14 +25,14 @@ class Login extends Component {
         console.log("res: ", res);
         this.props.setUser(res.user);
         // eslint-disable-next-line no-restricted-globals
-        history.push("/");
+        this.props.history.push("/");
       })
       .catch(() => {
-          this.setState(state => ({
-            ...state,
-            loginMessage: 'Invalid username/password.',
-          }));
-        })
+        this.setState(state => ({
+          ...state,
+          loginMessage: 'Invalid username/password.',
+        }));
+      })
   };
 
   resetPassword = () => {
@@ -64,7 +65,6 @@ class Login extends Component {
               name="email"
               id="email"
               className="form-control"
-              // ref={(email) => this.email = email}
               onChange={this.handleChange}
               placeholder="Email"
             />
@@ -78,7 +78,6 @@ class Login extends Component {
               className="form-control"
               placeholder="Password"
               onChange={this.handleChange}
-              // ref={(pw) => this.pw = pw}
             />
           </div>
           {
@@ -101,4 +100,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default withRouter(Login);
