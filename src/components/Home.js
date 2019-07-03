@@ -4,9 +4,8 @@ import { Button, Container, Divider, Flag, Grid, Header, Loader } from 'semantic
 import ItemCard from '../components/ItemCard';
 import { AppContext } from "../providers/AppProvider";
 import ErrorBoundary from '../common/ErrorBoundary';
-import PrettyCodeFormatter from '../common/PrettyCodeFormatter';
 
-const Home = ({ user }) => {
+const Home = () => {
   const { state, addToCart } = useContext(AppContext);
   const { cartItems, loading, stockItems } = state;
 
@@ -25,8 +24,6 @@ const Home = ({ user }) => {
         Welcome to Carrinho &nbsp;
         <Flag name={'br'} />
       </Header>
-
-      <PrettyCodeFormatter data={user} />
 
       {
         cartItems && Object.keys(cartItems).length > 0 && (

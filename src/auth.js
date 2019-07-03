@@ -5,13 +5,6 @@ export function auth(email, pw) {
     .then(saveUser)
 }
 
-export function checkAuthStatus(user) {
-  console.log("checkAuthStatus: ", user);
-  if (!user) return false;
-
-  return Object.keys(user).length > 0 && true; // TODO implement
-}
-
 export function logout() {
   return firebaseAuth.signOut();
 }

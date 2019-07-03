@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet';
 import { withRouter } from 'react-router';
 import { Button, Container } from 'semantic-ui-react';
 import { login, sendPasswordResetEmail } from '../auth';
+import * as ROUTES from '../constants/routes';
 
 class Login extends Component {
   state = {
@@ -21,11 +22,9 @@ class Login extends Component {
     e.preventDefault();
     console.log("email/pw", this.state.email, this.state.password);
     login(this.state.email, this.state.password)
-      .then( (res) => {
-        console.log("res: ", res);
-        this.props.setUser(res.user);
-        // eslint-disable-next-line no-restricted-globals
-        this.props.history.push("/");
+      .then( () => {
+        // TODO - redirect to the originally requested url
+        this.props.history.push(ROUTES.HOME);
       })
       .catch(() => {
         this.setState(state => ({

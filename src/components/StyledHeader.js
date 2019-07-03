@@ -7,7 +7,7 @@ import { logout } from '../auth';
 import * as ROUTES from '../constants/routes';
 import { ThemeContext } from '../providers/ThemeProvider';
 
-const StyledHeader = ({ authed = false, setUser, history }) => {
+const StyledHeader = ({ authUser, history }) => {
   const [activeItem, setActiveItem] = useState(window.location.pathname);
   const [theme, setTheme] = useContext(ThemeContext);
 
@@ -19,17 +19,12 @@ const StyledHeader = ({ authed = false, setUser, history }) => {
   const logoutUser = () => {
     console.log("logging out");
     logout()
-      .then( (res) => {
-        console.log("res: ", res);
-        setUser(null);
-        // eslint-disable-next-line no-restricted-globals
-        history.push("/login");
+      .then( () => {
+        history.push(ROUTES.LOGIN);
       })
       .catch(err => {
         console.error("err: ", err);
-        setUser(null);
-        // eslint-disable-next-line no-restricted-globals
-        history.push("/login");
+        history.push(ROUTES.LOGIN);
       })
   };
 
@@ -89,7 +84,7 @@ const StyledHeader = ({ authed = false, setUser, history }) => {
           Cart <Icon name={'cart'} size={"large"} color={"blue"} />
         </Menu.Item>
 
-        { authed ?
+        { authUser ?
           <Menu.Item className='item'>
             <Button onClick={logoutUser}>Logout</Button>
           </Menu.Item>
