@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
 import { withRouter } from 'react-router';
-import { Button, Container } from 'semantic-ui-react';
+import { Button, Container, Form, Message } from 'semantic-ui-react';
 import { login, sendPasswordResetEmail } from '../auth';
 import * as ROUTES from '../constants/routes';
 
@@ -20,8 +20,16 @@ class Login extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log("email/pw", this.state.email, this.state.password);
-    login(this.state.email, this.state.password)
+    const { email, password } = this.state;
+    if (!email || !password) {
+      this.setState(prevState => ({
+        ...prevState,
+        loginMessage: "Email and password fields must be filled out",
+      }));
+      return;
+    }
+
+    login(email, password)
       .then( () => {
         // TODO - redirect to the originally requested url
         this.props.history.push(ROUTES.HOME);
@@ -50,6 +58,7 @@ class Login extends Component {
       )
   };
   render () {
+    const { loginMessage } = this.state;
     return (
       <Container>
         <Helmet>
@@ -57,43 +66,39 @@ class Login extends Component {
         </Helmet>
 
         <h1> Login </h1>
-        <form onSubmit={this.handleSubmit}>
-          <div className="form-group">
+        <Form
+          onSubmit={this.handleSubmit}
+          error={loginMessage !== null}
+        >
+          <Form.Field required>
             <label htmlFor={"email"}>Email</label>
             <input
               name="email"
               id="email"
-              className="form-control"
               onChange={this.handleChange}
               placeholder="Email"
             />
-          </div>
-          <div className="form-group">
+          </Form.Field>
+          <Form.Field required>
             <label htmlFor={"password"}>Password</label>
             <input
               name="password"
               id="password"
               type="password"
-              className="form-control"
               placeholder="Password"
               onChange={this.handleChange}
             />
-          </div>
+          </Form.Field>
+          <Button type="submit">Login</Button>
           {
-            this.state.loginMessage && (
-              <>
-                <br />
-                <div className="alert alert-danger" role="alert">
-                  <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true" />
-                  <span className="sr-only">Error:</span>
-                  &nbsp;{this.state.loginMessage} <a href="#" onClick={this.resetPassword} className="alert-link">Forgot Password?</a>
-                </div>
-                <br />
-              </>
+            loginMessage && (
+              <Message error>
+                <Message.Header>Login Error</Message.Header>
+                &nbsp;{loginMessage} <a href="#" onClick={this.resetPassword}>Forgot Password?</a>
+              </Message>
             )
           }
-          <Button type="submit">Login</Button>
-        </form>
+        </Form>
       </Container>
     )
   }
