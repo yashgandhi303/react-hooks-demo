@@ -1,31 +1,57 @@
 import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
-import { Container } from 'semantic-ui-react';
+import { withRouter } from 'react-router';
+import { Button, Container } from 'semantic-ui-react';
 import { login, sendPasswordResetEmail } from '../auth';
-
-function setErrorMsg(error) {
-  return {
-    loginMessage: error,
-  }
-}
+import * as ROUTES from '../constants/routes';
 
 class Login extends Component {
-  state = { loginMessage: null };
+  state = {
+    loginMessage: null,
+    email: "",
+    password: ""
+  };
+  handleChange = ({ target }) => {
+    this.setState(state => ({
+      ...state,
+      [target.name]: target.value,
+    }))
+  };
+
   handleSubmit = (e) => {
     e.preventDefault();
-    login(this.email.value, this.pw.value)
+    console.log("email/pw", this.state.email, this.state.password);
+    login(this.state.email, this.state.password)
+      .then( () => {
+        // TODO - redirect to the originally requested url
+        this.props.history.push(ROUTES.HOME);
+      })
       .catch(() => {
-          this.setState(setErrorMsg('Invalid username/password.'))
-        })
+        this.setState(state => ({
+          ...state,
+          loginMessage: 'Invalid username/password.',
+        }));
+      })
   };
+
   resetPassword = () => {
-    sendPasswordResetEmail(this.email.value)
-      .then(() => this.setState(setErrorMsg(`Password reset email sent to ${this.email.value}.`)))
-      .catch(() => this.setState(setErrorMsg(`Email address not found.`)))
+    sendPasswordResetEmail(this.state.email)
+      .then(() =>
+        this.setState(state => ({
+          ...state,
+          loginMessage: `Password reset email sent to ${this.state.email}.`,
+        }))
+      )
+      .catch(() =>
+        this.setState(state => ({
+          ...state,
+          loginMessage: `Email address not found.`,
+        }))
+      )
   };
   render () {
     return (
-      <Container className="col-sm-6 col-sm-offset-3">
+      <Container>
         <Helmet>
           <title>Carrinho - login</title>
         </Helmet>
@@ -38,7 +64,7 @@ class Login extends Component {
               name="email"
               id="email"
               className="form-control"
-              ref={(email) => this.email = email}
+              onChange={this.handleChange}
               placeholder="Email"
             />
           </div>
@@ -50,22 +76,27 @@ class Login extends Component {
               type="password"
               className="form-control"
               placeholder="Password"
-              ref={(pw) => this.pw = pw}
+              onChange={this.handleChange}
             />
           </div>
           {
-            this.state.loginMessage &&
-            <div className="alert alert-danger" role="alert">
-              <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true" />
-              <span className="sr-only">Error:</span>
-              &nbsp;{this.state.loginMessage} <a href="#" onClick={this.resetPassword} className="alert-link">Forgot Password?</a>
-            </div>
+            this.state.loginMessage && (
+              <>
+                <br />
+                <div className="alert alert-danger" role="alert">
+                  <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true" />
+                  <span className="sr-only">Error:</span>
+                  &nbsp;{this.state.loginMessage} <a href="#" onClick={this.resetPassword} className="alert-link">Forgot Password?</a>
+                </div>
+                <br />
+              </>
+            )
           }
-          <button type="submit" className="btn btn-primary">Login</button>
+          <Button type="submit">Login</Button>
         </form>
       </Container>
     )
   }
 }
 
-export default Login;
+export default withRouter(Login);

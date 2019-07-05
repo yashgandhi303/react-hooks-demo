@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { isDev } from '../constants';
+import { isDev } from '../constants/config';
 
 // props to https://codepen.io/gaearon/pen/wqvxGa?editors=0010 and https://reactjs.org/docs/error-boundaries.html
 

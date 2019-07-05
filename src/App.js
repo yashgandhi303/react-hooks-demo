@@ -1,15 +1,20 @@
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense, lazy, useContext } from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { createGlobalStyle } from 'styled-components';
 
+import { SITE_URL } from './constants/config';
+import * as ROUTES from './constants/routes';
+
 import { AppContextProvider } from './providers/AppProvider';
 import { ThemeContextProvider } from './providers/ThemeProvider';
+import AuthUserContext from './providers/AuthProvider';
+import WithAuthentication from './common/withAuthentication';
 
 import Cart from './components/Cart';
 import Home from './components/Home';
-import Login from './components/Login';
 import LoadingSpinner from './components/LoadingSpinner';
+import Login from './components/Login';
 import NoMatch from './components/NoMatch';
 import Register from './components/Register';
 import StyledHeader from './components/StyledHeader';
@@ -19,61 +24,73 @@ import "./styles.css";
 const About = lazy(() => import('./components/About'));
 const AdminCP = lazy(() => import('./components/AdminCP'));
 
-function PublicRoute ({ component: Component, authed, ...rest }) {
+function PrivateRoute ({ component: Component, user, ...rest }) {
   return (
     <Route
       {...rest}
-      render={(props) => authed === false
-        ? <Component { ...props } />
-        : <Redirect to='/dashboard' />}
+      render={props => (
+        user
+        ? <Redirect to='/login' />
+        : <Component {...props} />
+      )}
     />
   )
 }
 
-class App extends React.Component {
-  // TODO: move all the auth logic to redux, sagas, etc. (global...)
-  state = {
-    authed: false,
-    loading: false,
-  };
+const App = () => {
+  const authState = useContext(AuthUserContext);
+  console.log("App - authState: ", authState);
+  return (
+    <AppContextProvider>
+      <ThemeContextProvider>
+        <BrowserRouter>
+          <div>
+            <Helmet>
+              <meta charSet="utf-8"/>
+              <title>Carrinho</title>
+              <link rel="canonical" href={SITE_URL} />
+            </Helmet>
+            <StyledHeader authUser={authState.authUser} />
+            <div className='container'>
+              <Suspense fallback={<LoadingSpinner />}>
+                <Switch>
+                  <Route exact path={ROUTES.HOME} component={Home} />
+                  <Route exact path={ROUTES.ABOUT} component={About} />
+                  <Route exact authUser={authState.authUser} path={ROUTES.CART} component={Cart} />
 
-  render() {
-    const { authed } = this.state;
-    return (
-      <AppContextProvider>
-        <ThemeContextProvider>
-          <BrowserRouter>
-            <div>
-              <Helmet>
-                <meta charSet="utf-8" />
-                <title>Carrinho</title>
-                <link rel="canonical" href="https://carrinho1.herokuapp.com/" />
-              </Helmet>
-              <StyledHeader authed={authed} />
-              <div className='container'>
-                <Suspense fallback={<LoadingSpinner />}>
-                  <Switch>
-                    <Route exact path='/' component={Home} />
+                   {/* redirect home if user is already logged in */}
+                  <Route exact path={ROUTES.REGISTER} render={(props) => (
+                    authState.authUser
+                      ? <Redirect to={ROUTES.HOME} />
+                      : <Register {...props} />
+                  )}
+                  />
 
-                    <PublicRoute authed={authed} exact path='/cart' component={Cart} />
-                    <PublicRoute authed={authed} exact path='/register' component={Register} />
-                    <PublicRoute authed={authed} exact path='/login' component={Login} />
+                  <Route exact path={ROUTES.LOGIN} render={(props) => (
+                    authState.authUser
+                      ? <Redirect to={ROUTES.HOME} />
+                      : <Login {...props} />
+                  )}
+                  />
 
-                    {/* /admin/* would be protected... */}
-                    <PublicRoute authed={authed} exact path='/admin' component={AdminCP} />
-                    <PublicRoute authed={authed} exact path='/about' component={About} />
+                  {/* protected routes */}
+                  <PrivateRoute
+                    exact
+                    authUser={authState.authUser}
+                    path={ROUTES.ADMIN}
+                    component={AdminCP}
+                  />
 
-                    <Route component={NoMatch} />
-                  </Switch>
-                </Suspense>
-              </div>
+                  <Route component={NoMatch} />
+                </Switch>
+              </Suspense>
             </div>
-          </BrowserRouter>
-        </ThemeContextProvider>
-      </AppContextProvider>
-    )
-  }
-}
+          </div>
+        </BrowserRouter>
+      </ThemeContextProvider>
+    </AppContextProvider>
+  );
+};
 
 createGlobalStyle`
   body {
@@ -81,4 +98,4 @@ createGlobalStyle`
   }
 `;
 
-export default App;
+export default WithAuthentication(App);

@@ -5,7 +5,6 @@ import { Provider, connect } from 'react-redux';
 import reducer from '../reducers/root_reducer';
 
 import Home from '../components/Home';
-// import HomeContainer from '../containers/HomeContainer';
 
 afterEach(cleanup);
 
@@ -35,9 +34,7 @@ describe.skip('All tests in this describe will be skipped', () => {
   };
 
   const { container, getByLabelText } = renderWithRedux(<Home {...mockProps} />);
-  // const asdf = getByLabelText("Amount");
   const h1 = container.querySelector('h1'); // getByText("Add to cart");
-  console.log("asdf: ", h1);
   test('renders welcome message', () => {
     expect(h1.textContent).toMatch("About this project:");
     expect(true).toEqual(true);

@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import "react-toggle/style.css";
 import 'semantic-ui-css/semantic.min.css';
-import { isDev } from './constants';
+import { isDev } from './constants/config';
 
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-import "react-toggle/style.css";
 
 const rootElement = document.getElementById("root");
 
