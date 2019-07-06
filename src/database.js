@@ -5,7 +5,7 @@ import { isDev } from './constants/config';
 import { config } from './constants/firebaseConfig';
 
 if (isDev) {
-  console.log('db config: ', config);
+  console.info('db config: ', config);
 }
 
 firebase.initializeApp(config);

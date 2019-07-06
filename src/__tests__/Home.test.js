@@ -38,8 +38,6 @@ describe.skip('All tests in this describe will be skipped', () => {
   test('renders welcome message', () => {
     expect(h1.textContent).toMatch("About this project:");
     expect(true).toEqual(true);
-    console.log("asdfas:: ", container);
-
   });
 
   // test('HomeContainer snapshot', () => {

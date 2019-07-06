@@ -4,7 +4,7 @@ import { config } from './constants/firebaseConfig';
 
 const BASE_URL = config.databaseURL;
 if (isDev) {
-  console.log('BASE_URL: ', BASE_URL);
+  console.info('BASE_URL: ', BASE_URL);
 }
 
 class Api {
@@ -25,7 +25,6 @@ class Api {
   static buyItems(data) {
     return axios.patch(`${BASE_URL}/stockItems.json`, data)
       .then(res => {
-        console.log("res: ", res);
         return res.data;
       });
   }

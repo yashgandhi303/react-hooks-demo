@@ -20,14 +20,13 @@ describe("tests for ItemCard component", () => {
   );
 
   // test("ItemCard has the correct props", () => {
-  //    console.log("container: ", container);
+  //
   // });
 
   test("mockFn gets called when button is clicked", () => {
     const button = container.querySelectorAll('button');
     expect(button).toHaveLength(1);
     // expect(a).toHaveLength(11);
-    // console.log("button: ", button);
     // expect(lis.length).toBe(11);
   });
 

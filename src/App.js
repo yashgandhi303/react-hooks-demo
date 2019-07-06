@@ -39,7 +39,6 @@ function PrivateRoute ({ component: Component, authUser, ...rest }) {
 
 const App = () => {
   const authState = useContext(AuthUserContext);
-  console.log("App - authState: ", authState);
   return (
     <AppContextProvider>
       <ThemeContextProvider>
