@@ -1,68 +1,101 @@
 import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
-import { Container } from 'semantic-ui-react';
-
-// import { auth } from '../auth';
-
-// function setErrorMsg(error) {
-//   return {
-//     registerError: error.message,
-//   }
-// }
+import { withRouter } from 'react-router';
+import { Button, Container, Form, Message } from 'semantic-ui-react';
+import { register } from '../auth';
+import * as ROUTES from '../constants/routes';
 
 class Register extends Component {
-  state = { registerError: null };
+  state = {
+    email: null,
+    password: null,
+    registerError: null,
+  };
+
+  handleChange = ({ target }) => {
+    this.setState(state => ({
+      ...state,
+      [target.name]: target.value,
+    }))
+  };
 
   handleSubmit = (e) => {
-    alert("thanks for registering");
     e.preventDefault();
-    // auth(this.email.value, this.pw.value)
-    //   .catch(e => this.setState(setErrorMsg(e)))
+    const { email, password } = this.state;
+    if (!email || !password) {
+      this.setState(prevState => ({
+        ...prevState,
+        registerError: "Email and password fields must be filled out",
+      }));
+      return;
+    }
+
+    register(email, password)
+      .then( () => {
+        // TODO - redirect to the originally requested url
+        this.props.history.push(ROUTES.HOME);
+      })
+      .catch(() => {
+        this.setState(state => ({
+          ...state,
+          registerError: 'There was a problem making your account. Please try again.',
+        }));
+      })
   };
 
   render () {
+    const { registerError } = this.state;
     return (
-      <Container className="col-sm-6 col-sm-offset-3">
+      <Container>
         <Helmet>
           <title>Carrinho - register</title>
         </Helmet>
 
         <h1>Register</h1>
-        <form onSubmit={this.handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="email">Email</label>
+
+        <Message error>
+          <Message.Header>Account Creation Unavailable</Message.Header>
+          <p>
+            We are not actively accepting new user accounts.  Thanks for your understanding.
+          </p>
+        </Message>
+
+        <Form
+          onSubmit={this.handleSubmit}
+          error={registerError !== null}
+        >
+          <Form.Field required disabled>
+            <label htmlFor={"email"}>Email</label>
             <input
               name="email"
               id="email"
-              className="form-control"
-              ref={(email) => this.email = email}
+              onChange={this.handleChange}
               placeholder="Email"
             />
-          </div>
-          <div className="form-group">
-            <label htmlFor="password">Password</label>
+          </Form.Field>
+          <Form.Field required disabled>
+            <label htmlFor={"password"}>Password</label>
             <input
-              type="password"
               name="password"
               id="password"
-              className="form-control"
+              type="password"
               placeholder="Password"
-              ref={(pw) => this.pw = pw}
+              onChange={this.handleChange}
             />
-          </div>
+          </Form.Field>
+          <Button type="submit" disabled>Register</Button>
           {
-            this.state.registerError &&
-            <div className="alert alert-danger" role="alert">
-              <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-              <span className="sr-only">Error:</span>
-              &nbsp;{this.state.registerError}
-            </div>
+            registerError && (
+              <Message error>
+                <Message.Header>Registration Error</Message.Header>
+                &nbsp;{registerError} <a href="#" onClick={this.resetPassword}>Forgot Password?</a>
+              </Message>
+            )
           }
-          <button type="submit" className="btn btn-primary">Register</button>
-        </form>
+        </Form>
       </Container>
     )
   }
 }
 
-export default Register;
+export default withRouter(Register);

@@ -13,7 +13,6 @@ describe("tests for ItemCardInput component", () => {
   const links = container.querySelectorAll('a'); // ("Store stock:");
 
   test("verify that correct links are shown", () => {
-    console.log("links: ", links);
     // expect(h2.textContent).toBe("");
   });
 

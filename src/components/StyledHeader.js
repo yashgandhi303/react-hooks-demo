@@ -17,7 +17,6 @@ const StyledHeader = ({ authUser, history }) => {
   };
 
   const logoutUser = () => {
-    console.log("logging out");
     logout()
       .then( () => {
         history.push(ROUTES.LOGIN);

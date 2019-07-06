@@ -12,7 +12,6 @@ const withAuthentication = Component => {
     componentDidMount() {
       this.listener = firebaseAuth.onAuthStateChanged(
         authUser => {
-          console.log("authUser, ", authUser);
           if (authUser) {
             // only using some of the user properties returned by firebase
             authUser = {
@@ -35,7 +34,6 @@ const withAuthentication = Component => {
       );
     }
     componentWillUnmount() {
-      console.log("unmounted");
       this.listener();
     }
     setUserState = (userState = null) => {

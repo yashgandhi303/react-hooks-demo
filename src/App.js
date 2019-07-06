@@ -24,14 +24,14 @@ import "./styles.css";
 const About = lazy(() => import('./components/About'));
 const AdminCP = lazy(() => import('./components/AdminCP'));
 
-function PrivateRoute ({ component: Component, user, ...rest }) {
+function PrivateRoute ({ component: Component, authUser, ...rest }) {
   return (
     <Route
       {...rest}
       render={props => (
-        user
-        ? <Redirect to='/login' />
-        : <Component {...props} />
+        authUser
+        ? <Component {...props} />
+        : <Redirect to={ROUTES.LOGIN} />
       )}
     />
   )
@@ -39,7 +39,6 @@ function PrivateRoute ({ component: Component, user, ...rest }) {
 
 const App = () => {
   const authState = useContext(AuthUserContext);
-  console.log("App - authState: ", authState);
   return (
     <AppContextProvider>
       <ThemeContextProvider>

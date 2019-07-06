@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const PrettyCodeFormatter = ({ data, replacer = null, space = 4 }) => {
-  console.log("data: ", data);
   if (!data) {
     return null;
   }

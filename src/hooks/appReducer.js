@@ -11,7 +11,6 @@ const initialState = {
 
 // TODO - break this into two reducers (cartItems / stockItems)
 const reducer = (state, action) => {
-  console.log('action: ', action);
   switch (action.type) {
     case actions.FETCH_STOCK_ITEMS:
       return {
