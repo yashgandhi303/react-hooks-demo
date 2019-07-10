@@ -5,10 +5,11 @@ const PrettyCodeFormatter = ({ data, replacer = null, space = 4 }) => {
   if (!data) {
     return null;
   }
+  const dataString = typeof data === "string" ? data : JSON.stringify(data, replacer, space);
   return (
     <pre>
       <code>
-        {JSON.stringify(data, replacer, space)}
+        {dataString}
       </code>
     </pre>
   );
