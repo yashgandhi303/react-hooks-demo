@@ -6,7 +6,7 @@ export interface IProps {
   space?: number;
 }
 
-const PrettyCodeFormatter: React.SFC<IProps> = ({data, replacer = null, space = 4}) => {
+const PrettyCodeFormatter: React.FC<IProps> = ({data, replacer = null, space = 4}) => {
   if (!data) {
     return null;
   }

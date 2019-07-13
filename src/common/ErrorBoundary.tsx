@@ -9,7 +9,7 @@ export interface IProps {
   errorInfo: ErrorInfo | null | undefined;
 }
 
-const ErrorDetails: React.SFC<IProps> = ({error, errorInfo}) => (
+const ErrorDetails: React.FC<IProps> = ({error, errorInfo}) => (
   <details style={{whiteSpace: 'pre-wrap'}}>
     {error && error.toString()}
     <br />
