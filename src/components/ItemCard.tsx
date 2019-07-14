@@ -1,5 +1,4 @@
 import React, {useContext, useState} from 'react';
-import PropTypes from 'prop-types';
 import {Button, Card, Image, Rating} from 'semantic-ui-react';
 import {ThemeContext} from '../providers/ThemeProvider';
 import {parseIntWithFallback} from '../utils/nutils';
