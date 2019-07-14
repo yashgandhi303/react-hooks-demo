@@ -4,7 +4,23 @@ import {Button, Card, Image, Rating} from 'semantic-ui-react';
 import {ThemeContext} from '../providers/ThemeProvider';
 import {parseIntWithFallback} from '../utils/nutils';
 
-const ItemCard = ({location, item, onClickFn}) => {
+interface IItem {
+  amt: number;
+  description?: string;
+  id: string;
+  image?: string;
+  name: string;
+  rating: number;
+  stock: number;
+}
+
+interface IProps {
+  location: string;
+  item: IItem;
+  onClickFn(a: number | IItem, b: number): void;
+}
+
+const ItemCard: React.FC<IProps> = ({location, item, onClickFn}) => {
   const initialAmt = location === 'cart' ? item.amt : 1;
 
   const [itemAmt, setState] = useState(initialAmt);
@@ -45,17 +61,6 @@ const ItemCard = ({location, item, onClickFn}) => {
       </Card.Content>
     </Card>
   );
-};
-
-ItemCard.propTypes = {
-  location: PropTypes.string.isRequired,
-  item: PropTypes.shape({
-    amt: PropTypes.number,
-    id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    stock: PropTypes.number.isRequired,
-  }),
-  onClickFn: PropTypes.func.isRequired,
 };
 
 export default ItemCard;
