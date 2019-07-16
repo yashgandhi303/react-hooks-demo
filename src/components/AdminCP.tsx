@@ -3,13 +3,20 @@ import {Helmet} from 'react-helmet';
 import {Bar, BarChart, CartesianGrid, Legend, Tooltip, YAxis, XAxis} from 'recharts';
 import {Container, Header} from 'semantic-ui-react';
 import {AppContext} from '../providers/AppProvider';
+import {IItem} from './ItemCard';
 // import AddItemForm from '../components/AddItemForm';
 
-const AdminCP = () => {
-  const {
+const AdminCP: React.FC = () => {
+  let stock: IItem[] = [];
+
+  let {
     state: {stockItems},
   } = useContext(AppContext);
-  const stock = Object.keys(stockItems).length > 0 ? Object.values(stockItems) : [];
+
+  if (stockItems && Object.keys(stockItems).length > 0) {
+    stock = Object.values(stockItems);
+  }
+
   return (
     <Container>
       <Helmet>
