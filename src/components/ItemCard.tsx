@@ -3,7 +3,7 @@ import {Button, Card, Image, Rating} from 'semantic-ui-react';
 import {ThemeContext} from '../providers/ThemeProvider';
 import {parseIntWithFallback} from '../utils/nutils';
 
-interface IItem {
+export interface IItem {
   amt: number;
   description?: string;
   id: string;
