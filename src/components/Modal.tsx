@@ -1,8 +1,8 @@
-import React, {useEffect, useRef, FunctionComponent, ReactChild} from 'react';
+import React, {useEffect, useRef, FunctionComponent, ReactNode} from 'react';
 import {createPortal} from 'react-dom';
 
 interface IProps {
-  children: ReactChild[];
+  children: ReactNode;
   styles?: React.CSSProperties;
 }
 

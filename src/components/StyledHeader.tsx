@@ -8,7 +8,6 @@ import * as ROUTES from '../constants/routes';
 import {ThemeContext} from '../providers/ThemeProvider';
 
 interface IProps extends RouteComponentProps {
-  // extends React.ComponentProps<any>
   authUser: firebase.User | null;
   history: H.History;
 }

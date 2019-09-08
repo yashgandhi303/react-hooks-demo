@@ -1,15 +1,20 @@
-import {useReducer, ReducerAction, Reducer} from 'react';
+import {useReducer, Reducer} from 'react';
 import omit from 'lodash.omit';
 import * as actions from '../actions/actionTypes';
+import {IItem} from '../components/ItemCard';
 
 export interface IState {
   loading: boolean;
   error: Error | null;
-  stockItems: any; // FIXME
-  cartItems: any; // FIXME
+  stockItems: {
+    [id: string]: IItem;
+  };
+  cartItems: {
+    [id: string]: IItem;
+  };
 }
 
-type Action =
+export type Action =
   | {type: 'FETCH_STOCK_ITEMS'}
   | {type: 'FETCH_ITEMS_SUCCESS'; payload: any}
   | {type: 'ERROR'; payload: any}
@@ -17,7 +22,7 @@ type Action =
   | {type: 'BUY_CART_ITEMS'}
   | {type: 'ADD_ITEM_TO_CART'; payload: any};
 
-let initialState: IState = {
+export let initialState: IState = {
   loading: true,
   error: null,
   stockItems: {},
@@ -25,7 +30,7 @@ let initialState: IState = {
 };
 
 // TODO - break this into two reducers (cartItems / stockItems)
-const reducer: Reducer<IState, Action> = (state: IState, action: Action): IState => {
+export const appReducer: Reducer<IState, Action> = (state: IState, action: Action): IState => {
   switch (action.type) {
     case actions.FETCH_STOCK_ITEMS:
       return {
@@ -138,4 +143,4 @@ const reducer: Reducer<IState, Action> = (state: IState, action: Action): IState
   }
 };
 
-export default () => useReducer(reducer, initialState);
+export default () => useReducer(appReducer, initialState);

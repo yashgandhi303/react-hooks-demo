@@ -2,16 +2,22 @@ import React, {useContext} from 'react';
 import {Helmet} from 'react-helmet';
 import {Bar, BarChart, CartesianGrid, Legend, Tooltip, YAxis, XAxis} from 'recharts';
 import {Container, Header} from 'semantic-ui-react';
-import {AppContext} from '../providers/AppProvider';
+import {useAppState} from '../providers/AppProvider';
 import {IItem} from './ItemCard';
 // import AddItemForm from '../components/AddItemForm';
 
 const AdminCP: React.FC = () => {
   let stock: IItem[] = [];
 
+  // let {stockItems} = useAppState();
+
   let {
     state: {stockItems},
-  } = useContext(AppContext);
+  } = useAppState();
+
+  // let {
+  //   state: {stockItems},
+  // } = useContext(AppContext);
 
   if (stockItems && Object.keys(stockItems).length > 0) {
     stock = Object.values(stockItems);

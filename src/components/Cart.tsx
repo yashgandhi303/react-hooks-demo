@@ -2,20 +2,38 @@ import React, {useContext, useState} from 'react';
 import {Link} from 'react-router-dom';
 import {Helmet} from 'react-helmet';
 import {Container, Button, Header, Grid} from 'semantic-ui-react';
-import ItemCard from '../components/ItemCard';
+import ItemCard, {IItem} from './ItemCard';
 import Modal from './Modal';
-import {AppContext} from '../providers/AppProvider';
+import {useAppState, useAppDispatch} from '../providers/AppProvider';
 
-const Cart = () => {
-  const {
+const Cart: React.FC = () => {
+  let {
     state: {cartItems},
     checkout,
-    removeFromCart,
-  } = useContext(AppContext);
+  } = useAppState();
+
+  let dispatch = useAppDispatch();
+
+  // let cartItems = {};
+  // if (state && state.hasOwnProperty('cartItems')) {
+  //   cartItems = state.cartItems;
+  // }
+
+  // let removeFromCart = (item: IItem, amt: number): void => {};
+  // let checkout = () => Promise.resolve(false);
+
+  // if (context && context.hasOwnProperty('removeFromCart')) {
+  //   removeFromCart = context.removeFromCart;
+  // }
+  // if (context && context.hasOwnProperty('checkout')) {
+  //   checkout = context.checkout;
+  // }
+
   const [showModal, setModalState] = useState(false);
 
-  function remove(item, amt) {
-    removeFromCart(item, amt);
+  function remove(item: IItem, amt: number) {
+    // removeFromCart(item, amt);
+    dispatch({type: 'REMOVE_FROM_CART', payload: {amt, item}});
   }
 
   function buyAll() {
@@ -62,7 +80,7 @@ const Cart = () => {
             <p>
               Go back to <Link to={'/'}>home</Link> to buy more
             </p>
-            <Button onClick={() => setModalState()}>back to cart</Button>
+            <Button onClick={() => setModalState(!showModal)}>back to cart</Button>
           </div>
         </Modal>
       )}

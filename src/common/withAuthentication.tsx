@@ -3,12 +3,12 @@ import {firebaseAuth} from '../database';
 import AuthUserContext from '../providers/AuthProvider';
 
 interface IWithAuthenticationState {
-  // authUser: IAuthUser | null;
   authUser: firebase.User | null;
 }
 
 // TODO - make this a hook
 const withAuthentication = <P extends object>(Component: React.ComponentType<P>) => {
+  console.log('Component: ', Component);
   class WithAuthentication extends React.Component<P> {
     state: IWithAuthenticationState = {
       authUser: null,
@@ -40,6 +40,7 @@ const withAuthentication = <P extends object>(Component: React.ComponentType<P>)
       });
     }
     componentWillUnmount() {
+      // unsubscribe the listener
       this.listener();
     }
     render() {
