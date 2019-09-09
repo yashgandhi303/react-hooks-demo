@@ -1,4 +1,4 @@
-export const ERROR = "ERROR";
+export const ERROR = 'ERROR';
 
 /* admin */
 export const UPDATE_ITEM_AMT = 'UPDATE_ITEM_AMT';

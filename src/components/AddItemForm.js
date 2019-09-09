@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { Form, Input, TextArea, Header, Button } from 'semantic-ui-react';
+import {connect} from 'react-redux';
+import {Form, Input, TextArea, Header, Button} from 'semantic-ui-react';
 
 class AddItemForm extends Component {
   state = {
@@ -10,7 +10,7 @@ class AddItemForm extends Component {
     description: '',
   };
 
-  handleChange = (e /*, { name, value }*/) => {
+  handleChange = e => {
     this.setState({[e.target.name]: e.target.value});
   };
 
@@ -20,59 +20,64 @@ class AddItemForm extends Component {
 
     if (item.stock === 0) return; // need to display something here
     this.props.addItemToStock(item);
-    this.setState({ name: '', stock: 0, description: ''});
+    this.setState({name: '', stock: 0, description: ''});
   };
 
   render() {
-    const { name, stock, description } = this.state;
+    const {name, stock, description} = this.state;
     return [
-      <Header as='h2' key="addItemForm-h2">Hey admin, add an item to stock</Header>,
+      <Header as="h2" key="addItemForm-h2">
+        Hey admin, add an item to stock
+      </Header>,
       <Form onSubmit={this.handleSubmit} key="addItemForm-form">
         <Form.Field
           required
           control={Input}
-          name='name'
+          name="name"
           value={name}
-          label='Name'
-          placeholder='Name'
+          label="Name"
+          placeholder="Name"
           onChange={this.handleChange}
         />
         <Form.Field
           required
-          label='Stock'
-          name='stock'
+          label="Stock"
+          name="stock"
           value={stock}
-          control='input'
-          type='number'
+          control="input"
+          type="number"
           max={99}
           onChange={this.handleChange}
         />
         <Form.Field
-          id='form-textarea-control-description'
-          name='description'
+          id="form-textarea-control-description"
+          name="description"
           control={TextArea}
-          label='Description'
-          placeholder='Description'
+          label="Description"
+          placeholder="Description"
           value={description}
           onChange={this.handleChange}
         />
-        <Button type='submit'>Submit</Button>
-      </Form>
-    ];  
+        <Button type="submit">Submit</Button>
+      </Form>,
+    ];
   }
 }
 
 AddItemForm.propTypes = {
-  addItemToStock: PropTypes.func.isRequired
+  addItemToStock: PropTypes.func.isRequired,
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  addItemToStock: (item) => {
+const mapDispatchToProps = dispatch => ({
+  addItemToStock: item => {
     dispatch({
       type: 'ADD_NEW_ITEM_TO_STOCK',
       item,
-    })
-  }
+    });
+  },
 });
 
-export default connect(null, mapDispatchToProps)(AddItemForm);
+export default connect(
+  null,
+  mapDispatchToProps,
+)(AddItemForm);

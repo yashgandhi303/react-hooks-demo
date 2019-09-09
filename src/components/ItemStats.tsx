@@ -1,5 +1,5 @@
 import React from 'react';
-import { Segment, Statistic } from 'semantic-ui-react';
+import {Segment, Statistic} from 'semantic-ui-react';
 
 const ItemStats = () => (
   <Segment inverted>

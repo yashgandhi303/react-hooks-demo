@@ -1,8 +1,28 @@
-import { useReducer } from 'react';
+import {useReducer, Reducer} from 'react';
 import omit from 'lodash.omit';
 import * as actions from '../actions/actionTypes';
+import {IItem} from '../components/ItemCard';
 
-const initialState = {
+export interface IState {
+  loading: boolean;
+  error: Error | null;
+  stockItems: {
+    [id: string]: IItem;
+  };
+  cartItems: {
+    [id: string]: IItem;
+  };
+}
+
+export type Action =
+  | {type: 'FETCH_STOCK_ITEMS'}
+  | {type: 'FETCH_ITEMS_SUCCESS'; payload: any}
+  | {type: 'ERROR'; payload: any}
+  | {type: 'REMOVE_FROM_CART'; payload: any}
+  | {type: 'BUY_CART_ITEMS'}
+  | {type: 'ADD_ITEM_TO_CART'; payload: any};
+
+export let initialState: IState = {
   loading: true,
   error: null,
   stockItems: {},
@@ -10,7 +30,7 @@ const initialState = {
 };
 
 // TODO - break this into two reducers (cartItems / stockItems)
-const reducer = (state, action) => {
+export const appReducer: Reducer<IState, Action> = (state: IState, action: Action): IState => {
   switch (action.type) {
     case actions.FETCH_STOCK_ITEMS:
       return {
@@ -30,7 +50,7 @@ const reducer = (state, action) => {
         loading: false,
       };
     case actions.ADD_ITEM_TO_CART: {
-      const { amt, item } = action.payload;
+      const {amt, item} = action.payload;
       const currentStockAmt = state.stockItems[item.id].stock;
 
       let newStockAmt = currentStockAmt - amt;
@@ -64,8 +84,9 @@ const reducer = (state, action) => {
         },
       };
     }
-    case actions.REMOVE_FROM_CART: { // update cart amount
-      let { amt: amtToRemove, item } = action.payload;
+    case actions.REMOVE_FROM_CART: {
+      // update cart amount
+      let {amt: amtToRemove, item} = action.payload;
 
       const currStockAmt = state.stockItems[item.id].stock;
       const currentCartAmt = state.cartItems[item.id].amt;
@@ -73,9 +94,10 @@ const reducer = (state, action) => {
       const removeAll = amtToRemove >= currentCartAmt; // added the > since user could edit and put in higher than their actual amount - in that case, just remove all from the cart
 
       if (removeAll) {
-        const updatedStockAmt = amtToRemove === currentCartAmt
-          ? currStockAmt + amtToRemove
-          : currStockAmt + currentCartAmt;
+        const updatedStockAmt =
+          amtToRemove === currentCartAmt
+            ? currStockAmt + amtToRemove
+            : currStockAmt + currentCartAmt;
 
         return {
           ...state,
@@ -87,8 +109,8 @@ const reducer = (state, action) => {
             [item.id]: {
               ...item,
               stock: updatedStockAmt,
-            }
-          }
+            },
+          },
         };
       }
 
@@ -121,4 +143,4 @@ const reducer = (state, action) => {
   }
 };
 
-export default () => useReducer(reducer, initialState);
+export default () => useReducer(appReducer, initialState);
