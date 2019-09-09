@@ -22,12 +22,10 @@ export function sendPasswordResetEmail(email: string) {
 }
 
 export function saveUser(userCredentials: firebase.auth.UserCredential) {
-  console.log('userCredentials: ', userCredentials);
   if (!userCredentials || !userCredentials.user) {
     console.error('user could not be saved: ', userCredentials);
     return;
   }
-  console.log('user: ', userCredentials.user);
   return ref
     .child(`users/${userCredentials.user.uid}/info`)
     .set({

@@ -9,7 +9,6 @@ import * as ROUTES from '../constants/routes';
 
 interface IProps {
   history: H.History;
-  // children?: React.ReactNode;
 }
 
 interface IState {
@@ -24,10 +23,6 @@ class Login extends Component<IProps & RouteComponentProps, IState> {
     email: '',
     password: '',
   };
-
-  componentDidMount() {
-    console.log('this.props: ', this.props);
-  }
 
   handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     this.setState(state => ({

@@ -8,7 +8,6 @@ interface IWithAuthenticationState {
 
 // TODO - make this a hook
 const withAuthentication = <P extends object>(Component: React.ComponentType<P>) => {
-  console.log('Component: ', Component);
   class WithAuthentication extends React.Component<P> {
     state: IWithAuthenticationState = {
       authUser: null,
@@ -17,7 +16,7 @@ const withAuthentication = <P extends object>(Component: React.ComponentType<P>)
     componentDidMount() {
       this.listener = firebaseAuth.onAuthStateChanged(authUser => {
         if (authUser) {
-          // only using some of the user properties returned by firebase
+          // TODO - only use some of the user properties returned by firebase
           // authUser = {
           //   uid: authUser.uid,
           //   email: authUser.email,
