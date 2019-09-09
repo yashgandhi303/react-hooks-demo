@@ -1,9 +1,14 @@
 import React, {Suspense, lazy, useContext} from 'react';
-import {BrowserRouter, Route, Switch, Redirect, RouteProps} from 'react-router-dom';
+import {
+  BrowserRouter,
+  Route,
+  Switch,
+  Redirect,
+  RouteProps,
+  RouteComponentProps,
+} from 'react-router-dom';
 import {Helmet} from 'react-helmet';
 import {createGlobalStyle} from 'styled-components';
-// import {createBrowserHistory} from 'history';
-import * as H from 'history';
 
 import {SITE_URL} from './constants/config';
 import * as ROUTES from './constants/routes';
@@ -23,17 +28,12 @@ import StyledHeader from './components/StyledHeader';
 
 import './styles.css';
 
-const history = H.createBrowserHistory();
-
 const About = lazy(() => import('./components/About'));
 const AdminCP = lazy(() => import('./components/AdminCP'));
 
-interface IPrivateRouteProps {
-  component: React.ElementType;
+interface IPrivateRouteProps extends RouteProps {
+  component: React.ComponentType<RouteComponentProps<any>> | React.ComponentType<any>;
   authUser: firebase.User | null;
-  exact?: boolean;
-  path: string;
-  history: H.History;
 }
 
 const PrivateRoute: React.FC<IPrivateRouteProps> = ({component: Component, authUser, ...rest}) => {

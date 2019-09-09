@@ -9,7 +9,7 @@ import * as ROUTES from '../constants/routes';
 
 interface IProps {
   history: H.History;
-  children?: React.ReactNode;
+  // children?: React.ReactNode;
 }
 
 interface IState {

@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import {Helmet} from 'react-helmet';
 import {Bar, BarChart, CartesianGrid, Legend, Tooltip, YAxis, XAxis} from 'recharts';
 import {Container, Header} from 'semantic-ui-react';
@@ -9,15 +9,9 @@ import {IItem} from './ItemCard';
 const AdminCP: React.FC = () => {
   let stock: IItem[] = [];
 
-  // let {stockItems} = useAppState();
-
   let {
     state: {stockItems},
   } = useAppState();
-
-  // let {
-  //   state: {stockItems},
-  // } = useContext(AppContext);
 
   if (stockItems && Object.keys(stockItems).length > 0) {
     stock = Object.values(stockItems);
