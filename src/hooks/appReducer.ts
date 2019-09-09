@@ -20,7 +20,8 @@ export type Action =
   | {type: 'ERROR'; payload: any}
   | {type: 'REMOVE_FROM_CART'; payload: any}
   | {type: 'BUY_CART_ITEMS'}
-  | {type: 'ADD_ITEM_TO_CART'; payload: any};
+  | {type: 'ADD_ITEM_TO_CART'; payload: any}
+  | {type: 'ADD_ITEM_TO_STOCK'; payload: any};
 
 export let initialState: IState = {
   loading: true,

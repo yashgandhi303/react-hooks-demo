@@ -10,6 +10,7 @@ interface IAppContext {
   state: IState;
   addToCart: (item: IItem, amt: number) => void;
   checkout: () => Promise<true | undefined>;
+  addItemToStock: (item: any) => void;
 }
 
 const AppStateContext = React.createContext<IAppContext | undefined>(undefined);
@@ -90,11 +91,22 @@ const AppContextProvider: React.FC = ({children}) => {
     }
   }
 
+  async function addItemToStock(item: IItem) {
+    try {
+      const res = await Api.addItemToStock(item);
+      dispatch({type: 'ADD_ITEM_TO_STOCK', payload: item});
+      return true;
+    } catch (error) {
+      dispatch({type: actions.ERROR, payload: error});
+    }
+  }
+
   const appState = {
     state,
     addToCart,
     checkout,
     removeFromCart,
+    addItemToStock,
   };
 
   return (

@@ -4,7 +4,7 @@ import {Bar, BarChart, CartesianGrid, Legend, Tooltip, YAxis, XAxis} from 'recha
 import {Container, Header} from 'semantic-ui-react';
 import {useAppState} from '../providers/AppProvider';
 import {IItem} from './ItemCard';
-// import AddItemForm from '../components/AddItemForm';
+import AddItemForm from '../components/AddItemForm';
 
 const AdminCP: React.FC = () => {
   let stock: IItem[] = [];
@@ -23,7 +23,8 @@ const AdminCP: React.FC = () => {
         <title>Carrinho - admin</title>
       </Helmet>
 
-      {/* <AddItemForm /> */}
+      <AddItemForm />
+
       <Header as="h2">Store stock: </Header>
 
       {stock.length > 0 ? (

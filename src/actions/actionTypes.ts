@@ -2,6 +2,7 @@ export const ERROR = 'ERROR';
 
 /* admin */
 export const UPDATE_ITEM_AMT = 'UPDATE_ITEM_AMT';
+export const ADD_ITEM_TO_STOCK = 'ADD_ITEM_TO_STOCK';
 
 /* stock */
 export const FETCH_STOCK_ITEMS = 'FETCH_STOCK_ITEMS';

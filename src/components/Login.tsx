@@ -12,22 +12,25 @@ interface IProps {
 }
 
 interface IState {
-  loginMessage: string | null;
+  loginMessage: string;
   email: string;
   password: string;
 }
 
 class Login extends Component<IProps & RouteComponentProps, IState> {
   state: IState = {
-    loginMessage: null,
+    loginMessage: '',
     email: '',
     password: '',
   };
 
   handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const name = event.target.name;
+    const value = event.target.value;
+
     this.setState(state => ({
       ...state,
-      [event.target.name]: event.target.value,
+      [name]: value,
     }));
   };
 
