@@ -1,22 +1,31 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
+import * as H from 'history';
 import {Form, Input, TextArea, Header, Button} from 'semantic-ui-react';
 
-class AddItemForm extends Component {
-  state = {
+interface IProps {
+  history: H.History;
+}
+
+interface IState {
+  name: string;
+  stock: number;
+  description: string;
+}
+
+class AddItemForm extends Component<IProps, IState> {
+  state: IState = {
     name: '',
     stock: 0,
     description: '',
   };
 
-  handleChange = e => {
+  handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({[e.target.name]: e.target.value});
   };
 
   handleSubmit = () => {
     const item = this.state;
-    //TODO: need to validate here (joi??)
+    // TODO: need to validate here (joi??)
 
     if (item.stock === 0) return; // need to display something here
     this.props.addItemToStock(item);
@@ -64,20 +73,18 @@ class AddItemForm extends Component {
   }
 }
 
-AddItemForm.propTypes = {
-  addItemToStock: PropTypes.func.isRequired,
-};
+// const mapDispatchToProps = dispatch => ({
+//   addItemToStock: item => {
+//     dispatch({
+//       type: 'ADD_NEW_ITEM_TO_STOCK',
+//       item,
+//     });
+//   },
+// });
 
-const mapDispatchToProps = dispatch => ({
-  addItemToStock: item => {
-    dispatch({
-      type: 'ADD_NEW_ITEM_TO_STOCK',
-      item,
-    });
-  },
-});
+// export default connect(
+//   null,
+//   mapDispatchToProps,
+// )(AddItemForm);
 
-export default connect(
-  null,
-  mapDispatchToProps,
-)(AddItemForm);
+export default AddItemForm;

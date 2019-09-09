@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
 import {Helmet} from 'react-helmet';
 import {Container, Button, Header, Grid} from 'semantic-ui-react';
@@ -14,25 +14,9 @@ const Cart: React.FC = () => {
 
   let dispatch = useAppDispatch();
 
-  // let cartItems = {};
-  // if (state && state.hasOwnProperty('cartItems')) {
-  //   cartItems = state.cartItems;
-  // }
-
-  // let removeFromCart = (item: IItem, amt: number): void => {};
-  // let checkout = () => Promise.resolve(false);
-
-  // if (context && context.hasOwnProperty('removeFromCart')) {
-  //   removeFromCart = context.removeFromCart;
-  // }
-  // if (context && context.hasOwnProperty('checkout')) {
-  //   checkout = context.checkout;
-  // }
-
   const [showModal, setModalState] = useState(false);
 
   function remove(item: IItem, amt: number) {
-    // removeFromCart(item, amt);
     dispatch({type: 'REMOVE_FROM_CART', payload: {amt, item}});
   }
 
