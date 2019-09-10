@@ -14,9 +14,10 @@ export interface IState {
   };
 }
 
+// TODO - fix the anys
 export type Action =
-  | {type: 'FETCH_STOCK_ITEMS'}
   | {type: 'FETCH_ITEMS_SUCCESS'; payload: any}
+  | {type: 'FETCH_STOCK_ITEMS'}
   | {type: 'ERROR'; payload: any}
   | {type: 'REMOVE_FROM_CART'; payload: any}
   | {type: 'BUY_CART_ITEMS'}

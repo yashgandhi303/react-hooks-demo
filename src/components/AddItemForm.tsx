@@ -1,7 +1,6 @@
-import React, {Component, useState} from 'react';
-import {Form, Input, TextArea, Header, Button} from 'semantic-ui-react';
-import {useAppState, useAppDispatch} from '../providers/AppProvider';
-// import {IItem} from './ItemCard';
+import React, {useState} from 'react';
+import {Form, Input, TextArea, Button} from 'semantic-ui-react';
+import {useAppState} from '../providers/AppProvider';
 
 interface IState {
   name: string;
@@ -19,8 +18,7 @@ const AddItemForm = () => {
   let {addItemToStock} = useAppState();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const name = event.target.name;
-    const value = event.target.value;
+    const {name, value} = event.target;
 
     setState(state => ({
       ...state,

@@ -91,13 +91,14 @@ const AppContextProvider: React.FC = ({children}) => {
     }
   }
 
-  async function addItemToStock(item: IItem) {
+  async function addItemToStock(item: any) {
     try {
       const res = await Api.addItemToStock(item);
-      dispatch({type: 'ADD_ITEM_TO_STOCK', payload: item});
+      dispatch({type: actions.ADD_ITEM_TO_STOCK, payload: item});
       return true;
     } catch (error) {
       dispatch({type: actions.ERROR, payload: error});
+      return false;
     }
   }
 
