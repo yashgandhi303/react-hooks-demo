@@ -6,7 +6,6 @@
   "private": true,
   "scripts": {
     "build": "node scripts/build.js",
-    "postbuild": "react-snap",
     "start": "node scripts/start.js",
     "test": "node scripts/test.js --env=jsdom",
     "test:cov": "jest --coverage",
