@@ -25,9 +25,12 @@ class Register extends Component<IProps & RouteComponentProps, IState> {
   };
 
   handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const name = event.target.name;
+    const value = event.target.value;
+
     this.setState(state => ({
       ...state,
-      [event.target.name]: event.target.value,
+      [name]: value,
     }));
   };
 

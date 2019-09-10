@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {isDev} from './constants/config';
 import {config} from './constants/firebaseConfig';
-import {IItem} from './components/ItemCard';
+// import {IItem} from './components/ItemCard';
 
 const BASE_URL = config.databaseURL;
 if (isDev) {
@@ -35,7 +35,7 @@ class Api {
     return result;
   }
 
-  static async addItemToStock(item: IItem) {
+  static async addItemToStock(item: any) {
     return axios.post(`${BASE_URL}/stockItems.json`, item).then(res => res.data);
   }
 }
