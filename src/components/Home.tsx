@@ -1,16 +1,8 @@
-import React, {
-  ComponentClass,
-  ComponentType,
-  FunctionComponent,
-  ReactChildren,
-  ReactNode,
-  ErrorInfo,
-} from 'react';
+import React from 'react';
 import {Link} from 'react-router-dom';
 import {Button, Container, Divider, Flag, Grid, Header, Loader} from 'semantic-ui-react';
 import ItemCard, {IItem} from './ItemCard';
 import {useAppState} from '../providers/AppProvider';
-import ErrorBoundary from '../common/ErrorBoundary';
 
 const Home: React.FC = () => {
   let {state, addToCart} = useAppState();
@@ -58,25 +50,5 @@ const Home: React.FC = () => {
     </Container>
   );
 };
-
-// interface IProps {
-//   children: ReactNode;
-//   error?: Error;
-//   errorInfo?: string;
-// }
-
-// export interface IProps {
-//   error: Error;
-//   errorInfo: ErrorInfo | null | undefined;
-//   children: React.ReactNode;
-// }
-
-// const HomeWithErrorBoundary: React.Component<any> = (props: Readonly<IProps>) => {
-//   return (
-//     <ErrorBoundary>
-//       <Home {...props} />
-//     </ErrorBoundary>
-//   );
-// };
 
 export default Home;

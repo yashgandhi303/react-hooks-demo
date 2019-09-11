@@ -6,7 +6,6 @@
   "private": true,
   "scripts": {
     "build": "node scripts/build.js",
-    "postbuild": "react-snap",
     "start": "node scripts/start.js",
     "test": "node scripts/test.js --env=jsdom",
     "test:cov": "jest --coverage",
@@ -76,6 +75,7 @@
   },
   "devDependencies": {
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@types/jest": "^24.0.18",
     "@types/lodash.omit": "^4.5.6",
     "@types/react": "^16.8.23",
     "@types/react-dom": "^16.8.4",
@@ -97,6 +97,7 @@
     "react-test-renderer": "^16.2.0",
     "react-testing-library": "^7.0.0",
     "source-map-loader": "^0.2.4",
+    "ts-jest": "^24.0.2",
     "ts-loader": "^6.0.4",
     "typescript": "^3.5.3",
     "uglifyjs-webpack-plugin": "^2.1.2",
@@ -104,19 +105,20 @@
   },
   "jest": {
     "collectCoverageFrom": [
-      "src/**/*.{js,jsx,mjs}"
+      "src/**/*.{ts,tsx,js,jsx,mjs}"
     ],
     "setupFiles": [
       "<rootDir>/config/polyfills.js"
     ],
     "testMatch": [
-      "<rootDir>/src/**/__tests__/**/*.{js,jsx,mjs}",
-      "<rootDir>/src/**/?(*.)(spec|test).{js,jsx,mjs}"
+      "<rootDir>/src/**/__tests__/**/*.{ts,tsx,js,jsx,mjs}",
+      "<rootDir>/src/**/?(*.)(spec|test).{ts,tsx,js,jsx,mjs}"
     ],
     "testEnvironment": "jsdom",
     "testURL": "http://localhost",
     "transform": {
       "^.+\\.(js|jsx|mjs)$": "<rootDir>/node_modules/babel-jest",
+      "^.+\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest",
       "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
       "^(?!.*\\.(js|jsx|mjs|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
     },
@@ -127,6 +129,8 @@
       "^react-native$": "react-native-web"
     },
     "moduleFileExtensions": [
+      "ts",
+      "tsx",
       "web.js",
       "mjs",
       "js",
