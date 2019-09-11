@@ -2,6 +2,7 @@ module.exports = {
   coverageDirectory: './coverage',
   collectCoverageFrom: [
     '**/src/**/*.js',
+    '**/src/**/*.tsx',
     '!**/__tests__/**',
     '!**/node_modules/**',
   ],
@@ -13,6 +14,6 @@ module.exports = {
       lines: 20,
     },
   },
-  testURL: "http://test.com/"
+  testURL: 'http://test.com/',
   // projects: ['./client', './server'],
 };
