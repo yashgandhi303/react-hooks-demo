@@ -1,16 +1,15 @@
-import React, {Component, ErrorInfo} from 'react';
-import {Link} from 'react-router-dom';
-import {isDev} from '../constants/config';
-
-// props to https://codepen.io/gaearon/pen/wqvxGa?editors=0010 and https://reactjs.org/docs/error-boundaries.html
-
+import React, { Component, ErrorInfo } from 'react';
+import { Link } from 'react-router-dom';
+import { isDev } from '../constants/config';
+import { Typography } from 'antd';
+const { Title } = Typography;
 export interface IProps {
   error: Error;
   errorInfo: ErrorInfo | null | undefined;
 }
 
-const ErrorDetails: React.FC<IProps> = ({error, errorInfo}) => (
-  <details style={{whiteSpace: 'pre-wrap'}}>
+const ErrorDetails: React.FC<IProps> = ({ error, errorInfo }) => (
+  <details style={{ whiteSpace: 'pre-wrap' }}>
     {error && error.toString()}
     <br />
     {errorInfo && errorInfo.componentStack}
@@ -32,7 +31,7 @@ class ErrorBoundary extends Component<IProps, IState> {
 
   public static getDerivedStateFromError() {
     // Update state so the next render will show the fallback UI.
-    return {hasError: true};
+    return { hasError: true };
   }
 
   public componentDidCatch(error: Error, errorInfo?: ErrorInfo) {
@@ -47,7 +46,7 @@ class ErrorBoundary extends Component<IProps, IState> {
     if (this.state.hasError && this.state.error) {
       return (
         <>
-          <h1>Something went wrong.</h1>
+          <Title>Something went wrong.</Title>
           Click <Link to="/">here</Link> to go back home.
           {isDev && <ErrorDetails error={this.state.error} errorInfo={this.state.errorInfo} />}
         </>

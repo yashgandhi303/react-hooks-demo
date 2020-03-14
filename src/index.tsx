@@ -2,16 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'react-toggle/style.css';
 import 'semantic-ui-css/semantic.min.css';
-import {isDev} from './constants/config';
-
+import { isDev } from './constants/config';
+import 'antd/dist/antd.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
 const rootElement = document.getElementById('root');
 
 if (isDev) {
-  const axe = require('react-axe');
-  axe(React, ReactDOM, 2000);
+  // const axe = require('react-axe');
+  // axe(React, ReactDOM, 2000);
 }
 
 if (rootElement && rootElement.hasChildNodes()) {

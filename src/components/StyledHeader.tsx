@@ -1,18 +1,18 @@
-import React, {useContext, useState} from 'react';
-import {Link, withRouter, RouteComponentProps} from 'react-router-dom';
+import React, { useContext, useState } from 'react';
+import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
 import * as H from 'history';
 import Toggle from 'react-toggle';
-import {Button, Icon, Menu} from 'semantic-ui-react';
-import {logout} from '../auth';
+import { Button, Icon, Menu } from 'semantic-ui-react';
+import { logout } from '../auth';
 import * as ROUTES from '../constants/routes';
-import {ThemeContext} from '../providers/ThemeProvider';
+import { ThemeContext } from '../providers/ThemeProvider';
 
 interface IProps extends RouteComponentProps {
   authUser: firebase.User | null;
   history: H.History;
 }
 
-const StyledHeader: React.FC<IProps> = ({authUser, history}) => {
+const StyledHeader: React.FC<IProps> = ({ authUser, history }) => {
   const [activeItem, setActiveItem] = useState(window.location.pathname);
   const [theme, setTheme] = useContext(ThemeContext);
 
@@ -33,35 +33,16 @@ const StyledHeader: React.FC<IProps> = ({authUser, history}) => {
   };
 
   return (
-    <Menu stackable inverted pointing>
-      <Menu.Item
-        name="home"
-        active={activeItem === ROUTES.HOME}
-        onClick={() => setActiveItem(ROUTES.HOME)}
-        as={Link}
-        to={ROUTES.HOME}
-      >
-        Carrinho.com <Icon name={'shopping cart'} size={'large'} />
-      </Menu.Item>
-
-      <Menu.Item
-        name="about"
-        active={activeItem === ROUTES.ABOUT}
-        onClick={() => setActiveItem(ROUTES.ABOUT)}
-        as={Link}
-        to={ROUTES.ABOUT}
-      >
-        About
-      </Menu.Item>
+    <Menu className={`${theme}`} stackable inverted pointing>
 
       <Menu.Item
         name="admin"
-        active={activeItem === ROUTES.ADMIN}
-        onClick={() => setActiveItem(ROUTES.ADMIN)}
+        active={activeItem === ROUTES.ONBOARDING}
+        onClick={() => setActiveItem(ROUTES.ONBOARDING)}
         as={Link}
-        to={ROUTES.ADMIN}
+        to={ROUTES.ONBOARDING}
       >
-        Admin
+        On Boarding
       </Menu.Item>
 
       <Menu.Item>
@@ -78,34 +59,25 @@ const StyledHeader: React.FC<IProps> = ({authUser, history}) => {
       </Menu.Item>
 
       <Menu.Menu position="right">
-        <Menu.Item
-          name="cart"
-          active={activeItem === ROUTES.CART}
-          onClick={() => setActiveItem(ROUTES.CART)}
-          as={Link}
-          to={ROUTES.CART}
-        >
-          Cart <Icon name={'cart'} size={'large'} color={'blue'} />
-        </Menu.Item>
 
         {authUser ? (
           <Menu.Item className="item">
             <Button onClick={logoutUser}>Logout</Button>
           </Menu.Item>
         ) : (
-          <>
-            <Menu.Item>
-              <Button as={Link} to={ROUTES.REGISTER} inverted color="black">
-                Sign Up
+            <>
+              <Menu.Item>
+                <Button as={Link} to={ROUTES.REGISTER} inverted color="black">
+                  Sign Up
               </Button>
-            </Menu.Item>
-            <Menu.Item className="item">
-              <Button as={Link} to={ROUTES.LOGIN}>
-                Log in
-              </Button>
-            </Menu.Item>
-          </>
-        )}
+              </Menu.Item>
+              <Menu.Item className="item">
+                <Button as={Link} to={ROUTES.LOGIN}>
+                  Log in
+                </Button>
+              </Menu.Item>
+            </>
+          )}
       </Menu.Menu>
     </Menu>
   );

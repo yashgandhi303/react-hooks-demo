@@ -1,12 +1,8 @@
 import React from 'react';
-import {Dimmer, Loader, Segment} from 'semantic-ui-react';
+import { Spin } from 'antd';
 
 const LoadingSpinner = () => (
-  <Segment>
-    <Dimmer active inverted>
-      <Loader size="medium">Loading...</Loader>
-    </Dimmer>
-  </Segment>
+  <Spin size="large" />
 );
 
 export default LoadingSpinner;

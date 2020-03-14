@@ -1,113 +1,47 @@
-import React, {useEffect} from 'react';
-import {appReducer, Action, initialState, IState} from '../hooks/appReducer';
-import Api from '../api';
+import React from 'react';
+import { appReducer, Action, initialState, IState } from '../hooks/appReducer';
 import * as actions from '../actions/actionTypes';
-import {IItem} from '../components/ItemCard';
 
 type Dispatch = (action: Action) => void;
 
 interface IAppContext {
   state: IState;
-  addToCart: (item: IItem, amt: number) => void;
-  checkout: () => Promise<true | undefined>;
-  addItemToStock: (item: any) => void;
+  formSubmit: (item: any) => void;
+  nextStep: (form: any, step: number) => void;
 }
 
 const AppStateContext = React.createContext<IAppContext | undefined>(undefined);
 const AppDispatchContext = React.createContext<Dispatch | undefined>(undefined);
 
-const AppContextProvider: React.FC = ({children}) => {
+const AppContextProvider: React.FC = ({ children }) => {
   const [state, dispatch] = React.useReducer(appReducer, initialState);
 
-  useEffect(() => {
-    let didCancel = false;
-
-    async function getStockItems() {
-      dispatch({type: actions.FETCH_STOCK_ITEMS});
-      try {
-        const data = await Api.fetchItems();
-        if (!didCancel) {
-          dispatch({type: actions.FETCH_ITEMS_SUCCESS, payload: data});
-        }
-      } catch (error) {
-        if (!didCancel) {
-          dispatch({type: actions.ERROR, payload: error});
-        }
-      }
-    }
-
-    getStockItems();
-
-    return () => {
-      didCancel = true;
-    };
-  }, [dispatch]);
-
-  function addToCart(item: IItem, amt: number) {
+  async function formSubmit(item: any) {
     try {
-      dispatch({
-        type: actions.ADD_ITEM_TO_CART,
-        payload: {
-          amt,
-          item,
-        },
-      });
-    } catch (error) {
-      dispatch({type: actions.ERROR, payload: error});
-    }
-  }
+      dispatch({ type: actions.NEXT_STEP, payload: { form: item, step: 3 } });
+      console.log(state.formData, '--------FormDate');
 
-  function removeFromCart(item: IItem, amt: number) {
-    try {
-      dispatch({
-        type: actions.REMOVE_FROM_CART,
-        payload: {
-          amt,
-          item,
-        },
-      });
-    } catch (error) {
-      dispatch({type: actions.ERROR, payload: error});
-    }
-  }
-
-  async function checkout() {
-    try {
-      const {cartItems}: {cartItems: {[id: string]: IItem}} = state;
-
-      const reqData: {[path: string]: number} = {}; // FIXME - is this fine??
-
-      for (let [key, item] of Object.entries(cartItems)) {
-        const path = `${key}/stock`;
-        reqData[path] = item.stock;
-      }
-      const res = await Api.buyItems(reqData);
-      dispatch({
-        type: actions.BUY_CART_ITEMS,
-      });
+      // dispatch({ type: actions.SUBMIT_FORM, payload: {} })
       return true;
     } catch (error) {
-      dispatch({type: actions.ERROR, payload: error});
+      dispatch({ type: actions.ERROR, payload: error });
+      return false;
     }
   }
 
-  async function addItemToStock(item: any) {
+  async function nextStep(form: any, step: number) {
     try {
-      const res = await Api.addItemToStock(item);
-      dispatch({type: actions.ADD_ITEM_TO_STOCK, payload: item});
-      return true;
+      dispatch({ type: actions.NEXT_STEP, payload: { form, step } });
     } catch (error) {
-      dispatch({type: actions.ERROR, payload: error});
+      dispatch({ type: actions.ERROR, payload: error });
       return false;
     }
   }
 
   const appState = {
     state,
-    addToCart,
-    checkout,
-    removeFromCart,
-    addItemToStock,
+    nextStep,
+    formSubmit,
   };
 
   return (
@@ -133,4 +67,4 @@ function useAppDispatch() {
   return context;
 }
 
-export {AppContextProvider, AppStateContext, useAppState, useAppDispatch};
+export { AppContextProvider, AppStateContext, useAppState, useAppDispatch };

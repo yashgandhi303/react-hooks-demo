@@ -82,3 +82,43 @@ a.ui.card.dark .content input,
 a.ui.card.dark .content button:hover {
     color: black !important;
 }
+
+
+/* dark mode styles */
+.ui.menu.light,
+.ui.inverted.pointing.menu.light .active.item:after,
+.onBoard-container.light {
+    background: #2185d0 !important;
+}
+
+.ui.menu.dark,
+.ui.inverted.pointing.menu.dark .active.item:after,
+.onBoard-container.dark {
+    background: #282C35 !important;
+}
+
+.onBoard-container {
+    background: #F5F6FA;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.onBoard-container .card {
+    margin: 5% auto;
+    width: 400px;
+}
+
+.onBoard-container .ant-card-body {
+        text-align: center;
+}
+
+.onBoard-container .submit-btn {
+    width: 100%;
+    border-radius: 50px;
+}
+
+.container-div {
+    padding: 50px 50px 0 50px;
+}

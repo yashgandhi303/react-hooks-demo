@@ -1,4 +1,4 @@
-import React, {useEffect, useState, Dispatch, SetStateAction} from 'react';
+import React, { useEffect, useState, Dispatch, SetStateAction } from 'react';
 
 const ThemeContext = React.createContext<[string, Dispatch<SetStateAction<string>>]>([
   'light',
@@ -17,4 +17,4 @@ const ThemeContextProvider = (props: any) => {
   return <ThemeContext.Provider value={themeHook}>{props.children}</ThemeContext.Provider>;
 };
 
-export {ThemeContext, ThemeContextProvider};
+export { ThemeContext, ThemeContextProvider };

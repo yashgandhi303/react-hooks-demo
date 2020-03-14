@@ -1,5 +1,5 @@
 import React from 'react';
-import {AppStateContext} from './AppProvider';
+import { AppStateContext } from './AppProvider';
 
 // const AppContextConsumer = () => {};
 

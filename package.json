@@ -1,8 +1,8 @@
 {
-  "name": "carrinho",
+  "name": "react-demo",
   "version": "0.8.0",
-  "author": "nick bouldien",
-  "repository": "https://github.com/nickbouldien/carrinho",
+  "author": "",
+  "repository": "",
   "private": true,
   "scripts": {
     "build": "node scripts/build.js",
@@ -14,6 +14,7 @@
     "test:jest": "jest --env=jsdom"
   },
   "dependencies": {
+    "antd": "^4.0.2",
     "autoprefixer": "9.5.1",
     "axios": "^0.18.1",
     "babel-core": "6.26.3",
@@ -68,6 +69,7 @@
     "tape": "^4.8.0",
     "url-loader": "1.1.2",
     "uuid": "^3.2.1",
+    "validate.js": "0.12.0",
     "webpack": "4.31.0",
     "webpack-dev-server": "3.3.1",
     "webpack-manifest-plugin": "2.0.4",
