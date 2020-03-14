@@ -1,9 +1,6 @@
 import React from 'react';
 import { AppStateContext } from './AppProvider';
 
-// const AppContextConsumer = () => {};
-
-// : <P = AppStateContext>
 const AppContextConsumer = (props: any) => {
   return (
     <AppStateContext.Consumer>

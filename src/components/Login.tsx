@@ -23,7 +23,6 @@ const Login = (props: IProps) => {
 
     try {
       await login(values.email, values.password);
-      // TODO - redirect to the originally requested url
       props.history.push(ROUTES.HOME);
       message.success('Logged in successfully.');
     } catch (e) {

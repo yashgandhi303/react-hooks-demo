@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Card } from 'antd';
 import { Form, Input, Button } from 'antd';
@@ -7,21 +7,19 @@ const { Meta } = Card;
 const FormItem = Form.Item;
 
 const Step1 = ({ ...props }) => {
-
-  const [loading, setLoading] = useState(false);
   const [form] = Form.useForm();
 
-  function onFormSubmit(values: any) {
+  const onFormSubmit = (values: any) => {
     props.onFormSubmit(values, 2)
   }
 
-  function onFinishFailed(error: any) {
-    console.log('error', error, setLoading);
+  const onFinishFailed = (error: any) => {
+    console.log('error', error);
   }
 
   return (
     <>
-      <Card className="card" loading={loading}>
+      <Card className="card">
         <Meta
           title="User Onboarding"
           description="Part 1/3 - Basic Questions"

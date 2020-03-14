@@ -19,7 +19,6 @@ const AppContextProvider: React.FC = ({ children }) => {
   async function formSubmit(item: any) {
     try {
       dispatch({ type: actions.NEXT_STEP, payload: { form: item, step: 3 } });
-      console.log(state.formData, '--------FormDate');
 
       // dispatch({ type: actions.SUBMIT_FORM, payload: {} })
       return true;

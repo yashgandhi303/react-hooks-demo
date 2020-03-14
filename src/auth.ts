@@ -1,19 +1,19 @@
 import { ref, firebaseAuth } from './database';
 
-export function register(email: string, pw: string) {
+export const register = (email: string, pw: string) => {
   return firebaseAuth
     .createUserWithEmailAndPassword(email, pw)
 }
 
-export function logout() {
+export const logout = () => {
   return firebaseAuth.signOut();
 }
 
-export function login(email: string, pw: string) {
+export const login = (email: string, pw: string) => {
   return firebaseAuth.signInWithEmailAndPassword(email, pw);
 }
 
-export function saveUser(userCredentials: firebase.auth.UserCredential) {
+export const saveUser = (userCredentials: firebase.auth.UserCredential) => {
   if (!userCredentials || !userCredentials.user) {
     console.error('user could not be saved: ', userCredentials);
     return;

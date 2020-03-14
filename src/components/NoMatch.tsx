@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import * as H from 'history';
-import { Layout } from 'antd';
+import { Layout, Typography } from 'antd';
 const { Content } = Layout;
+const { Title, Text } = Typography;
+
 interface IProps {
   location: H.Location;
 }
@@ -10,11 +12,11 @@ interface IProps {
 const NoMatch: React.FC<IProps> = ({ location }) => {
   return (
     <Content className="container-div">
-      <h3>
-        404 - Sorry, there was no match for <code>{location.pathname}</code>.
+      <Title level={3}>
+        404 - Sorry, there was no match for <Text code>{location.pathname}</Text>.
         <br />
         Click <Link to={'/'}>here</Link> to go back home.
-      </h3>
+      </Title>
     </Content>
   );
 };

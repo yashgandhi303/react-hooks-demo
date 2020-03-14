@@ -1,5 +1,4 @@
 import { useReducer, Reducer } from 'react';
-import omit from 'lodash.omit';
 import * as actions from '../actions/actionTypes';
 
 export interface IState {
@@ -24,7 +23,6 @@ export let initialState: IState = {
   formData: {}
 };
 
-// TODO - break this into two reducers ()
 export const appReducer: Reducer<IState, Action> = (state: IState, action: Action): IState => {
   switch (action.type) {
     case actions.ERROR:
