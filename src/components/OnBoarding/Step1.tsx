@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Card } from 'antd';
-import { Form, Input, Button } from 'antd';
+import { Form, Input, InputNumber, Button } from 'antd';
 import { Row, Col } from 'antd';
 const { Meta } = Card;
 const FormItem = Form.Item;
@@ -10,7 +10,8 @@ const Step1 = ({ ...props }) => {
   const [form] = Form.useForm();
 
   const onFormSubmit = (values: any) => {
-    props.onFormSubmit(values, 2)
+    props.onFormSubmit(values, 2);
+    props.routing.history.push(`/onboarding/2`)
   }
 
   const onFinishFailed = (error: any) => {
@@ -31,6 +32,7 @@ const Step1 = ({ ...props }) => {
               <FormItem
                 label="First Name"
                 name="firstName"
+                rules={[{ required: true, message: 'This field is required.' }]}
               >
                 <Input placeholder="First Name" />
               </FormItem>
@@ -39,6 +41,7 @@ const Step1 = ({ ...props }) => {
               <FormItem
                 label="Last Name"
                 name="lastName"
+                rules={[{ required: true, message: 'This field is required.' }]}
               >
                 <Input placeholder="Last Name" />
               </FormItem>
@@ -47,17 +50,24 @@ const Step1 = ({ ...props }) => {
           <FormItem
             label="Email"
             name="email"
+            rules={[{ required: true, type: 'email', message: 'Please enter valid email address' }]}
           >
             <Input placeholder="Email" />
           </FormItem>
           <FormItem
             label="Phone Number"
             name="phoneNumber"
+            rules={[{ required: true, message: 'Please write your phone number' }, {
+              type: 'number',
+              message: 'Need to enter numbers only'
+            }]}
           >
-            <Input placeholder="Phone Number" />
+            <InputNumber min={0} placeholder="Phone Number" maxLength={10} />
           </FormItem>
           <FormItem>
-            <Button className="submit-btn" htmlType="submit" type="primary">Submit</Button>
+            <Button className="submit-btn" htmlType="submit" type="primary">
+              Submit
+            </Button>
           </FormItem>
         </Form>
       </Card>
@@ -69,4 +79,4 @@ Step1.propTypes = {
   nextStep: PropTypes.func,
 }
 
-export default Step1;
+export default (Step1);

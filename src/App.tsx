@@ -48,42 +48,40 @@ const App = () => {
     <AppContextProvider>
       <ThemeContextProvider>
         <BrowserRouter>
-          <div>
-            <StyledHeader authUser={authState.authUser} />
-            <div className="container">
-              <Suspense fallback={<LoadingSpinner />}>
-                <Switch>
-                  <Route exact path={ROUTES.HOME} component={Home} />
+          <StyledHeader authUser={authState.authUser} />
+          <div className="container">
+            <Suspense fallback={<LoadingSpinner />}>
+              <Switch>
+                <Route exact path={ROUTES.HOME} component={Home} />
 
-                  {/* redirect home if user is already logged in */}
-                  <Route
-                    exact
-                    path={ROUTES.REGISTER}
-                    render={props =>
-                      authState.authUser ? <Redirect to={ROUTES.HOME} /> : <Register {...props} />
-                    }
-                  />
+                {/* redirect home if user is already logged in */}
+                <Route
+                  exact
+                  path={ROUTES.REGISTER}
+                  render={props =>
+                    authState.authUser ? <Redirect to={ROUTES.HOME} /> : <Register {...props} />
+                  }
+                />
 
-                  <Route
-                    exact
-                    path={ROUTES.LOGIN}
-                    render={props =>
-                      authState.authUser ? <Redirect to={ROUTES.HOME} /> : <Login {...props} />
-                    }
-                  />
+                <Route
+                  exact
+                  path={ROUTES.LOGIN}
+                  render={props =>
+                    authState.authUser ? <Redirect to={ROUTES.HOME} /> : <Login {...props} />
+                  }
+                />
 
-                  {/* protected routes */}
-                  <PrivateRoute
-                    exact={true}
-                    authUser={authState.authUser}
-                    path={ROUTES.ONBOARDING}
-                    component={OnBoardingCP}
-                  />
+                {/* protected routes */}
+                <PrivateRoute
+                  exact={true}
+                  authUser={authState.authUser}
+                  path={`${ROUTES.ONBOARDING}`}
+                  component={OnBoardingCP}
+                />
 
-                  <Route component={NoMatch} />
-                </Switch>
-              </Suspense>
-            </div>
+                <Route component={NoMatch} />
+              </Switch>
+            </Suspense>
           </div>
         </BrowserRouter>
       </ThemeContextProvider>

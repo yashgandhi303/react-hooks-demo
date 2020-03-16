@@ -1,48 +1,7 @@
-#about-div .item {
-    color: rgba(0,0,0,.87);
-}
-
-#about-div .item:hover {
-    text-decoration: underline;
-}
-
-.item-grid .column .card {
-    min-height: 360px;
-}
-
-.item-grid .card button {
-    margin-top: 6px;
-}
-
-.item-grid .card .content {
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-}
-
-#modal-root {
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.9);
-    bottom: 0;
-    display: flex;
-    justify-content: center;
-    left: 0;
-    position: fixed;
-    right: 0;
-    top: 0;
-    z-index: 20;
-}
-
-#modal-root:empty {
-    display: none;
-}
-
-#modal-root div {
-    background-color: white;
-    border-radius: 6px;
-    max-width: 550px;
-    padding: 30px;
-    text-align: center;
+#root,
+.container,
+.onBoard-container {
+    height: 100%;
 }
 
 .menu .react-toggle-track-check,
@@ -58,41 +17,10 @@
     background-color: darkblue;
 }
 
-.stock-amount {
-    color: rgba(0,0,0,.87);
-}
-
-.ui.card {
-    padding-top: 10px;
-}
-
-/* dark mode styles */
-a.ui.card.dark,
-a.ui.card.dark:hover {
-    /*background-color: #282C35;*/
-    background-color: #101e26;
-}
-
-a.ui.card.dark .content *,
-a.ui.card.dark.raised .content * {
-    color: white !important;
-}
-
-a.ui.card.dark .content input,
-a.ui.card.dark .content button:hover {
-    color: black !important;
-}
-
-
-/* dark mode styles */
-.ui.menu.light,
-.ui.inverted.pointing.menu.light .active.item:after,
 .onBoard-container.light {
-    background: #2185d0 !important;
+    background: #F5F6FA !important;
 }
 
-.ui.menu.dark,
-.ui.inverted.pointing.menu.dark .active.item:after,
 .onBoard-container.dark {
     background: #282C35 !important;
 }
@@ -121,4 +49,12 @@ a.ui.card.dark .content button:hover {
 
 .container-div {
     padding: 50px 50px 0 50px;
+}
+
+.ant-input-number-handler-wrap {
+    display: none;
+}
+
+.ant-input-number {
+    width: 100%;
 }

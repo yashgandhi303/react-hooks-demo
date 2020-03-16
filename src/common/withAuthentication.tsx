@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { firebaseAuth } from '../database';
+import { firebaseAuth } from '../services/database';
 import AuthUserContext from '../providers/AuthProvider';
 
 interface IWithAuthenticationState {

@@ -1,11 +1,12 @@
 import React, { useContext, useState } from 'react';
 import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
 import * as H from 'history';
-import Toggle from 'react-toggle'; import { logout } from '../auth';
+import Toggle from 'react-toggle'; import { logout } from '../services/api';
 import * as ROUTES from '../constants/routes';
 import { ThemeContext } from '../providers/ThemeProvider';
-import { Menu, message } from 'antd';
+import { Menu, message, Button } from 'antd';
 import { BulbOutlined, BulbFilled } from '@ant-design/icons';
+import { useAppState } from '../providers/AppProvider';
 
 interface IProps extends RouteComponentProps {
   authUser: firebase.User | null;
@@ -14,6 +15,7 @@ interface IProps extends RouteComponentProps {
 
 const StyledHeader: React.FC<IProps> = ({ authUser, history }) => {
   const [theme, setTheme] = useContext(ThemeContext);
+  let { currentStep } = useAppState();
 
   const updateTheme = () => {
     const newTheme = theme === "light" ? "dark" : "light";
@@ -30,15 +32,27 @@ const StyledHeader: React.FC<IProps> = ({ authUser, history }) => {
     }
   };
 
+  const navigateTo = () => {
+    currentStep(1);
+    history.push(`/onboarding/1`);
+  }
+
   return (
     <Menu theme={theme === "light" ? "light" : "dark"} mode="horizontal" >
 
       <Menu.Item
-        key="onBoarding"
+        key="home"
       >
-        <Link to={ROUTES.ONBOARDING} >
-          On Boarding
+        <Link to={ROUTES.HOME}>
+          Home
         </Link>
+      </Menu.Item>
+
+      <Menu.Item
+        key="onBoarding"
+        onClick={navigateTo}
+      >
+        On Boarding
       </Menu.Item>
 
       <Menu.Item key="toggle theme mode">

@@ -2,7 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import { withRouter } from 'react-router';
 import * as H from 'history';
-import { login } from '../auth';
+import { login } from '../services/api';
 import * as ROUTES from '../constants/routes';
 import { Typography, Layout, Button, Form, Input, message } from 'antd';
 const { Content } = Layout;
@@ -26,10 +26,9 @@ const Login = (props: IProps) => {
       props.history.push(ROUTES.HOME);
       message.success('Logged in successfully.');
     } catch (e) {
-      message.error((e.code) || 'Invalid username/password.');
+      message.error((e.message) || 'Invalid username/password.');
     }
   };
-
 
   return (
     <Content className="container-div">
@@ -41,12 +40,23 @@ const Login = (props: IProps) => {
         <FormItem
           label="Email"
           name="email"
+          rules={[
+            {
+              type: 'email',
+              message: 'The input is not valid E-mail!',
+            },
+            {
+              required: true,
+              message: 'Please input your E-mail!',
+            },
+          ]}
         >
           <Input placeholder="Email" />
         </FormItem>
         <FormItem
           label="Password"
           name="password"
+          rules={[{ required: true, message: 'Please input your Password!' }]}
         >
           <Input type="password" placeholder="Password" />
         </FormItem>

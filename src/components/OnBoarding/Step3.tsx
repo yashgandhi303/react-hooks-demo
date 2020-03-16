@@ -10,13 +10,15 @@ const Step3 = ({ ...props }) => {
 
   const [form] = Form.useForm();
 
-  const onFormSubmit = (values: any) => {
-    props.onFormSubmit(values)
+  const onFormSubmit = async (values: any) => {
+    props.onFormSubmit(values);
+    props.routing.history.push(`/`)
   }
 
   const onFinishFailed = (error: any) => {
     console.log('error', error);
   }
+
   return (
     <>
       <Card className="card">
@@ -29,6 +31,7 @@ const Step3 = ({ ...props }) => {
           <FormItem
             label="Why are you interested in software engineering?"
             name="whyInterested"
+            rules={[{ required: true, message: 'This field is required.' }]}
           >
             <TextArea
               name="expericeYear"

@@ -1,16 +1,31 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { ThemeContext } from '../../providers/ThemeProvider';
 import { useAppState } from '../../providers/AppProvider';
+import * as H from 'history';
+import Step1 from './Step1';
+import Step2 from './Step2';
+import Step3 from './Step3';
+interface IProps {
+    history: H.History;
+}
 
-import Step1Form from './Step1Form';
-import Step2Form from './Step2Form';
-import Step3Form from './Step3Form';
+const STEPS = {
+    STEP1: 1,
+    STEP2: 2,
+    STEP3: 3
+}
 
-const OnBoardingCP: React.FC = () => {
-    let { state, nextStep, formSubmit } = useAppState();
+const OnBoardingCP = (props: IProps) => {
+    let { state, nextStep, formSubmit, currentStep } = useAppState();
     const [theme, setTheme] = useContext(ThemeContext);
+    const { match }: any = props;
 
+    useEffect(() => {
+        currentStep(Number(match.params.onStep))
+    }, []);
+
+    console.log(state);
     return (
         <>
             <div className={`${theme} onBoard-container`}>
@@ -18,9 +33,27 @@ const OnBoardingCP: React.FC = () => {
                     <title>On Boarding</title>
                 </Helmet>
 
-                {state.step == 1 && <Step1Form onFormSubmit={nextStep} />}
-                {state.step == 2 && <Step2Form onFormSubmit={nextStep} />}
-                {state.step == 3 && <Step3Form onFormSubmit={formSubmit} />}
+                {
+                    STEPS.STEP1 === state.step &&
+                    <Step1
+                        onFormSubmit={nextStep}
+                        routing={props}
+                    />
+                }
+                {
+                    STEPS.STEP2 === state.step &&
+                    <Step2
+                        onFormSubmit={nextStep}
+                        routing={props}
+                    />
+                }
+                {
+                    STEPS.STEP3 === state.step &&
+                    <Step3
+                        onFormSubmit={formSubmit}
+                        routing={props}
+                    />
+                }
             </div>
         </>
     );
