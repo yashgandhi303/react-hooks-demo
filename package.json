@@ -45,7 +45,7 @@
     "promise": "8.0.3",
     "prop-types": "^15.6.0",
     "react": "^16.8.6",
-    "react-dev-utils": "^9.0.1",
+    "react-dev-utils": "^11.0.4",
     "react-dom": "^16.8.6",
     "react-helmet": "^5.2.1",
     "react-router": "^5.0.0",
